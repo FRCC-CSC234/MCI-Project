@@ -6,7 +6,7 @@
 class Ball : public GameObject
 {
 private:
-	double direction;
+	//*** needs direction value. in double form.
 public:
 	//Constructor
 	Ball( );
