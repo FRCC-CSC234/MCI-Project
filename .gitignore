@@ -3,6 +3,9 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+#VCXPROJ file (not syncing this as each user will have to set their SDL properties locally
+*.vcxproj
+
 # User-specific files
 *.rsuser
 *.suo
