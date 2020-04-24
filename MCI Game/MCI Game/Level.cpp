@@ -1,6 +1,7 @@
 #include "Level.h"
 #include "Brick.h"
-#include "ball.h"
+#include "Ball.h"
+#include<vector>
 
 void Level::develop( )
 {
@@ -47,17 +48,17 @@ Level::Level(int x)
 	getters for the variables
 ********************************/
 
-Ball getBall() { 
-	return (*ball); 
+Ball Level::getBall() { 
+	return (ball); 
 }
-vector<Brick> getBricks() { 
-	return (*bricks); 
+vector<Brick> Level::getBricks() {
+	return (bricks); 
 }
-bool getComplete() { 
-	return (*complete); 
+bool Level::getComplete() {
+	return (complete); 
 }
-int getLevelNumber() { 
-	return (*levelNumber); 
+int Level::getLevelNumber() {
+	return (levelNumber); 
 }
 
 
