@@ -15,62 +15,62 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="powerup3.bmp">
-      <Filter>Source Files</Filter>
-    </Image>
-    <Image Include="powerup4.bmp">
-      <Filter>Source Files</Filter>
-    </Image>
-    <Image Include="powerup5.bmp">
-      <Filter>Source Files</Filter>
-    </Image>
-    <Image Include="powerup6.bmp">
-      <Filter>Source Files</Filter>
-    </Image>
-    <Image Include="powerup7.bmp">
-      <Filter>Source Files</Filter>
-    </Image>
-    <Image Include="powerup8.bmp">
-      <Filter>Source Files</Filter>
-    </Image>
-    <Image Include="powerup9.bmp">
-      <Filter>Source Files</Filter>
-    </Image>
     <Image Include="background1.bmp">
-      <Filter>Source Files</Filter>
-    </Image>
-    <Image Include="background2.bmp">
-      <Filter>Source Files</Filter>
+      <Filter>Resource Files</Filter>
     </Image>
     <Image Include="background3.bmp">
-      <Filter>Source Files</Filter>
+      <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="ballpictures.bmp">
-      <Filter>Source Files</Filter>
+    <Image Include="background2.bmp">
+      <Filter>Resource Files</Filter>
     </Image>
     <Image Include="Brick_MCI_Blue.bmp">
-      <Filter>Source Files</Filter>
+      <Filter>Resource Files</Filter>
     </Image>
     <Image Include="Brick_MCI_Gray.bmp">
-      <Filter>Source Files</Filter>
+      <Filter>Resource Files</Filter>
     </Image>
     <Image Include="Brick_MCI_Light_Blue.bmp">
-      <Filter>Source Files</Filter>
+      <Filter>Resource Files</Filter>
     </Image>
     <Image Include="Brick_MCI_Orange.bmp">
-      <Filter>Source Files</Filter>
+      <Filter>Resource Files</Filter>
     </Image>
     <Image Include="paddlepictures.bmp">
-      <Filter>Source Files</Filter>
+      <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="powerup0.bmp">
-      <Filter>Source Files</Filter>
+    <Image Include="ballpictures.bmp">
+      <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="powerup1.bmp">
-      <Filter>Source Files</Filter>
+    <Image Include="Brick_Powerup_Baby.bmp">
+      <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="powerup2.bmp">
-      <Filter>Source Files</Filter>
+    <Image Include="Brick_Powerup_Broken_Condom.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Brick_Powerup_Condom.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Brick_Powerup_Men.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Brick_Powerup_Money.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Brick_Powerup_Multiple_BC.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Brick_Powerup_Pill.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Brick_Powerup_Reversal.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Brick_Powerup_Scissors.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Brick_Powerup_Sperm.bmp">
+      <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
@@ -136,5 +136,22 @@
     <ClCompile Include="TrelGraphics2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="backgroundpictures.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="ballpictures.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="brickpictures.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="paddlepictures.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="titleImage.txt.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>
