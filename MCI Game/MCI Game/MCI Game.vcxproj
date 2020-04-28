@@ -149,6 +149,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <Image Include="Baby_1.bmp" />
+    <Image Include="Baby_2.bmp" />
     <Image Include="background1.bmp" />
     <Image Include="background2.bmp" />
     <Image Include="background3.bmp" />
@@ -167,7 +169,28 @@
     <Image Include="Brick_Powerup_Reversal.bmp" />
     <Image Include="Brick_Powerup_Scissors.bmp" />
     <Image Include="Brick_Powerup_Sperm.bmp" />
+    <Image Include="Broken_Condom_1.bmp" />
+    <Image Include="Broken_Condom_2.bmp" />
+    <Image Include="Circular_Paddle.bmp" />
+    <Image Include="Condom_1.bmp" />
+    <Image Include="Condom_2.bmp" />
+    <Image Include="Egg.bmp" />
+    <Image Include="Game_over_screen.bmp" />
+    <Image Include="Men_1.bmp" />
+    <Image Include="Men_2.bmp" />
+    <Image Include="Money_1.bmp" />
+    <Image Include="Money_2.bmp" />
+    <Image Include="Multiple_BC_1.bmp" />
+    <Image Include="Multiple_BC_2.bmp" />
     <Image Include="paddlepictures.bmp" />
+    <Image Include="Pill_1.bmp" />
+    <Image Include="Pill_2.bmp" />
+    <Image Include="Reversal_1.bmp" />
+    <Image Include="Reversal_2.bmp" />
+    <Image Include="Sperm_1.bmp" />
+    <Image Include="Sperm_2.bmp" />
+    <Image Include="Vasectomy_1.bmp" />
+    <Image Include="Vasectomy_2.bmp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ball.h" />
@@ -197,7 +220,9 @@
     <Text Include="backgroundpictures.txt" />
     <Text Include="ballpictures.txt" />
     <Text Include="brickpictures.txt" />
+    <Text Include="Circular_Paddle_Info.txt" />
     <Text Include="paddlepictures.txt" />
+    <Text Include="powerups_fact.txt" />
     <Text Include="titleImage.txt.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
