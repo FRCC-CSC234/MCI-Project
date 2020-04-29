@@ -114,8 +114,10 @@ void playGame( )
 			}
 		}
 
+		level.moveBalls();
+		
 		// removed draw code. Draw Flat screen needs to be used to draw things to the screen 
-		drawFlatScreen( bricks, balls, paddle, level );
+		drawFlatScreen( bricks, level.getBalls(), paddle, level );
 	}
 
 }
