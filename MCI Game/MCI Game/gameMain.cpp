@@ -1,12 +1,8 @@
 //Main Driver for MCI Game - version 1
 //starts, plays and ends the game
 //written by: Patty Wiens 4/18/20
-//edited by:  Trel Johnson, Nick Brady 4/22
+//edited by:  Trel Johnson, Nick Brady 4/22, Simon Martin 4/29
 
-
-
-
-//# include "SDL_mixer.h" // commenting out mixer untill implementation needs to happen 
 
 // Implemented Driver.h to remove having to include more than 1 .h file
 #include "Driver.h"
@@ -18,6 +14,7 @@ using namespace std;
 void startGame( );
 void endGame( );
 void playGame( );
+//void startMusic();
 
 vector<Brick> bricks;
 vector<Ball> balls;
@@ -30,6 +27,7 @@ int main( int argc, char** argv ) // Main must have these specific arguments for
 
 	
 	startGame( );
+	//startMusic();
 	playGame( );
 	endGame( );
 	
@@ -122,5 +120,19 @@ void endGame( )
 	TrelGraphics2::close( );
 
 }
+
+//void startMusic()
+//{
+//	if (SDL_Init(SDL_INIT_AUDIO) < 0) exit(1);
+//
+//	Mix_OpenAudio(22050, AUDIO_S16SYS, 2, 640);
+//	Mix_Music* mus;  // Background Music
+//
+//	mus = Mix_LoadMUS("MCIsong2.wav");
+//
+//	Mix_PlayMusic(mus, -1); //Music loop: -1 for continuous play
+//
+//}
+
 
 

@@ -12,3 +12,5 @@
 #include "Paddle.h"
 #include "Player.h"
 #include "GraphicsMethods.h"
+#include <SDL.h>
+#include "SDL_Mixer.h"
