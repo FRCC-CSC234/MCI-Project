@@ -14,7 +14,8 @@ public:
 	//Constructor
 	Ball( );
 
-	void move();
+	void move(int paddleLocation);
+	void moveX();
 
 	void setSpeedX(int x) {speedX = x;}
 	void setSpeedY(int y) { speedY = y; }

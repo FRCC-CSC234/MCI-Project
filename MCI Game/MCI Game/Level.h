@@ -29,7 +29,7 @@ public:
 	int getPictureID( ) { return pictureID; }
 	void setPictureID( int pictureID ) { this->pictureID = pictureID; }
 
-	void moveBalls();
+	void moveObjects(int direction);
 
 	void setLevelNumber(int x) { levelNumber = x; }
 	void setComplete(bool c) { complete = c; }

@@ -45,22 +45,12 @@ int main( int argc, char** argv ) // Main must have these specific arguments for
 
 void startGame( )
 {
-	
-	TrelGraphics2::start( "Insert MCI Game Name Here", 700, 500 ); //*** needed a TrelGraphics::start call, made up a size.
+	//#nick pallotti
+	//i changed the games width to 720 to better fit the blocks as well as the blue
+	//backgrounds width to 720 but not the other colors
+	TrelGraphics2::start( "Insert MCI Game Name Here", 720, 500 ); //*** needed a TrelGraphics::start call, made up a size.
 	cout << "in Gamemain startGame - NEEDS TO BE IMPLEMENTED" << endl;
 	
-	//** This code probably belongs in level? 
-	Brick temp1;
-	temp1.setX( 300 );
-	temp1.setY( 30 );
-	bricks.push_back( temp1 );
-	Ball temp2;
-	temp2.setX( 400 );
-	temp2.setY( 200 );
-	balls.push_back( temp2 );
-	paddle.setX( 350 );
-	paddle.setY( 450 );
-	level.setPictureID( 0 );
 }
 
 void playGame( )
@@ -80,10 +70,13 @@ void playGame( )
 			}
 			else if ( e.type == SDL_KEYDOWN )
 			{
+				int paddleLocation = level.getPaddle().getX();
 				switch ( e.key.keysym.sym )
 				{
+					
 				case SDLK_LEFT:
 					direction = -1;
+					(level.getPaddle()).setX(paddleLocation - 5);
 					break;
 				case SDLK_RIGHT:
 					direction = 1;
@@ -114,10 +107,11 @@ void playGame( )
 			}
 		}
 
-		level.moveBalls();
+		//handle all the objects that need to be moved
+		level.moveObjects(direction);
 		
 		// removed draw code. Draw Flat screen needs to be used to draw things to the screen 
-		drawFlatScreen( bricks, level.getBalls(), paddle, level );
+		drawFlatScreen( level.getBricks(), level.getBalls(), level.getPaddle(), level );
 	}
 
 }
