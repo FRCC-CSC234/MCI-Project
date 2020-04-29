@@ -6,7 +6,7 @@ using namespace std;
 //#SimonM A parent class that contains common fields for game objects
 class GameObject
 {
-private:
+protected:
 
 	// ID value for the picture used to draw this object
 	// *** Changed from ID String to pictureID into to pass what picture we are loading to graphics

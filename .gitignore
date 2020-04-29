@@ -348,3 +348,5 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+/MCI Game/MCI Game/MCIsong.wav
+/MCI Game/MCI Game/MCIsong2.wav
