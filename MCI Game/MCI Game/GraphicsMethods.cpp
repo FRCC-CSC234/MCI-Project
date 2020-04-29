@@ -10,15 +10,15 @@ Comments Updated: Ben Jurenka
 
 void drawFlatScreen( std::vector<Brick> bricks, std::vector<Ball> balls, Paddle paddle, Level background )
 {
-	static TrelGraphics2 brickPictures( "brickpictures.txt", 0xFF, 0xFF, 0xFF );
-	static TrelGraphics2 ballPictures( "ballpictures.txt", 0xFF, 0xFF, 0xFF );
-	static TrelGraphics2 paddlePictures( "paddlepictures.txt", 0xFF, 0xFF, 0xFF );
-	static TrelGraphics2 backgroundPictures( "backgroundpictures.txt" );
+	static TrelGraphics2 brickPictures( "Graphics_Text_Files/brickpictures.txt", 0xFF, 0xFF, 0xFF );
+	static TrelGraphics2 ballPictures( "Graphics_Text_Files/ballpictures.txt", 0xFF, 0xFF, 0xFF );
+	static TrelGraphics2 paddlePictures( "Graphics_Text_Files/paddlepictures.txt", 0xFF, 0xFF, 0xFF );
+	static TrelGraphics2 titleScreens( "Graphics_Text_Files/Title_Screens.txt" ); // No long only holding backgrounds updated name 
 	int x, y, w, h;
 	double angle;
 	bool vFlip, hFlip;
 	SDL_Point center;
-	backgroundPictures.addPictureToFrame( background.getPictureID( ), 0, 0 );
+	titleScreens.addPictureToFrame( background.getPictureID( ), 0, 0 );
 	for ( Brick brick : bricks )
 	{
 		w = brick.getWidth( );	// This is working under the assumtion that getWidth returns the distance to the edge from the center.

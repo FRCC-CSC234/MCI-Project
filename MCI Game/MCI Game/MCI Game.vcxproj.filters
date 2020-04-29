@@ -13,134 +13,39 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="background1.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="background3.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="background2.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Brick_MCI_Blue.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Brick_MCI_Gray.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Brick_MCI_Light_Blue.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Brick_MCI_Orange.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="paddlepictures.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="ballpictures.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Brick_Powerup_Baby.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Brick_Powerup_Broken_Condom.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Brick_Powerup_Condom.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Brick_Powerup_Men.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Brick_Powerup_Money.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Brick_Powerup_Multiple_BC.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Brick_Powerup_Pill.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Brick_Powerup_Reversal.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Brick_Powerup_Scissors.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Brick_Powerup_Sperm.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Circular_Paddle.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Egg.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Game_over_screen.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Broken_Condom_1.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Broken_Condom_2.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Condom_1.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Condom_2.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Men_1.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Men_2.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Money_1.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Money_2.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Multiple_BC_1.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Multiple_BC_2.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Pill_1.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Pill_2.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Reversal_1.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Reversal_2.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Sperm_1.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Sperm_2.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Vasectomy_1.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Vasectomy_2.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Baby_1.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Baby_2.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
+    <Filter Include="Resource Files\Circular_Level">
+      <UniqueIdentifier>{f23496cc-8188-4cfa-854e-ad12c8570cc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Circular_Level\Bricks">
+      <UniqueIdentifier>{9c823b94-c1be-4f4a-80a0-be4c32f6563a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Circular_Level\Paddle">
+      <UniqueIdentifier>{4117311f-c9b6-45f5-a50b-b8c0c72aac41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Circular_Level\Bricks\Row_1">
+      <UniqueIdentifier>{4721d7b5-c98b-4b66-91d3-ba4f10be5f45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Flat_Level">
+      <UniqueIdentifier>{cae09f0d-c82d-4bee-9bcd-c3f89cf2acc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Flat_Level\Bricks">
+      <UniqueIdentifier>{2b9f3bc9-8fbf-4c66-9d6c-7b315e2a7404}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Flat_Level\Paddle">
+      <UniqueIdentifier>{d6ecd319-13b7-4cbd-a6e7-99042881d682}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Graphics_Text_Files">
+      <UniqueIdentifier>{23ec1d3e-706e-446b-a51b-1acfe88c9eae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Powerup_Facts">
+      <UniqueIdentifier>{f7b30693-75f1-48e0-9a43-79253166c308}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Title_Screens">
+      <UniqueIdentifier>{3b2978d6-760a-4fe8-8ff1-0026c7d2f979}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Title_Screens\Bacgrounds">
+      <UniqueIdentifier>{64b0c450-19b3-443d-9a95-b67557203167}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TrelTexture.h">
@@ -207,26 +112,235 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="backgroundpictures.txt">
-      <Filter>Resource Files</Filter>
+    <Image Include="Circular_Level\Bricks\Row_1\Circle_Row_1_Brick_0_MCI_Light_Blue.bmp">
+      <Filter>Resource Files\Circular_Level\Bricks\Row_1</Filter>
+    </Image>
+    <Image Include="Circular_Level\Bricks\Row_1\Circle_Row_1_Brick_0_MCI_Orange.bmp">
+      <Filter>Resource Files\Circular_Level\Bricks\Row_1</Filter>
+    </Image>
+    <Image Include="Circular_Level\Bricks\Row_1\Circle_Row_1_Brick_0_Powerup_Baby.bmp">
+      <Filter>Resource Files\Circular_Level\Bricks\Row_1</Filter>
+    </Image>
+    <Image Include="Circular_Level\Bricks\Row_1\Circle_Row_1_Brick_0_Powerup_Broken_Condom.bmp">
+      <Filter>Resource Files\Circular_Level\Bricks\Row_1</Filter>
+    </Image>
+    <Image Include="Circular_Level\Bricks\Row_1\Circle_Row_1_Brick_0_Powerup_Condom.bmp">
+      <Filter>Resource Files\Circular_Level\Bricks\Row_1</Filter>
+    </Image>
+    <Image Include="Circular_Level\Bricks\Row_1\Circle_Row_1_Brick_0_Powerup_Men.bmp">
+      <Filter>Resource Files\Circular_Level\Bricks\Row_1</Filter>
+    </Image>
+    <Image Include="Circular_Level\Bricks\Row_1\Circle_Row_1_Brick_0_Powerup_Money.bmp">
+      <Filter>Resource Files\Circular_Level\Bricks\Row_1</Filter>
+    </Image>
+    <Image Include="Circular_Level\Bricks\Row_1\Circle_Row_1_Brick_0_Powerup_Mutiple_BC.bmp">
+      <Filter>Resource Files\Circular_Level\Bricks\Row_1</Filter>
+    </Image>
+    <Image Include="Circular_Level\Bricks\Row_1\Circle_Row_1_Brick_0_Powerup_Pill.bmp">
+      <Filter>Resource Files\Circular_Level\Bricks\Row_1</Filter>
+    </Image>
+    <Image Include="Circular_Level\Bricks\Row_1\Circle_Row_1_Brick_0_Powerup_Reversal.bmp">
+      <Filter>Resource Files\Circular_Level\Bricks\Row_1</Filter>
+    </Image>
+    <Image Include="Circular_Level\Bricks\Row_1\Circle_Row_1_Brick_0_Powerup_Scissors.bmp">
+      <Filter>Resource Files\Circular_Level\Bricks\Row_1</Filter>
+    </Image>
+    <Image Include="Circular_Level\Bricks\Row_1\Circle_Row_1_Brick_0_Powerup_Sperm.bmp">
+      <Filter>Resource Files\Circular_Level\Bricks\Row_1</Filter>
+    </Image>
+    <Image Include="Circular_Level\Bricks\Row_1\Circle_Row_1_Brick_1_MCI_Blue.bmp">
+      <Filter>Resource Files\Circular_Level\Bricks\Row_1</Filter>
+    </Image>
+    <Image Include="Circular_Level\Bricks\Row_1\Circle_Row_1_Brick_1_MCI_Gray.bmp">
+      <Filter>Resource Files\Circular_Level\Bricks\Row_1</Filter>
+    </Image>
+    <Image Include="Circular_Level\Bricks\Row_1\Circle_Row_1_Brick_1_MCI_Light_Blue.bmp">
+      <Filter>Resource Files\Circular_Level\Bricks\Row_1</Filter>
+    </Image>
+    <Image Include="Circular_Level\Bricks\Row_1\Circle_Row_1_Brick_1_MCI_Orange.bmp">
+      <Filter>Resource Files\Circular_Level\Bricks\Row_1</Filter>
+    </Image>
+    <Image Include="Circular_Level\Bricks\Row_1\Circle_Row_1_Brick_1_Powerup_Baby.bmp">
+      <Filter>Resource Files\Circular_Level\Bricks\Row_1</Filter>
+    </Image>
+    <Image Include="Circular_Level\Bricks\Row_1\Circle_Row_1_Brick_1_Powerup_Broken_Condom.bmp">
+      <Filter>Resource Files\Circular_Level\Bricks\Row_1</Filter>
+    </Image>
+    <Image Include="Circular_Level\Bricks\Row_1\Circle_Row_1_Brick_1_Powerup_Condom.bmp">
+      <Filter>Resource Files\Circular_Level\Bricks\Row_1</Filter>
+    </Image>
+    <Image Include="Circular_Level\Bricks\Row_1\Circle_Row_1_Brick_1_Powerup_Men.bmp">
+      <Filter>Resource Files\Circular_Level\Bricks\Row_1</Filter>
+    </Image>
+    <Image Include="Circular_Level\Bricks\Row_1\Circle_Row_1_Brick_1_Powerup_Money.bmp">
+      <Filter>Resource Files\Circular_Level\Bricks\Row_1</Filter>
+    </Image>
+    <Image Include="Circular_Level\Bricks\Row_1\Circle_Row_1_Brick_1_Powerup_Mutiple_BC.bmp">
+      <Filter>Resource Files\Circular_Level\Bricks\Row_1</Filter>
+    </Image>
+    <Image Include="Circular_Level\Bricks\Row_1\Circle_Row_1_Brick_1_Powerup_Pill.bmp">
+      <Filter>Resource Files\Circular_Level\Bricks\Row_1</Filter>
+    </Image>
+    <Image Include="Circular_Level\Bricks\Row_1\Circle_Row_1_Brick_1_Powerup_Reversal.bmp">
+      <Filter>Resource Files\Circular_Level\Bricks\Row_1</Filter>
+    </Image>
+    <Image Include="Circular_Level\Bricks\Row_1\Circle_Row_1_Brick_1_Powerup_Scissors.bmp">
+      <Filter>Resource Files\Circular_Level\Bricks\Row_1</Filter>
+    </Image>
+    <Image Include="Circular_Level\Bricks\Row_1\Circle_Row_1_Brick_1_Powerup_Sperm.bmp">
+      <Filter>Resource Files\Circular_Level\Bricks\Row_1</Filter>
+    </Image>
+    <Image Include="Circular_Level\Bricks\Row_1\Circle_Row_1_Brick_0_MCI_Blue.bmp">
+      <Filter>Resource Files\Circular_Level\Bricks\Row_1</Filter>
+    </Image>
+    <Image Include="Circular_Level\Bricks\Row_1\Circle_Row_1_Brick_0_MCI_Gray.bmp">
+      <Filter>Resource Files\Circular_Level\Bricks\Row_1</Filter>
+    </Image>
+    <Image Include="Circular_Level\Paddle\Circular_Paddle.bmp">
+      <Filter>Resource Files\Circular_Level\Paddle</Filter>
+    </Image>
+    <Image Include="Circular_Level\Egg.bmp">
+      <Filter>Resource Files\Circular_Level</Filter>
+    </Image>
+    <Image Include="Flat_Level\Bricks\Brick_MCI_Orange.bmp">
+      <Filter>Resource Files\Flat_Level\Bricks</Filter>
+    </Image>
+    <Image Include="Flat_Level\Bricks\Brick_Powerup_Baby.bmp">
+      <Filter>Resource Files\Flat_Level\Bricks</Filter>
+    </Image>
+    <Image Include="Flat_Level\Bricks\Brick_Powerup_Broken_Condom.bmp">
+      <Filter>Resource Files\Flat_Level\Bricks</Filter>
+    </Image>
+    <Image Include="Flat_Level\Bricks\Brick_Powerup_Condom.bmp">
+      <Filter>Resource Files\Flat_Level\Bricks</Filter>
+    </Image>
+    <Image Include="Flat_Level\Bricks\Brick_Powerup_Men.bmp">
+      <Filter>Resource Files\Flat_Level\Bricks</Filter>
+    </Image>
+    <Image Include="Flat_Level\Bricks\Brick_Powerup_Money.bmp">
+      <Filter>Resource Files\Flat_Level\Bricks</Filter>
+    </Image>
+    <Image Include="Flat_Level\Bricks\Brick_Powerup_Multiple_BC.bmp">
+      <Filter>Resource Files\Flat_Level\Bricks</Filter>
+    </Image>
+    <Image Include="Flat_Level\Bricks\Brick_Powerup_Pill.bmp">
+      <Filter>Resource Files\Flat_Level\Bricks</Filter>
+    </Image>
+    <Image Include="Flat_Level\Bricks\Brick_Powerup_Reversal.bmp">
+      <Filter>Resource Files\Flat_Level\Bricks</Filter>
+    </Image>
+    <Image Include="Flat_Level\Bricks\Brick_Powerup_Scissors.bmp">
+      <Filter>Resource Files\Flat_Level\Bricks</Filter>
+    </Image>
+    <Image Include="Flat_Level\Bricks\Brick_Powerup_Sperm.bmp">
+      <Filter>Resource Files\Flat_Level\Bricks</Filter>
+    </Image>
+    <Image Include="Flat_Level\Bricks\Brick_MCI_Blue.bmp">
+      <Filter>Resource Files\Flat_Level\Bricks</Filter>
+    </Image>
+    <Image Include="Flat_Level\Bricks\Brick_MCI_Gray.bmp">
+      <Filter>Resource Files\Flat_Level\Bricks</Filter>
+    </Image>
+    <Image Include="Flat_Level\Bricks\Brick_MCI_Light_Blue.bmp">
+      <Filter>Resource Files\Flat_Level\Bricks</Filter>
+    </Image>
+    <Image Include="Flat_Level\Paddle\Flat_Paddle.bmp">
+      <Filter>Resource Files\Flat_Level\Paddle</Filter>
+    </Image>
+    <Image Include="Powerup_Facts\Broken_Condom_2.bmp">
+      <Filter>Resource Files\Powerup_Facts</Filter>
+    </Image>
+    <Image Include="Powerup_Facts\Condom_1.bmp">
+      <Filter>Resource Files\Powerup_Facts</Filter>
+    </Image>
+    <Image Include="Powerup_Facts\Condom_2.bmp">
+      <Filter>Resource Files\Powerup_Facts</Filter>
+    </Image>
+    <Image Include="Powerup_Facts\Men_1.bmp">
+      <Filter>Resource Files\Powerup_Facts</Filter>
+    </Image>
+    <Image Include="Powerup_Facts\Men_2.bmp">
+      <Filter>Resource Files\Powerup_Facts</Filter>
+    </Image>
+    <Image Include="Powerup_Facts\Money_1.bmp">
+      <Filter>Resource Files\Powerup_Facts</Filter>
+    </Image>
+    <Image Include="Powerup_Facts\Money_2.bmp">
+      <Filter>Resource Files\Powerup_Facts</Filter>
+    </Image>
+    <Image Include="Powerup_Facts\Multiple_BC_1.bmp">
+      <Filter>Resource Files\Powerup_Facts</Filter>
+    </Image>
+    <Image Include="Powerup_Facts\Multiple_BC_2.bmp">
+      <Filter>Resource Files\Powerup_Facts</Filter>
+    </Image>
+    <Image Include="Powerup_Facts\Pill_1.bmp">
+      <Filter>Resource Files\Powerup_Facts</Filter>
+    </Image>
+    <Image Include="Powerup_Facts\Pill_2.bmp">
+      <Filter>Resource Files\Powerup_Facts</Filter>
+    </Image>
+    <Image Include="Powerup_Facts\Reversal_1.bmp">
+      <Filter>Resource Files\Powerup_Facts</Filter>
+    </Image>
+    <Image Include="Powerup_Facts\Reversal_2.bmp">
+      <Filter>Resource Files\Powerup_Facts</Filter>
+    </Image>
+    <Image Include="Powerup_Facts\Sperm_1.bmp">
+      <Filter>Resource Files\Powerup_Facts</Filter>
+    </Image>
+    <Image Include="Powerup_Facts\Sperm_2.bmp">
+      <Filter>Resource Files\Powerup_Facts</Filter>
+    </Image>
+    <Image Include="Powerup_Facts\Vasectomy_1.bmp">
+      <Filter>Resource Files\Powerup_Facts</Filter>
+    </Image>
+    <Image Include="Powerup_Facts\Vasectomy_2.bmp">
+      <Filter>Resource Files\Powerup_Facts</Filter>
+    </Image>
+    <Image Include="Powerup_Facts\Baby_1.bmp">
+      <Filter>Resource Files\Powerup_Facts</Filter>
+    </Image>
+    <Image Include="Powerup_Facts\Baby_2.bmp">
+      <Filter>Resource Files\Powerup_Facts</Filter>
+    </Image>
+    <Image Include="Powerup_Facts\Broken_Condom_1.bmp">
+      <Filter>Resource Files\Powerup_Facts</Filter>
+    </Image>
+    <Image Include="Title_Screens\Game_over_screen.bmp">
+      <Filter>Resource Files\Title_Screens</Filter>
+    </Image>
+    <Image Include="Title_Screens\Backgrounds\background3.bmp">
+      <Filter>Resource Files\Title_Screens\Bacgrounds</Filter>
+    </Image>
+    <Image Include="Title_Screens\Backgrounds\background1.bmp">
+      <Filter>Resource Files\Title_Screens\Bacgrounds</Filter>
+    </Image>
+    <Image Include="Title_Screens\Backgrounds\background2.bmp">
+      <Filter>Resource Files\Title_Screens\Bacgrounds</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Circular_Level\Bricks\Row_1\Circle Brick Row 1 Instructions.txt">
+      <Filter>Resource Files\Circular_Level\Bricks\Row_1</Filter>
     </Text>
-    <Text Include="ballpictures.txt">
-      <Filter>Resource Files</Filter>
+    <Text Include="Circular_Level\Paddle\Circular_Paddle_Info.txt">
+      <Filter>Resource Files\Circular_Level\Paddle</Filter>
     </Text>
-    <Text Include="brickpictures.txt">
-      <Filter>Resource Files</Filter>
+    <Text Include="Graphics_Text_Files\paddlepictures.txt">
+      <Filter>Resource Files\Graphics_Text_Files</Filter>
     </Text>
-    <Text Include="paddlepictures.txt">
-      <Filter>Resource Files</Filter>
+    <Text Include="Graphics_Text_Files\powerups_fact.txt">
+      <Filter>Resource Files\Graphics_Text_Files</Filter>
     </Text>
-    <Text Include="titleImage.txt.txt">
-      <Filter>Resource Files</Filter>
+    <Text Include="Graphics_Text_Files\Title_Screens.txt">
+      <Filter>Resource Files\Graphics_Text_Files</Filter>
     </Text>
-    <Text Include="Circular_Paddle_Info.txt">
-      <Filter>Resource Files</Filter>
+    <Text Include="Graphics_Text_Files\ballpictures.txt">
+      <Filter>Resource Files\Graphics_Text_Files</Filter>
     </Text>
-    <Text Include="powerups_fact.txt">
-      <Filter>Resource Files</Filter>
+    <Text Include="Graphics_Text_Files\brickpictures.txt">
+      <Filter>Resource Files\Graphics_Text_Files</Filter>
     </Text>
   </ItemGroup>
 </Project>
