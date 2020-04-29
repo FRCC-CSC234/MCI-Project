@@ -1,0 +1,9 @@
+Circular Paddle Info:
+	Starts at top. Top left corner starts at (269, 240)
+	Top of paddle: radius 60 pixels
+	Bottom of paddle: radius 45 pixels
+	Top left corner travels along radius of 68 pixels
+	
+	File info:
+	Width: 64 px
+	Height: 23 px

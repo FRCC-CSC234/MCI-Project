@@ -1,0 +1,20 @@
+	*Top left corner refers to the top left corner of the brick's file, not the physical brick's corner
+Row 1 details:
+	First brick (Brick 0) top left corner at (300, 27)
+	Second brick (Brick 1) top left corner at (397, 49)
+	Third brick: (Brick 1) Flip vertically, rotate 90°, top left corner at (478, 109)
+		Note: top left corner has changed due to flip/rotate
+	Fourth brick: (Brick 0) Flip vertically, rotate 90°, top left corner at (531, 197)
+		Note: top left corner has changed
+	Fifth brick: Repeat fourth brick, then flip vertical. New top left corner at (531, 300)
+	Sixth brick: repeat third brick, then flip vertical. New top left corner at (478, 397)
+	Seventh brick: repeat second brick, flip vertical. New top left corner at (397, 478)
+	Eighth brick: repeat first brick, flip vertical, new top left corner at (300, 531)
+	Ninth brick: repeat eighth brick, flip horizontal, new TL corner at (197, 531)
+	Tenth brick: repeat seventh brick, flip horizontal, new TL corner at (109, 478)
+	Eleventh brick: repeat sixth brick, flip horizontal, new TL corner at (49, 397)
+	Twelfth brick: repeat fifth brick, flip horizontal, new TL corner at (27, 300)
+	Thirteenth brick: repeat fourth brick, flip horizontal, new TL corner at (27, 197)
+	Fourteenth brick: repeat third brick, flip horizontal, new TL corner at (49, 109)
+	Fifteenth brick: repeat second brick, flip horizontal, new TL corner at (109, 49)
+	Sixteenth brick: repeat first brick, flip horizontal, new TL corner at (197, 27)
