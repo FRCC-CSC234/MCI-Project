@@ -25,6 +25,7 @@ class Level
 
 public:
 	Level();
+	Level(int x);
 
 	int getPictureID( ) { return pictureID; }
 	void setPictureID( int pictureID ) { this->pictureID = pictureID; }

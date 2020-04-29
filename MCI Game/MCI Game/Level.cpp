@@ -28,6 +28,32 @@ Level::Level() {
 	//level.setPictureID(0);
 }
 
+Level::Level(int x) {
+
+	Ball ball;
+	ball.setX(400);
+	ball.setY(100);
+	addBall(ball);
+
+	//Paddle paddle;
+	paddle.setX(350);
+	paddle.setY(400);
+
+	levelNumber = x;
+
+	ball.setSpeedY(4 + x);
+
+	//currently  have a defualt array for testing, this should be changed eventualy
+	for (int i = 0; i < 30; i++) {
+		Brick brick;
+		brick.setX((i % 10) * 72);
+		brick.setY((i / 10) * 29);
+		addBrick(brick);
+	}
+
+	//level.setPictureID(0);
+}
+
 //#nick pallotti
 //this method moves the ball and also checks for collision with the paddle
 void Level::moveObjects(int direction) {
@@ -36,12 +62,10 @@ void Level::moveObjects(int direction) {
 	for (int i = 0; i < balls.size(); i++) {
 		
 		//for loop checks for the balls collision with the bricks
-		//while the loop works fine with the first row it doesnt with 
-		//the second row right now
 		for (int j = 0; j < bricks.size(); j++) {
 
 			//ball x/y are the balls x and y coordinates
-			int ballx = (balls.at(i)).getX();
+			int ballx = (balls.at(i)).getX() + 7;
 			int bally = (balls.at(i)).getY();
 
 			//the bounds/edges of the brick
@@ -52,7 +76,7 @@ void Level::moveObjects(int direction) {
 			int yTopBound = bricks.at(j).getY() + 29;
 
 			//if block checking that the ball intersects with the y and x coordinateds of the block
-			if (bally >= yBottomBound && bally <= yBottomBound) {
+			if (bally >= yBottomBound && bally <= yTopBound) {
 				if(ballx >= xLeftBound && ballx <= xRightBound) {
 					//if there is an collision erase the block and send the ball back
 					bricks.erase(bricks.begin() + j);
