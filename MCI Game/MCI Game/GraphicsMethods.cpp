@@ -44,8 +44,8 @@ void drawFlatScreen( std::vector<Brick> bricks, std::vector<Ball> balls, Paddle 
 		h = ball.getHeight( ); // This is working under the assumtion that getHeight returns the distance to the edge from the center.
 		x = ball.getX( ) - w;
 		y = ball.getY( ) - h;
-		//angle = ball.getDirection( );
-		angle = 0;
+		angle = ball.getAngle( );
+		//angle = 0;
 		//vFlip = ball.getVFlip( );	// Temperory concept, likely to be replaced by math, will depend on art and logic team.
 		//hFlip = ball.getHFlip( );	// ^
 		vFlip = false;
