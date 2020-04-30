@@ -76,7 +76,7 @@ void playGame( )
 					
 				case SDLK_LEFT:
 					direction = -1;
-					(level.getPaddle()).setX(paddleLocation - 5);
+					//(level.getPaddle()).setX(paddleLocation - 5);
 					break;
 				case SDLK_RIGHT:
 					direction = 1;

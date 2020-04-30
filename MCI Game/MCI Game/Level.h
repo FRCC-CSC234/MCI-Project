@@ -31,6 +31,7 @@ public:
 	void setPictureID( int pictureID ) { this->pictureID = pictureID; }
 
 	void moveObjects(int direction);
+	void createBricks();
 
 	void setLevelNumber(int x) { levelNumber = x; }
 	void setComplete(bool c) { complete = c; }

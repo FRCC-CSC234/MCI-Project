@@ -1,4 +1,5 @@
 #include "Level.h"
+#include <time.h>
 
 void Level::develop( )
 {
@@ -6,6 +7,7 @@ void Level::develop( )
 }
 
 Level::Level() {
+	srand(time(NULL));
 
 	Ball ball;
 	ball.setX(400);
@@ -16,14 +18,8 @@ Level::Level() {
 	paddle.setX(350);
 	paddle.setY(400);
 
-	
-	//currently  have a defualt array for testing, this should be changed eventualy
-	for (int i = 0; i < 30; i++) {
-		Brick brick;
-		brick.setX((i%10)* 72);
-		brick.setY((i/10) * 29);
-		addBrick(brick);
-	}
+	createBricks();// method fills the brick array
+
 
 	//level.setPictureID(0);
 }
@@ -42,14 +38,8 @@ Level::Level(int x) {
 	levelNumber = x;
 
 	ball.setSpeedY(4 + x);
-
-	//currently  have a defualt array for testing, this should be changed eventualy
-	for (int i = 0; i < 30; i++) {
-		Brick brick;
-		brick.setX((i % 10) * 72);
-		brick.setY((i / 10) * 29);
-		addBrick(brick);
-	}
+	
+	createBricks();//method fills the bricks array
 
 	//level.setPictureID(0);
 }
@@ -101,3 +91,33 @@ void Level::moveObjects(int direction) {
 		paddle.setX(paddle.getX() - 8);
 	}
 }
+
+void Level::createBricks() {
+	int powerupBrickCount = 0;
+	for (int i = 0; i < 30; i++)
+	{
+		//create a brick and set its location
+		Brick brick;
+		brick.setX((i % 10) * 72);
+		brick.setY((i / 10) * 29);
+
+		int randomPercent = rand() % 100 + 1;
+		if (randomPercent >= 90 && powerupBrickCount != 2) //if percent is greater than 90 and there arent already 2 power up bricks
+		{
+			int random = rand() % 8 + 4;  // Generating 4-13
+			brick.setPictureID(random); // Set a picture ID to brick
+			brick.setPowerupID((random - 4)); // Set a power id of brick from 0 -9
+			addBrick(brick);
+			powerupBrickCount++;
+		}
+		else
+		{
+			int random = rand() % 4;  // Generating 0-4
+			brick.setPictureID(random); // Set a picture ID to brick
+			brick.setPowerupID(-1); // No power up
+			addBrick(brick);
+		}
+
+	}
+}
+	

@@ -16,7 +16,7 @@ public:
 
 	void move(int paddleLocation);
 	void moveX();
-
+	double getAngle();
 	void setSpeedX(int x) {speedX = x;}
 	void setSpeedY(int y) { speedY = y; }
 

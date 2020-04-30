@@ -44,15 +44,15 @@ void drawFlatScreen( std::vector<Brick> bricks, std::vector<Ball> balls, Paddle 
 		h = ball.getHeight( ); // This is working under the assumtion that getHeight returns the distance to the edge from the center.
 		x = ball.getX( ) - w;
 		y = ball.getY( ) - h;
-		//angle = ball.getDirection( );
-		angle = 0;
+		angle = ball.getAngle( );
+		//angle = 0;
 		//vFlip = ball.getVFlip( );	// Temperory concept, likely to be replaced by math, will depend on art and logic team.
 		//hFlip = ball.getHFlip( );	// ^
 		vFlip = false;
 		hFlip = false;
 		//center = (x + w, y + h);
-		center.x = x + w;
-		center.y = y + h;
+		center.x = w;
+		center.y = h;
 		ballPictures.addPictureToFrameRotation( ball.getPictureID( ), x, y, angle, vFlip, hFlip, center );
 	}
 	w = paddle.getWidth( );	// This is working under the assumtion that getWidth returns the distance to the edge from the center.
