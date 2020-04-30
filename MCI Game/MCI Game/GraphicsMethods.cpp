@@ -10,15 +10,15 @@ Comments Updated: Ben Jurenka
 
 void drawFlatScreen( std::vector<Brick> bricks, std::vector<Ball> balls, Paddle paddle, Level background )
 {
-	static TrelGraphics2 brickPictures( "brickpictures.txt", 0xFF, 0xFF, 0xFF );
-	static TrelGraphics2 ballPictures( "ballpictures.txt", 0xFF, 0xFF, 0xFF );
-	static TrelGraphics2 paddlePictures( "paddlepictures.txt", 0xFF, 0xFF, 0xFF );
-	static TrelGraphics2 backgroundPictures( "backgroundpictures.txt" );
+	static TrelGraphics2 brickPictures( "Graphics_Text_Files/brickpictures.txt", 0xFF, 0xFF, 0xFF );
+	static TrelGraphics2 ballPictures( "Graphics_Text_Files/ballpictures.txt", 0xFF, 0xFF, 0xFF );
+	static TrelGraphics2 paddlePictures( "Graphics_Text_Files/paddlepictures.txt", 0xFF, 0xFF, 0xFF );
+	static TrelGraphics2 titleScreens( "Graphics_Text_Files/Title_Screens.txt" ); // No long only holding backgrounds updated name 
 	int x, y, w, h;
 	double angle;
 	bool vFlip, hFlip;
 	SDL_Point center;
-	backgroundPictures.addPictureToFrame( background.getPictureID( ), 0, 0 );
+	titleScreens.addPictureToFrame( background.getPictureID( ), 0, 0 );
 	for ( Brick brick : bricks )
 	{
 		w = brick.getWidth( );	// This is working under the assumtion that getWidth returns the distance to the edge from the center.
@@ -33,8 +33,8 @@ void drawFlatScreen( std::vector<Brick> bricks, std::vector<Ball> balls, Paddle 
 		vFlip = false;
 		hFlip = false;
 		//*** incorrect setup for SDL_Point, replacing center = (x + w, y + h);
-		center.x = x + w;
-		center.y = y + h;
+		center.x = w; // Updated 4.28
+		center.y = h; // Updated 4.28
 		brickPictures.addPictureToFrameRotation( brick.getPictureID( ), x, y, angle, vFlip, hFlip, center );
 	}
 	//*** changes above repeated
@@ -44,15 +44,15 @@ void drawFlatScreen( std::vector<Brick> bricks, std::vector<Ball> balls, Paddle 
 		h = ball.getHeight( ); // This is working under the assumtion that getHeight returns the distance to the edge from the center.
 		x = ball.getX( ) - w;
 		y = ball.getY( ) - h;
-		angle = ball.getAngle( );
-		//angle = 0;
+		//angle = ball.getDirection( );
+		angle = 0;
 		//vFlip = ball.getVFlip( );	// Temperory concept, likely to be replaced by math, will depend on art and logic team.
 		//hFlip = ball.getHFlip( );	// ^
 		vFlip = false;
 		hFlip = false;
 		//center = (x + w, y + h);
-		center.x = w;
-		center.y = h;
+		center.x = w; // Updated 4.28
+		center.y = h; // Updated 4.28
 		ballPictures.addPictureToFrameRotation( ball.getPictureID( ), x, y, angle, vFlip, hFlip, center );
 	}
 	w = paddle.getWidth( );	// This is working under the assumtion that getWidth returns the distance to the edge from the center.
@@ -66,8 +66,8 @@ void drawFlatScreen( std::vector<Brick> bricks, std::vector<Ball> balls, Paddle 
 	vFlip = false;
 	hFlip = false;
 	//center = (x + w, y + h);
-	center.x = x + w;
-	center.y = y + h;
+	center.x = w; // Updated 4.28
+	center.y = h; // Updated 4.28
 	paddlePictures.addPictureToFrameRotation( paddle.getPictureID( ), x, y, angle, vFlip, hFlip, center );
 	TrelGraphics2::drawFrame( );
 }
