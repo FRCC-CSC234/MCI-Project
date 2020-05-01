@@ -20,7 +20,7 @@ public:
 
 	int move(int paddleLocation, vector<Brick> bricks);
 	void moveX();
-
+	double getAngle();
 	void setSpeedX(int x) {speedX = x;}
 	void setSpeedY(int y) { speedY = y; }
 	void setDirection(double newDirection);
