@@ -9,13 +9,14 @@ Level::Level() {
 
 	Ball ball;
 	ball.setX(400);
-	ball.setY(100);
+	ball.setY(380);
 	addBall(ball);
 
 	//Paddle paddle;
 	paddle.setX(350);
 	paddle.setY(400);
 
+	ball.setSpeedY(-2);
 	
 	//currently  have a defualt array for testing, this should be changed eventualy
 	for (int i = 0; i < 30; i++) {
@@ -32,7 +33,7 @@ Level::Level(int x) {
 
 	Ball ball;
 	ball.setX(400);
-	ball.setY(100);
+	ball.setY(380);
 	addBall(ball);
 
 	//Paddle paddle;
@@ -41,7 +42,7 @@ Level::Level(int x) {
 
 	levelNumber = x;
 
-	ball.setSpeedY(4 + x);
+	ball.setSpeedY(-2 + x);
 
 	//currently  have a defualt array for testing, this should be changed eventualy
 	for (int i = 0; i < 30; i++) {
@@ -56,7 +57,7 @@ Level::Level(int x) {
 
 //#nick pallotti
 //this method moves the ball and also checks for collision with the paddle
-void Level::moveObjects(int direction) {
+int Level::moveObjects(int direction, Player &player) {
 
 	//for each ball on the board move the ball
 	for (int i = 0; i < balls.size(); i++) {
@@ -80,16 +81,50 @@ void Level::moveObjects(int direction) {
 				if(ballx >= xLeftBound && ballx <= xRightBound) {
 					//if there is an collision erase the block and send the ball back
 					bricks.erase(bricks.begin() + j);
+					if (bricks.size() == 0)
+					{
+						return 1;
+					}
 					int newSpeed = balls.at(i).getSpeedY() * -1;
 					(balls.at(i)).setSpeedY(newSpeed);
+					
 				}
 	
 			}
 			
 		}
 
-		balls.at(i).move(paddle.getX());
+		//if move returns -1, means the ball is dead
+		if (balls.at(i).move(paddle.getX(), bricks) == -1)
+		{
+			//death
+			player.takeLives(1);
+			cout << player.getLives();
 
+			if (player.getLives() < 0)
+			{
+				cout << "Game over!" << endl;
+				paddle.setX(350);
+				paddle.setY(400);
+				
+				balls.at(i).setSpeedX(0);
+				balls.at(i).setSpeedY(0);
+				return -1;
+			}
+
+			paddle.setX(350);
+			paddle.setY(400);
+
+			balls.at(i).setX(400);
+			balls.at(i).setY(380);
+			balls.at(i).setSpeedY(-2);
+			return 0;
+		}
+		if (balls.at(i).move(paddle.getX(), bricks) == 1)
+		{
+			cout << "Congratulations! Next level! Not programmed yet!" << endl;
+			return 1;
+		}
 	}
 
 	//move the paddle in the apporpriate direction

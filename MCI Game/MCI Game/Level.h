@@ -5,6 +5,7 @@
 #include "Ball.h"
 #include "Brick.h"
 #include "Paddle.h"
+#include "Player.h"
 #include <vector>
 
 using namespace std;
@@ -30,7 +31,7 @@ public:
 	int getPictureID( ) { return pictureID; }
 	void setPictureID( int pictureID ) { this->pictureID = pictureID; }
 
-	void moveObjects(int direction);
+	int moveObjects(int direction, Player &player);
 
 	void setLevelNumber(int x) { levelNumber = x; }
 	void setComplete(bool c) { complete = c; }

@@ -11,9 +11,9 @@
 using namespace std;
 
 
-void startGame( );
-void endGame( );
-void playGame( );
+void startGame(Player player);
+void endGame();
+void playGame(Player &player);
 //void startMusic();
 
 vector<Brick> bricks;
@@ -25,11 +25,12 @@ Level level; //*** exists to make me not have to delete stuff from drawScreen();
 int main( int argc, char** argv ) // Main must have these specific arguments for SDL to work 
 {
 
+	Player player;
 	
-	startGame( );
+	startGame(player);
+	playGame(player);
 	//startMusic();
-	playGame( );
-	endGame( );
+	endGame();
 	
 
 
@@ -41,7 +42,7 @@ int main( int argc, char** argv ) // Main must have these specific arguments for
 //*** moved game.cpp over to here
 
 
-void startGame( )
+void startGame(Player player)
 {
 	//#nick pallotti
 	//i changed the games width to 720 to better fit the blocks as well as the blue
@@ -51,70 +52,69 @@ void startGame( )
 	
 }
 
-void playGame( )
+void playGame(Player &player)
 {
 	cout << "in Gamemain playGame - NEEDS TO BE IMPLEMENTED" << endl;
-
+	SDL_Event e;
 	bool quit = false;
 	int direction = 0;
-	SDL_Event e;
-	while ( !quit )
+	int gameState = 0;
+	while (gameState == 0 || !quit)
 	{
-		while ( SDL_PollEvent( &e ) != 0 )
-		{
-			if ( e.type == SDL_QUIT )
+			while (SDL_PollEvent(&e) != 0)
 			{
-				quit = true;
-			}
-			else if ( e.type == SDL_KEYDOWN )
-			{
-				int paddleLocation = level.getPaddle().getX();
-				switch ( e.key.keysym.sym )
+				if (e.type == SDL_QUIT)
 				{
-					
-				case SDLK_LEFT:
-					direction = -1;
-					(level.getPaddle()).setX(paddleLocation - 5);
-					break;
-				case SDLK_RIGHT:
-					direction = 1;
-					break;
-				case SDLK_1:
-					level.setPictureID( 0 );
-					break;
-				case SDLK_2:
-					level.setPictureID( 1 );
-					break;
-				case SDLK_3:
-					level.setPictureID( 2 );
-					break;
+					quit = true;
+				}
+				else if (e.type == SDL_KEYDOWN)
+				{
+					int paddleLocation = level.getPaddle().getX();
+					switch (e.key.keysym.sym)
+					{
+
+					case SDLK_LEFT:
+						direction = -1;
+						(level.getPaddle()).setX(paddleLocation - 5);
+						//if (level.getPaddle().getX() <= 0)
+						break;
+					case SDLK_RIGHT:
+						direction = 1;
+						break;
+					case SDLK_1:
+						level.setPictureID(0);
+						break;
+					case SDLK_2:
+						level.setPictureID(1);
+						break;
+					case SDLK_3:
+						level.setPictureID(2);
+						break;
+					}
+				}
+				else if (e.type == SDL_KEYUP)
+				{
+					switch (e.key.keysym.sym)
+					{
+					case SDLK_LEFT:
+						direction = direction == 1 ? 1 : 0;
+						break;
+					case SDLK_RIGHT:
+						direction = direction == -1 ? -1 : 0;
+						break;
+					}
 
 				}
 			}
-			else if ( e.type == SDL_KEYUP )
-			{
-				switch ( e.key.keysym.sym )
-				{
-				case SDLK_LEFT:
-					direction = direction == 1 ? 1 : 0;
-					break;
-				case SDLK_RIGHT:
-					direction = direction == -1 ? -1 : 0;
-					break;
-				}
-			}
+
+			gameState = level.moveObjects(direction, player);
+
+			// removed draw code. Draw Flat screen needs to be used to draw things to the screen 
+			drawFlatScreen(level.getBricks(), level.getBalls(), level.getPaddle(), level);
 		}
-
-		//handle all the objects that need to be moved
-		level.moveObjects(direction);
-		
-		// removed draw code. Draw Flat screen needs to be used to draw things to the screen 
-		drawFlatScreen( level.getBricks(), level.getBalls(), level.getPaddle(), level );
-	}
-
 }
 
-void endGame( )
+void endGame()
 {
 	cout << "in gameMain endGame - NEEDS TO BE IMPLEMENTED" << endl;
 	TrelGraphics2::close( );
@@ -133,6 +133,4 @@ void endGame( )
 //	Mix_PlayMusic(mus, -1); //Music loop: -1 for continuous play
 //
 //}
-
-
 
