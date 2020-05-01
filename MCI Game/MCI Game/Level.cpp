@@ -16,13 +16,34 @@ Level::Level() {
 	paddle.setX(350);
 	paddle.setY(400);
 
-	
+	int powerupBrickCount = 0;
+
 	//currently  have a defualt array for testing, this should be changed eventualy
-	for (int i = 0; i < 30; i++) {
+	for ( int i = 0; i < 30; i++ )
+	{
+		 
 		Brick brick;
-		brick.setX((i%10)* 72);
-		brick.setY((i/10) * 29);
-		addBrick(brick);
+		brick.setX( (i % 10) * 72 );
+		brick.setY( (i / 10) * 29 );
+
+		int randomPercent = rand( ) % 100 + 1;
+		if ( randomPercent >= 90 && powerupBrickCount != 2) // are we generating a power up brick
+		{
+			int random = rand( ) %8 + 4;  // Generating 4-13
+			brick.setPictureID( random ); // Set a picture ID to brick
+			brick.setPowerupID( random ); // Set a power id of brick
+			addBrick( brick );
+			powerupBrickCount++;
+		}
+		else
+		{
+			int random = rand( ) % 4 ;  // Generating 0-4
+			brick.setPictureID( random ); // Set a picture ID to brick
+			brick.setPowerupID( -1 ); // No power up
+			addBrick( brick );
+		}
+	
+		
 	}
 
 	//level.setPictureID(0);

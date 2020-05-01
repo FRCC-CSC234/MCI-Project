@@ -43,7 +43,10 @@
     <Filter Include="Resource Files\Title_Screens">
       <UniqueIdentifier>{3b2978d6-760a-4fe8-8ff1-0026c7d2f979}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files\Title_Screens\Bacgrounds">
+    <Filter Include="Resource Files\Circular_Level\Bricks\Row_2">
+      <UniqueIdentifier>{1fc92fcd-4584-4bdb-ae12-1a7b52841a1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Title_Screens\Backgrounds">
       <UniqueIdentifier>{64b0c450-19b3-443d-9a95-b67557203167}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -311,13 +314,100 @@
       <Filter>Resource Files\Title_Screens</Filter>
     </Image>
     <Image Include="Title_Screens\Backgrounds\background3.bmp">
-      <Filter>Resource Files\Title_Screens\Bacgrounds</Filter>
+      <Filter>Resource Files\Title_Screens\Backgrounds</Filter>
     </Image>
     <Image Include="Title_Screens\Backgrounds\background1.bmp">
-      <Filter>Resource Files\Title_Screens\Bacgrounds</Filter>
+      <Filter>Resource Files\Title_Screens\Backgrounds</Filter>
     </Image>
     <Image Include="Title_Screens\Backgrounds\background2.bmp">
-      <Filter>Resource Files\Title_Screens\Bacgrounds</Filter>
+      <Filter>Resource Files\Title_Screens\Backgrounds</Filter>
+    </Image>
+    <Image Include="Circular_Level\Bricks\Row_2\Circle_Row_2_Brick_0_MCI_Blue.bmp">
+      <Filter>Resource Files\Circular_Level\Bricks\Row_2</Filter>
+    </Image>
+    <Image Include="Circular_Level\Bricks\Row_2\Circle_Row_2_Brick_0_MCI_Gray.bmp">
+      <Filter>Resource Files\Circular_Level\Bricks\Row_2</Filter>
+    </Image>
+    <Image Include="Circular_Level\Bricks\Row_2\Circle_Row_2_Brick_0_MCI_Light_Blue.bmp">
+      <Filter>Resource Files\Circular_Level\Bricks\Row_2</Filter>
+    </Image>
+    <Image Include="Circular_Level\Bricks\Row_2\Circle_Row_2_Brick_0_MCI_Orange.bmp">
+      <Filter>Resource Files\Circular_Level\Bricks\Row_2</Filter>
+    </Image>
+    <Image Include="Circular_Level\Bricks\Row_2\Circle_Row_2_Brick_0_Powerup_Baby.bmp">
+      <Filter>Resource Files\Circular_Level\Bricks\Row_2</Filter>
+    </Image>
+    <Image Include="Circular_Level\Bricks\Row_2\Circle_Row_2_Brick_0_Powerup_Broken_Condom.bmp">
+      <Filter>Resource Files\Circular_Level\Bricks\Row_2</Filter>
+    </Image>
+    <Image Include="Circular_Level\Bricks\Row_2\Circle_Row_2_Brick_0_Powerup_Condom.bmp">
+      <Filter>Resource Files\Circular_Level\Bricks\Row_2</Filter>
+    </Image>
+    <Image Include="Circular_Level\Bricks\Row_2\Circle_Row_2_Brick_0_Powerup_Men.bmp">
+      <Filter>Resource Files\Circular_Level\Bricks\Row_2</Filter>
+    </Image>
+    <Image Include="Circular_Level\Bricks\Row_2\Circle_Row_2_Brick_0_Powerup_Money.bmp">
+      <Filter>Resource Files\Circular_Level\Bricks\Row_2</Filter>
+    </Image>
+    <Image Include="Circular_Level\Bricks\Row_2\Circle_Row_2_Brick_0_Powerup_Multiple_BC.bmp">
+      <Filter>Resource Files\Circular_Level\Bricks\Row_2</Filter>
+    </Image>
+    <Image Include="Circular_Level\Bricks\Row_2\Circle_Row_2_Brick_0_Powerup_Pill.bmp">
+      <Filter>Resource Files\Circular_Level\Bricks\Row_2</Filter>
+    </Image>
+    <Image Include="Circular_Level\Bricks\Row_2\Circle_Row_2_Brick_0_Powerup_Reversal.bmp">
+      <Filter>Resource Files\Circular_Level\Bricks\Row_2</Filter>
+    </Image>
+    <Image Include="Circular_Level\Bricks\Row_2\Circle_Row_2_Brick_0_Powerup_Scissors.bmp">
+      <Filter>Resource Files\Circular_Level\Bricks\Row_2</Filter>
+    </Image>
+    <Image Include="Circular_Level\Bricks\Row_2\Circle_Row_2_Brick_0_Powerup_Sperm.bmp">
+      <Filter>Resource Files\Circular_Level\Bricks\Row_2</Filter>
+    </Image>
+    <Image Include="Circular_Level\Bricks\Row_2\Circle_Row_2_Brick_1_MCI_Blue.bmp">
+      <Filter>Resource Files\Circular_Level\Bricks\Row_2</Filter>
+    </Image>
+    <Image Include="Circular_Level\Bricks\Row_2\Circle_Row_2_Brick_1_MCI_Gray.bmp">
+      <Filter>Resource Files\Circular_Level\Bricks\Row_2</Filter>
+    </Image>
+    <Image Include="Circular_Level\Bricks\Row_2\Circle_Row_2_Brick_1_MCI_Light_Blue.bmp">
+      <Filter>Resource Files\Circular_Level\Bricks\Row_2</Filter>
+    </Image>
+    <Image Include="Circular_Level\Bricks\Row_2\Circle_Row_2_Brick_1_MCI_Orange.bmp">
+      <Filter>Resource Files\Circular_Level\Bricks\Row_2</Filter>
+    </Image>
+    <Image Include="Circular_Level\Bricks\Row_2\Circle_Row_2_Brick_1_Powerup_Baby.bmp">
+      <Filter>Resource Files\Circular_Level\Bricks\Row_2</Filter>
+    </Image>
+    <Image Include="Circular_Level\Bricks\Row_2\Circle_Row_2_Brick_1_Powerup_Broken_Condom.bmp">
+      <Filter>Resource Files\Circular_Level\Bricks\Row_2</Filter>
+    </Image>
+    <Image Include="Circular_Level\Bricks\Row_2\Circle_Row_2_Brick_1_Powerup_Condom.bmp">
+      <Filter>Resource Files\Circular_Level\Bricks\Row_2</Filter>
+    </Image>
+    <Image Include="Circular_Level\Bricks\Row_2\Circle_Row_2_Brick_1_Powerup_Men.bmp">
+      <Filter>Resource Files\Circular_Level\Bricks\Row_2</Filter>
+    </Image>
+    <Image Include="Circular_Level\Bricks\Row_2\Circle_Row_2_Brick_1_Powerup_Money.bmp">
+      <Filter>Resource Files\Circular_Level\Bricks\Row_2</Filter>
+    </Image>
+    <Image Include="Circular_Level\Bricks\Row_2\Circle_Row_2_Brick_1_Powerup_Multiple_BC.bmp">
+      <Filter>Resource Files\Circular_Level\Bricks\Row_2</Filter>
+    </Image>
+    <Image Include="Circular_Level\Bricks\Row_2\Circle_Row_2_Brick_1_Powerup_Pill.bmp">
+      <Filter>Resource Files\Circular_Level\Bricks\Row_2</Filter>
+    </Image>
+    <Image Include="Circular_Level\Bricks\Row_2\Circle_Row_2_Brick_1_Powerup_Reversal.bmp">
+      <Filter>Resource Files\Circular_Level\Bricks\Row_2</Filter>
+    </Image>
+    <Image Include="Circular_Level\Bricks\Row_2\Circle_Row_2_Brick_1_Powerup_Scissors.bmp">
+      <Filter>Resource Files\Circular_Level\Bricks\Row_2</Filter>
+    </Image>
+    <Image Include="Circular_Level\Bricks\Row_2\Circle_Row_2_Brick_1_Powerup_Sperm.bmp">
+      <Filter>Resource Files\Circular_Level\Bricks\Row_2</Filter>
+    </Image>
+    <Image Include="Title_Screens\Credits.bmp">
+      <Filter>Resource Files\Title_Screens</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
@@ -341,6 +431,9 @@
     </Text>
     <Text Include="Graphics_Text_Files\brickpictures.txt">
       <Filter>Resource Files\Graphics_Text_Files</Filter>
+    </Text>
+    <Text Include="Circular_Level\Bricks\Row_2\Circular Brick Coordinates Row 2.txt">
+      <Filter>Resource Files\Circular_Level\Bricks\Row_2</Filter>
     </Text>
   </ItemGroup>
 </Project>

@@ -196,6 +196,34 @@
     <Image Include="Circular_Level\Bricks\Row_1\Circle_Row_1_Brick_1_Powerup_Reversal.bmp" />
     <Image Include="Circular_Level\Bricks\Row_1\Circle_Row_1_Brick_1_Powerup_Scissors.bmp" />
     <Image Include="Circular_Level\Bricks\Row_1\Circle_Row_1_Brick_1_Powerup_Sperm.bmp" />
+    <Image Include="Circular_Level\Bricks\Row_2\Circle_Row_2_Brick_0_MCI_Blue.bmp" />
+    <Image Include="Circular_Level\Bricks\Row_2\Circle_Row_2_Brick_0_MCI_Gray.bmp" />
+    <Image Include="Circular_Level\Bricks\Row_2\Circle_Row_2_Brick_0_MCI_Light_Blue.bmp" />
+    <Image Include="Circular_Level\Bricks\Row_2\Circle_Row_2_Brick_0_MCI_Orange.bmp" />
+    <Image Include="Circular_Level\Bricks\Row_2\Circle_Row_2_Brick_0_Powerup_Baby.bmp" />
+    <Image Include="Circular_Level\Bricks\Row_2\Circle_Row_2_Brick_0_Powerup_Broken_Condom.bmp" />
+    <Image Include="Circular_Level\Bricks\Row_2\Circle_Row_2_Brick_0_Powerup_Condom.bmp" />
+    <Image Include="Circular_Level\Bricks\Row_2\Circle_Row_2_Brick_0_Powerup_Men.bmp" />
+    <Image Include="Circular_Level\Bricks\Row_2\Circle_Row_2_Brick_0_Powerup_Money.bmp" />
+    <Image Include="Circular_Level\Bricks\Row_2\Circle_Row_2_Brick_0_Powerup_Multiple_BC.bmp" />
+    <Image Include="Circular_Level\Bricks\Row_2\Circle_Row_2_Brick_0_Powerup_Pill.bmp" />
+    <Image Include="Circular_Level\Bricks\Row_2\Circle_Row_2_Brick_0_Powerup_Reversal.bmp" />
+    <Image Include="Circular_Level\Bricks\Row_2\Circle_Row_2_Brick_0_Powerup_Scissors.bmp" />
+    <Image Include="Circular_Level\Bricks\Row_2\Circle_Row_2_Brick_0_Powerup_Sperm.bmp" />
+    <Image Include="Circular_Level\Bricks\Row_2\Circle_Row_2_Brick_1_MCI_Blue.bmp" />
+    <Image Include="Circular_Level\Bricks\Row_2\Circle_Row_2_Brick_1_MCI_Gray.bmp" />
+    <Image Include="Circular_Level\Bricks\Row_2\Circle_Row_2_Brick_1_MCI_Light_Blue.bmp" />
+    <Image Include="Circular_Level\Bricks\Row_2\Circle_Row_2_Brick_1_MCI_Orange.bmp" />
+    <Image Include="Circular_Level\Bricks\Row_2\Circle_Row_2_Brick_1_Powerup_Baby.bmp" />
+    <Image Include="Circular_Level\Bricks\Row_2\Circle_Row_2_Brick_1_Powerup_Broken_Condom.bmp" />
+    <Image Include="Circular_Level\Bricks\Row_2\Circle_Row_2_Brick_1_Powerup_Condom.bmp" />
+    <Image Include="Circular_Level\Bricks\Row_2\Circle_Row_2_Brick_1_Powerup_Men.bmp" />
+    <Image Include="Circular_Level\Bricks\Row_2\Circle_Row_2_Brick_1_Powerup_Money.bmp" />
+    <Image Include="Circular_Level\Bricks\Row_2\Circle_Row_2_Brick_1_Powerup_Multiple_BC.bmp" />
+    <Image Include="Circular_Level\Bricks\Row_2\Circle_Row_2_Brick_1_Powerup_Pill.bmp" />
+    <Image Include="Circular_Level\Bricks\Row_2\Circle_Row_2_Brick_1_Powerup_Reversal.bmp" />
+    <Image Include="Circular_Level\Bricks\Row_2\Circle_Row_2_Brick_1_Powerup_Scissors.bmp" />
+    <Image Include="Circular_Level\Bricks\Row_2\Circle_Row_2_Brick_1_Powerup_Sperm.bmp" />
     <Image Include="Circular_Level\Egg.bmp" />
     <Image Include="Circular_Level\Paddle\Circular_Paddle.bmp" />
     <Image Include="Flat_Level\Bricks\Brick_MCI_Blue.bmp" />
@@ -236,10 +264,12 @@
     <Image Include="Title_Screens\Backgrounds\background1.bmp" />
     <Image Include="Title_Screens\Backgrounds\background2.bmp" />
     <Image Include="Title_Screens\Backgrounds\background3.bmp" />
+    <Image Include="Title_Screens\Credits.bmp" />
     <Image Include="Title_Screens\Game_over_screen.bmp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Circular_Level\Bricks\Row_1\Circle Brick Row 1 Instructions.txt" />
+    <Text Include="Circular_Level\Bricks\Row_2\Circular Brick Coordinates Row 2.txt" />
     <Text Include="Circular_Level\Paddle\Circular_Paddle_Info.txt" />
     <Text Include="Graphics_Text_Files\ballpictures.txt" />
     <Text Include="Graphics_Text_Files\brickpictures.txt" />
