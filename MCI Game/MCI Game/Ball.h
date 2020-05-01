@@ -23,10 +23,10 @@ public:
 	double getAngle();
 	void setSpeedX(int x) {speedX = x;}
 	void setSpeedY(int y) { speedY = y; }
-	void setDirection(double newDirection);
-	void setMovable(bool move);
+	void setDirection(double newDirection) { this->direction = newDirection; }
+	void setMoveable(bool move) { this->movable = move; }
 
-	bool getMovable() { return movable; }
+	bool getMoveable() { return movable; }
 	int getSpeedX() { return speedX; }
 	int getSpeedY() { return speedY; }
 	double getDirection() { return direction; }

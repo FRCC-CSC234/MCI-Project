@@ -65,9 +65,10 @@ int Level::moveObjects(int direction, Player &player) {
 		//for loop checks for the balls collision with the bricks
 		for (int j = 0; j < bricks.size(); j++) {
 
-			//ball x/y are the balls x and y coordinates
+			//ball x/y are the balls x and y coordinates	
 			int ballx = (balls.at(i)).getX() + 7;
 			int bally = (balls.at(i)).getY();
+
 
 			//the bounds/edges of the brick
 			int xLeftBound = bricks.at(j).getX();
@@ -81,11 +82,13 @@ int Level::moveObjects(int direction, Player &player) {
 				if(ballx >= xLeftBound && ballx <= xRightBound) {
 					//if there is an collision erase the block and send the ball back
 					bricks.erase(bricks.begin() + j);
+					//#SimonM if the array of bricks is empty, move on to next level
 					if (bricks.size() == 0)
 					{
 						return 1;
 					}
-					int newSpeed = balls.at(i).getSpeedY() * -1;
+
+					int newSpeed = balls.at(i).getSpeedY() * -2;
 					(balls.at(i)).setSpeedY(newSpeed);
 					
 				}
@@ -94,13 +97,14 @@ int Level::moveObjects(int direction, Player &player) {
 			
 		}
 
-		//if move returns -1, means the ball is dead
+		//#SimonM if move returns -1, means the ball is dead, resets to paddle waits for space to launch
 		if (balls.at(i).move(paddle.getX(), bricks) == -1)
 		{
 			//death
 			player.takeLives(1);
 			cout << player.getLives();
 
+			//#SimonM if player is out of lives, end game.
 			if (player.getLives() < 0)
 			{
 				cout << "Game over!" << endl;
@@ -112,18 +116,17 @@ int Level::moveObjects(int direction, Player &player) {
 				return -1;
 			}
 
+			//#SimonM reset ball and paddle to middle
 			paddle.setX(350);
 			paddle.setY(400);
 
 			balls.at(i).setX(400);
 			balls.at(i).setY(380);
 			balls.at(i).setSpeedY(-2);
-			return 0;
-		}
-		if (balls.at(i).move(paddle.getX(), bricks) == 1)
-		{
-			cout << "Congratulations! Next level! Not programmed yet!" << endl;
-			return 1;
+
+			//#SimonM set ball to immovable so that it waits for the space key to start moving again
+			balls.at(i).setMoveable(false);
+					
 		}
 	}
 
@@ -135,4 +138,6 @@ int Level::moveObjects(int direction, Player &player) {
 	if (direction == -1) {
 		paddle.setX(paddle.getX() - 8);
 	}
+
+	return 0;
 }

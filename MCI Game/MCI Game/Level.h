@@ -12,9 +12,10 @@ using namespace std;
 
 class Level
 {
-	
+
 	int levelNumber;
 	bool complete;
+	//Ball ball;
 	vector<Ball> balls;
 	vector<Brick> bricks;
 	Paddle paddle;
@@ -38,6 +39,7 @@ public:
 	void addBall(Ball ball) { balls.push_back(ball); }
 	void addBrick(Brick brick) { bricks.push_back(brick); }
 	void setPaddle(Paddle p) { paddle = p; }
+	void moveBall(bool b) { balls.at(0).setMoveable(b); }
 	
 
 	int getLevelNumber() { return levelNumber;}

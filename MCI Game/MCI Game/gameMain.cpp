@@ -59,7 +59,7 @@ void playGame(Player &player)
 	bool quit = false;
 	int direction = 0;
 	int gameState = 0;
-	while (gameState == 0 || !quit)
+	while (!quit)
 	{
 			while (SDL_PollEvent(&e) != 0)
 			{
@@ -76,7 +76,6 @@ void playGame(Player &player)
 					case SDLK_LEFT:
 						direction = -1;
 						(level.getPaddle()).setX(paddleLocation - 5);
-						//if (level.getPaddle().getX() <= 0)
 						break;
 					case SDLK_RIGHT:
 						direction = 1;
@@ -90,6 +89,9 @@ void playGame(Player &player)
 					case SDLK_3:
 						level.setPictureID(2);
 						break;
+					case SDLK_SPACE:
+						level.moveBall(true);
+						break;
 					}
 				}
 				else if (e.type == SDL_KEYUP)
@@ -102,15 +104,36 @@ void playGame(Player &player)
 					case SDLK_RIGHT:
 						direction = direction == -1 ? -1 : 0;
 						break;
+						//#SimonM set spacebar to change balls movable bool to true
+					case SDLK_SPACE:
+						level.moveBall(true);
+						break;
 					}
+
 
 				}
 			}
 
+			//#SimonM the moveObjects method returns an int -1 for death, 0 for normal, 1 for moving to next level
 			gameState = level.moveObjects(direction, player);
 
 			// removed draw code. Draw Flat screen needs to be used to draw things to the screen 
 			drawFlatScreen(level.getBricks(), level.getBalls(), level.getPaddle(), level);
+
+			//#SimonM
+			//if player is out of lives, quit. Need to put in way to exit this method and move to endGame method here instead.
+			if (gameState == -1)
+			{
+				cout << endl << "you dead womp womp" << endl;
+				quit = true;
+			}
+
+			if (gameState == 1)
+			{
+				//do level progression code here
+				cout << endl << "Next level time" << endl;
+				quit = true;
+			}
 		}
 }
 

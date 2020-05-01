@@ -18,7 +18,7 @@ Player::Player( )
 {
 	//playerName = "No Name";
 	//playerScore = 0;
-	playerLives = 4;
+	playerLives = 100;
 	//Paddle playerPaddle;
 	//Level currentLevel;
 }
