@@ -36,7 +36,7 @@ void drawFlatScreen( std::vector<Brick> bricks, std::vector<Ball> balls, Paddle 
 		//*** incorrect setup for SDL_Point, replacing center = (x + w, y + h);
 		center.x = w; // Updated 4.28
 		center.y = h; // Updated 4.28
-		brickPictures.addPictureToFrameRotation( brick.getPictureID( ), x, y, angle, vFlip, hFlip, &center );
+		brickPictures.addPictureToFrameRotation( brick.getPictureID( ), x, y, angle, vFlip, hFlip, center );
 	}
 	//*** changes above repeated
 	for ( Ball ball : balls )
@@ -54,7 +54,7 @@ void drawFlatScreen( std::vector<Brick> bricks, std::vector<Ball> balls, Paddle 
 		//center = (x + w, y + h);
 		center.x = w; // Updated 4.28
 		center.y = h; // Updated 4.28
-		ballPictures.addPictureToFrameRotation( ball.getPictureID( ), x, y, angle, vFlip, hFlip, &center );
+		ballPictures.addPictureToFrameRotation( ball.getPictureID( ), x, y, angle, vFlip, hFlip, center );
 	}
 	w = paddle.getWidth( );	// This is working under the assumtion that getWidth returns the distance to the edge from the center.
 	h = paddle.getHeight( ); // This is working under the assumtion that getHeight returns the distance to the edge from teh center.
@@ -69,7 +69,7 @@ void drawFlatScreen( std::vector<Brick> bricks, std::vector<Ball> balls, Paddle 
 	//center = (x + w, y + h);
 	center.x = w; // Updated 4.28
 	center.y = h; // Updated 4.28
-	paddlePictures.addPictureToFrameRotation( paddle.getPictureID( ), x, y, angle, vFlip, hFlip, &center );
+	paddlePictures.addPictureToFrameRotation( paddle.getPictureID( ), x, y, angle, vFlip, hFlip, center );
 	if ( powerupID != -1 )
 	{
 		powerupFacts.addPictureToFrame( (powerupID * 2) + rand( ) % 2, 170, 150 );
