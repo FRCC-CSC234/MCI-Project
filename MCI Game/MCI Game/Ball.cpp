@@ -38,9 +38,9 @@ void Ball::move(int paddleLocation) {
 		speedY = (speedY * -1);
 		moveX();
 	}
-	else if (yLocation <= 0) { //if the ball hits the top of the screen
-		speedY = (speedY * -1);
-		moveX();
+	else if (yLocation <= 0) { //if the ball hits the bottom of the screen
+		//speedY = (speedY * -1);
+		//moveX();
 	}
 	else if (xLocation >= 720 || xLocation <= 0) { //if the ball hits the right or left side of the screen
 		speedX = speedX * -1;
@@ -50,7 +50,6 @@ void Ball::move(int paddleLocation) {
 		speedY = (speedY * -1);
 			moveX();
 		}
-
 	}
 
 	//set the balls new location
