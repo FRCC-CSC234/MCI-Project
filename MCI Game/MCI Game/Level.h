@@ -12,13 +12,12 @@ using namespace std;
 
 class Level
 {
-
 	int levelNumber;
 	bool complete;
-	//Ball ball;
+	bool bonus;
 	vector<Ball> balls;
 	vector<Brick> bricks;
-	Paddle paddle;
+	vector<Paddle> paddles;
 
 	//*** Adding Picture ID to level for background images
 	int pictureID; // ID value for background image.
@@ -33,20 +32,22 @@ public:
 	void setPictureID( int pictureID ) { this->pictureID = pictureID; }
 
 	int moveObjects(int direction, Player &player);
+	void checkPowerUps(int brickLocation);
 
 	void setLevelNumber(int x) { levelNumber = x; }
 	void setComplete(bool c) { complete = c; }
 	void addBall(Ball ball) { balls.push_back(ball); }
 	void addBrick(Brick brick) { bricks.push_back(brick); }
-	void setPaddle(Paddle p) { paddle = p; }
-	void moveBall(bool b) { balls.at(0).setMoveable(b); }
-	
+	void setPaddle(Paddle paddle) { paddles.push_back(paddle); }
+	void moveBall(bool b) { balls.at(0).setMoveable(b);}
+	void setBonus(bool isBonus) { this->bonus = isBonus; }
 
+	bool getBonus() { return bonus; }
 	int getLevelNumber() { return levelNumber;}
 	bool getComplete() { return complete; }
 	vector<Ball> getBalls() { return balls; }
 	vector<Brick> getBricks() { return bricks; }
-	Paddle getPaddle() { return paddle; }
+	vector<Paddle> getPaddles() { return paddles; }
 	
 };
 

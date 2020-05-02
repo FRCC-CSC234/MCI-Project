@@ -8,7 +8,7 @@ description: ** this is a prototpye some things will be changed **
 Comments Updated: Ben Jurenka
 **************************/
 
-void drawFlatScreen( std::vector<Brick> bricks, std::vector<Ball> balls, Paddle paddle, Level background )
+void drawFlatScreen( std::vector<Brick> bricks, std::vector<Ball> balls, std::vector<Paddle> paddles, Level background )
 {
 	static TrelGraphics2 brickPictures( "Graphics_Text_Files/brickpictures.txt", 0xFF, 0xFF, 0xFF );
 	static TrelGraphics2 ballPictures( "Graphics_Text_Files/ballpictures.txt", 0xFF, 0xFF, 0xFF );
@@ -55,20 +55,24 @@ void drawFlatScreen( std::vector<Brick> bricks, std::vector<Ball> balls, Paddle 
 		center.y = h; // Updated 4.28
 		ballPictures.addPictureToFrameRotation( ball.getPictureID( ), x, y, angle, vFlip, hFlip, center );
 	}
-	w = paddle.getWidth( );	// This is working under the assumtion that getWidth returns the distance to the edge from the center.
-	h = paddle.getHeight( ); // This is working under the assumtion that getHeight returns the distance to the edge from teh center.
-	x = paddle.getX( ) - w;
-	y = paddle.getY( ) - h;
-	//angle = paddle.getDirection( );
-	angle = 0;
-	//vFlip = paddle.getVFlip( );	// Temperory concept, likely to be replaced by math, will depend on art and logic team.
-	//hFlip = paddle.getHFlip( );	// ^
-	vFlip = false;
-	hFlip = false;
-	//center = (x + w, y + h);
-	center.x = w; // Updated 4.28
-	center.y = h; // Updated 4.28
-	paddlePictures.addPictureToFrameRotation( paddle.getPictureID( ), x, y, angle, vFlip, hFlip, center );
+	//#nathan: "I attempted to make it so multipal paddles can be drawn on to the screen but have been un succsessful."
+	for (Paddle paddle : paddles)
+	{
+		w = paddle.getWidth() / 2;	// This is working under the assumtion that getWidth returns the distance to the edge from the center.
+		h = paddle.getHeight() / 2; // This is working under the assumtion that getHeight returns the distance to the edge from teh center.
+		x = paddle.getX();
+		y = paddle.getY() - h;
+		//angle = paddle.getDirection( );
+		angle = 0;
+		//vFlip = paddle.getVFlip( );	// Temperory concept, likely to be replaced by math, will depend on art and logic team.
+		//hFlip = paddle.getHFlip( );	// ^
+		vFlip = false;
+		hFlip = false;
+		//center = (x + w, y + h);
+		center.x = w; // Updated 4.28
+		center.y = h; // Updated 4.28
+		paddlePictures.addPictureToFrameRotation(paddle.getPictureID(), x, y, angle, vFlip, hFlip, center);
+	}
 	TrelGraphics2::drawFrame( );
 }
 

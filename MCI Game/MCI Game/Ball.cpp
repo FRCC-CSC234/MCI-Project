@@ -24,7 +24,7 @@ Ball::Ball( )
 	direction the ball is moving
 	********************/
 	speedX = 0;
-	speedY = -2;
+	speedY = (-2);
 	movable = false;
 
 }
@@ -33,7 +33,7 @@ Ball::Ball( )
 	#nick Pallotti
 	this method moves the ball,
 ********************/
-int Ball::move(int paddleLocation, vector<Brick> bricks) {
+int Ball::move(int paddleLocation, int paddleWidth, vector<Brick> bricks) {
 	srand(time(0));
 
 	if (yLocation >= 500) { //if the ball hits the bottom of the screen
@@ -48,7 +48,7 @@ int Ball::move(int paddleLocation, vector<Brick> bricks) {
 		speedX = speedX * -1;
 	}
 	else if ((yLocation == 400)) {
-		if ( xLocation >= paddleLocation && xLocation <= paddleLocation + 100) { //if the ball hits th paddle
+		if ( xLocation >= paddleLocation && xLocation <= paddleLocation + paddleWidth) { //if the ball hits th paddle
 		speedY = (speedY * -1);
 			moveX();
 		}
@@ -59,8 +59,9 @@ int Ball::move(int paddleLocation, vector<Brick> bricks) {
 	if (movable == true)
 	{
 		//set the balls new location
-		setX(xLocation + speedX);
-		setY(yLocation + speedY);
+		setX(xLocation + (speedX/4));
+		setY(yLocation + (speedY/4));
+
 	}
 
 	//#SimonM if the ball is not movable, it will stick to the paddle

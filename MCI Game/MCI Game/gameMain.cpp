@@ -69,13 +69,13 @@ void playGame(Player &player)
 				}
 				else if (e.type == SDL_KEYDOWN)
 				{
-					int paddleLocation = level.getPaddle().getX();
+					int paddleLocation = level.getPaddles().at(0).getX();
 					switch (e.key.keysym.sym)
 					{
 
 					case SDLK_LEFT:
 						direction = -1;
-						(level.getPaddle()).setX(paddleLocation - 5);
+						//(level.getPaddle()).setX(paddleLocation - 5);
 						break;
 					case SDLK_RIGHT:
 						direction = 1;
@@ -115,10 +115,12 @@ void playGame(Player &player)
 			}
 
 			//#SimonM the moveObjects method returns an int -1 for death, 0 for normal, 1 for moving to next level
-			gameState = level.moveObjects(direction, player);
-
+			for (int i = 0; i < 4; i++)
+			{
+				gameState = level.moveObjects(direction, player);
+			}
 			// removed draw code. Draw Flat screen needs to be used to draw things to the screen 
-			drawFlatScreen(level.getBricks(), level.getBalls(), level.getPaddle(), level);
+			drawFlatScreen(level.getBricks(), level.getBalls(), level.getPaddles(), level);
 
 			//#SimonM
 			//if player is out of lives, quit. Need to put in way to exit this method and move to endGame method here instead.
