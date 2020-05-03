@@ -63,56 +63,75 @@ void Ball::move(int paddleLocation) {
 //#nick pallotti
 //method for randomly changing the balls speed in the x direction
 void Ball::moveX() {
-	int xmoveAmount = rand() % 5;    //how fast the x direction speed changes
-	int xmoveDirection = rand() % 2;  //whether the speed changes in the left or right direction
+	//int xmoveAmount = rand() % 5;    //how fast the x direction speed changes
+	//int xmoveDirection = rand() % 2;  //whether the speed changes in the left or right direction
 
-	//if xMoveDirection == 1 speed up to the right
-	if (xmoveDirection == 1) {
+	////if xMoveDirection == 1 speed up to the right
+	//if (xmoveDirection == 1) {
 
-		//this if block decides how much the speed changes
-		if (xmoveAmount == 1) {
-			speedX += 1;
-		}
-		else if (xmoveAmount == 2) {
-			speedX += 2;
-		}
-		else if (xmoveAmount == 3) {
-			speedX += 3;
-		}
-		else if (xmoveAmount == 4) {
-			speedX += 4;
-		}
-		else {
-			speedX += 5;
-		}
-		//makes sure the ball doesnt go to fast
-		if (speedX > 5) {
-			speedX = 5;
-		}
+	//	//this if block decides how much the speed changes
+	//	if (xmoveAmount == 1) {
+	//		speedX += 1;
+	//	}
+	//	else if (xmoveAmount == 2) {
+	//		speedX += 2;
+	//	}
+	//	else if (xmoveAmount == 3) {
+	//		speedX += 3;
+	//	}
+	//	else if (xmoveAmount == 4) {
+	//		speedX += 4;
+	//	}
+	//	else {
+	//		speedX += 5;
+	//	}
+	//	//makes sure the ball doesnt go to fast
+	//	if (speedX > 5) {
+	//		speedX = 5;
+	//	}
 
+	//}
+	////if xMoveDirection != 1 speed up to the left
+	//else {
+	//	//this if block decides how much the speed changes
+	//	if (xmoveAmount == 1) {
+	//		speedX -= 1;
+	//	}
+	//	else if (xmoveAmount == 2) {
+	//		speedX -= 2;
+	//	}
+	//	else if (xmoveAmount == 3) {
+	//		speedX -= 3;
+	//	}
+	//	else if (xmoveAmount == 4) {
+	//		speedX -= 4;
+	//	}
+	//	else {
+	//		speedX -= 5;
+	//	}
+	//	//makes sure the ball doesnt move to fast
+	//	if (speedX < -5) {
+	//		speedX = -5;
+	//	}
+	//}
+	srand(time(NULL));
+	int moveX = rand() % 3;
+	//int moveAmount = rand() % 3;
+	
+	if (moveX == 1) {
+		speedX += 3;
+		if (speedX > 6) {
+			speedX = 6;
+		}
 	}
-	//if xMoveDirection != 1 speed up to the left
-	else {
-		//this if block decides how much the speed changes
-		if (xmoveAmount == 1) {
-			speedX -= 1;
+	else if (moveX == 2) {
+		speedX -= 3;
+		if (speedX < -6) {
+			speedX = -6;
 		}
-		else if (xmoveAmount == 2) {
-			speedX -= 2;
-		}
-		else if (xmoveAmount == 3) {
-			speedX -= 3;
-		}
-		else if (xmoveAmount == 4) {
-			speedX -= 4;
-		}
-		else {
-			speedX -= 5;
-		}
-		//makes sure the ball doesnt move to fast
-		if (speedX < -5) {
-			speedX = -5;
-		}
+	}
+	else if (moveX == 3) {
+
 	}
 }
 /***************************************

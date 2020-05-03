@@ -8,8 +8,8 @@ class Ball : public GameObject
 private:
 	// direction between 0 and 360
 	double direction;
-	int speedX;
-	int speedY;
+	double speedX;
+	double speedY;
 
 public:
 	//Constructor
