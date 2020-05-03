@@ -20,6 +20,7 @@ public:
 	Ball( );
 
 	int move(int paddleLocation, int paddleWidth, vector<Brick> bricks);
+	int move2(int paddleLocation, int paddle2Location, int paddleWidth, vector<Brick> bricks);
 	void moveX();
 	double getAngle();
 	void setSpeedX(double x) {speedX = x;}

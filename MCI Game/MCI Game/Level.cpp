@@ -47,7 +47,7 @@ Level::Level() {
 Level::Level(int x) {
 
 	Ball ball;
-	bonus = false;
+	bonusBall = false;
 	ball.setX(400);
 	ball.setY(380);
 	addBall(ball);
@@ -56,6 +56,7 @@ Level::Level(int x) {
 	paddles.at(0).setX(350);
 	paddles.at(0).setY(400);
 	paddles.at(0).setWidth(100);
+	bonusPaddle = false;
 
 	levelNumber = x;
 
@@ -105,9 +106,11 @@ int Level::moveObjects(int direction, Player &player) {
 					{
 						return 1;
 					}
-
+					else
+					{
 					int newSpeed = balls.at(i).getSpeedY() * -1;
 					(balls.at(i)).setSpeedY(newSpeed);
+					}
 					
 				}
 	
@@ -116,49 +119,117 @@ int Level::moveObjects(int direction, Player &player) {
 		}
 		for (int k = 0; k < paddles.size(); k++)
 		{
-			//#SimonM if move returns -1, means the ball is dead, resets to paddle waits for space to launch
-			if (balls.at(i).move(paddles.at(k).getX(), paddles.at(k).getWidth(), bricks) == -1)
+
+			if (paddles.size() > 1)
 			{
-				if (bonus == true)
+				if (balls.at(i).move2(paddles.at(0).getX(), paddles.at(1).getX(), paddles.at(k).getWidth(), bricks) == -1)
 				{
-					bonus = false;
-					balls.at(i).setX(900);
-					balls.at(i).setY(980);
-					balls.at(i).setSpeedY(0);
-				}
-				else
-				{
-					//death
-					player.takeLives(1);
-					cout << player.getLives();
-
-					//#SimonM if player is out of lives, end game.
-					if (player.getLives() < 0)
+					if (bonusBall == true)
 					{
-						cout << "Game over!" << endl;
-						paddles.at(k).setX(350);
-						paddles.at(k).setY(400);
-
-						balls.at(i).setSpeedX(0);
-						balls.at(i).setSpeedY(0);
-						return -1;
+						bonusBall = false;
+						balls.erase(balls.begin() + i);
+						/*balls.at(i).setX(900);
+						balls.at(i).setY(980);
+						balls.at(i).setSpeedY(0);*/
+						return 0;
 					}
-
-					//#SimonM reset ball and paddle to middle
-					for (int k = 0; k < paddles.size(); k++)
+					else
 					{
-						paddles.at(k).setX(350 + (200 * k));
-						paddles.at(k).setY(400);
+						//death
+						player.takeLives(1);
+						cout << player.getLives();
+						bonusPaddle = false;
+
+						//#SimonM if player is out of lives, end game.
+						if (player.getLives() < 0)
+						{
+							cout << "Game over!" << endl;
+							paddles.at(k).setX(350);
+							paddles.at(k).setY(400);
+
+							balls.at(i).setSpeedX(0);
+							balls.at(i).setSpeedY(0);
+							return -1;
+						}
+
+						//#SimonM reset all paddles to middle
+						for (int k = 0; k < paddles.size(); k++)
+						{
+							//#SimonM checks if there are multiple paddles, if so deletes any extras
+							if (paddles.size() > 1)
+							{
+								paddles.erase(paddles.begin() + (k + 1));
+							}
+							paddles.at(k).setX(350 + (200 * k));
+							paddles.at(k).setY(400);
+						}
+
+						balls.at(i).setX(400);
+						balls.at(i).setY(380);
+						balls.at(i).setSpeedY(-2);
+
+						//#SimonM set ball to immovable so that it waits for the space key to start moving again
+						balls.at(i).setMoveable(false);
 					}
-
-					balls.at(i).setX(400);
-					balls.at(i).setY(380);
-					balls.at(i).setSpeedY(-2);
-
-					//#SimonM set ball to immovable so that it waits for the space key to start moving again
-					balls.at(i).setMoveable(false);
 				}
 			}
+
+			else
+			{
+				//#SimonM if move returns -1, means the ball is dead, resets to paddle waits for space to launch
+				if (balls.at(i).move(paddles.at(k).getX(), paddles.at(k).getWidth(), bricks) == -1)
+				{
+					if (bonusBall == true)
+					{
+						bonusBall = false;
+						balls.erase(balls.begin() + i);
+						/*balls.at(i).setX(900);
+						balls.at(i).setY(980);
+						balls.at(i).setSpeedY(0);*/
+						return 0;
+					}
+					else
+					{
+						//death
+						player.takeLives(1);
+						cout << player.getLives();
+						bonusPaddle = false;
+
+						//#SimonM if player is out of lives, end game.
+						if (player.getLives() < 0)
+						{
+							cout << "Game over!" << endl;
+							paddles.at(k).setX(350);
+							paddles.at(k).setY(400);
+
+							balls.at(i).setSpeedX(0);
+							balls.at(i).setSpeedY(0);
+							return -1;
+						}
+
+						//#SimonM reset all paddles to middle
+						for (int k = 0; k < paddles.size(); k++)
+						{
+							//#SimonM checks if there are multiple paddles, if so deletes any extras
+							if (paddles.size() > 1)
+							{
+								paddles.erase(paddles.begin() + (k + 1));
+							}
+							paddles.at(k).setX(350 + (200 * k));
+							paddles.at(k).setY(400);
+						}
+
+						balls.at(i).setX(400);
+						balls.at(i).setY(380);
+						balls.at(i).setSpeedY(-2);
+
+						//#SimonM set ball to immovable so that it waits for the space key to start moving again
+						balls.at(i).setMoveable(false);
+					}
+				}
+			}
+
+
 		}
 	}
 
@@ -197,7 +268,7 @@ void Level::checkPowerUps(int brickLocation)
 		{
 			Ball ball2;
 			ball2.setMoveable(true);
-			bonus = true;
+			bonusBall = true;
 			ball2.setX(paddles.at(0).getX());
 			ball2.setY(paddles.at(0).getY());
 			ball2.setSpeedY(2);
@@ -223,6 +294,7 @@ void Level::checkPowerUps(int brickLocation)
 		if (bricks.at(brickLocation).getPowerupID() == 5) // add a paddle
 		{
 			Paddle paddle2;
+			bonusPaddle = true;
 			paddle2.setX(paddles.at(0).getX() - 150);
 			paddle2.setY(400);
 			paddle2.setWidth(100);

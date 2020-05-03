@@ -33,7 +33,8 @@ Ball::Ball( )
 	#nick Pallotti
 	this method moves the ball,
 ********************/
-int Ball::move(int paddleLocation, int paddleWidth, vector<Brick> bricks) {
+int Ball::move(int paddleLocation, int paddleWidth, vector<Brick> bricks) 
+{
 	srand(time(0));
 
 	if (yLocation >= 500) { //if the ball hits the bottom of the screen
@@ -48,7 +49,7 @@ int Ball::move(int paddleLocation, int paddleWidth, vector<Brick> bricks) {
 		speedX = speedX * -1;
 	}
 	else if ((yLocation == 400)) {
-		if ( xLocation >= paddleLocation && xLocation <= paddleLocation + paddleWidth) { //if the ball hits th paddle
+		if ( xLocation >= paddleLocation && xLocation <= paddleLocation + paddleWidth) { //if the ball hits the paddle
 		speedY = (speedY * -1);
 			moveX();
 		}
@@ -61,6 +62,56 @@ int Ball::move(int paddleLocation, int paddleWidth, vector<Brick> bricks) {
 		//set the balls new location
 		setX(xLocation + (speedX/4));
 		setY(yLocation + (speedY/4));
+
+	}
+
+	//#SimonM if the ball is not movable, it will stick to the paddle
+	if (movable == false)
+	{
+		setX(paddleLocation + 40);
+		setY(380);
+	}
+}
+
+/********************
+	#Simon M
+	overloaded move method, includes second paddle location in case of extra paddle
+********************/
+int Ball::move2(int paddleLocation, int paddle2Location, int paddleWidth, vector<Brick> bricks)
+{
+	srand(time(0));
+
+	if (yLocation >= 500) { //if the ball hits the bottom of the screen
+		//#SimonM return -1 to level class to do death stuff
+		return -1;
+	}
+	else if (yLocation <= 0) { //if the ball hits the top of the screen
+		speedY = (speedY * -1);
+		moveX();
+	}
+	else if (xLocation >= 720 || xLocation <= 0) { //if the ball hits the right or left side of the screen
+		speedX = speedX * -1;
+	}
+	else if ((yLocation == 400)) {
+		if (xLocation >= paddleLocation && xLocation <= paddleLocation + paddleWidth) { //if the ball hits the paddle
+			speedY = (speedY * -1);
+			moveX();
+		}
+		//#SimonM add to check if there's a second paddle the ball might collide with
+		else if (xLocation >= paddle2Location && xLocation <= paddle2Location + paddleWidth)
+		{
+			speedY = (speedY * -1);
+			moveX();
+		}
+
+	}
+
+	//#SimonM if the ball is movable it will move as normal
+	if (movable == true)
+	{
+		//set the balls new location
+		setX(xLocation + (speedX / 4));
+		setY(yLocation + (speedY / 4));
 
 	}
 

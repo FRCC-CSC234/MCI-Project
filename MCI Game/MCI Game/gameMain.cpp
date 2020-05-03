@@ -115,7 +115,7 @@ void playGame(Player &player)
 			}
 
 			//#SimonM the moveObjects method returns an int -1 for death, 0 for normal, 1 for moving to next level
-			for (int i = 0; i < 4; i++)
+			for (int i = 0; i < 4 && gameState == 0; i++)
 			{
 				gameState = level.moveObjects(direction, player);
 			}

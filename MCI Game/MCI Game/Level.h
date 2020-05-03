@@ -14,7 +14,14 @@ class Level
 {
 	int levelNumber;
 	bool complete;
-	bool bonus;
+
+	//#SimonM if player has a bonus ball, this will be true. 
+	//If bonus ball hits bottom, this will become false but no lifes reduced
+	bool bonusBall; 
+
+	//#SimonM if player has a second paddle this will be true. Once player loses a life this becomes false
+	bool bonusPaddle;
+
 	vector<Ball> balls;
 	vector<Brick> bricks;
 	vector<Paddle> paddles;
@@ -40,9 +47,11 @@ public:
 	void addBrick(Brick brick) { bricks.push_back(brick); }
 	void setPaddle(Paddle paddle) { paddles.push_back(paddle); }
 	void moveBall(bool b) { balls.at(0).setMoveable(b);}
-	void setBonus(bool isBonus) { this->bonus = isBonus; }
+	void setBonusBall(bool isBonus) { this->bonusBall = isBonus; }
+	void setBonusPaddle(bool isBonus) { this->bonusPaddle = isBonus; }
 
-	bool getBonus() { return bonus; }
+	bool getBonusPaddle() { return bonusPaddle; }
+	bool getBonusBall() { return bonusBall; }
 	int getLevelNumber() { return levelNumber;}
 	bool getComplete() { return complete; }
 	vector<Ball> getBalls() { return balls; }
