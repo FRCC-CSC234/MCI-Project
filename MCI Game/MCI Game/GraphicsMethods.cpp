@@ -58,8 +58,8 @@ void drawFlatScreen( std::vector<Brick> bricks, std::vector<Ball> balls, std::ve
 	//#nathan: "I attempted to make it so multipal paddles can be drawn on to the screen but have been un succsessful."
 	for (Paddle paddle : paddles)
 	{
-		w = paddle.getWidth() / 2;	// This is working under the assumtion that getWidth returns the distance to the edge from the center.
-		h = paddle.getHeight() / 2; // This is working under the assumtion that getHeight returns the distance to the edge from teh center.
+		w = paddle.getWidth();	// This is working under the assumtion that getWidth returns the distance to the edge from the center.
+		h = 14; // This is working under the assumtion that getHeight returns the distance to the edge from teh center.
 		x = paddle.getX();
 		y = paddle.getY() - h;
 		//angle = paddle.getDirection( );
@@ -71,7 +71,7 @@ void drawFlatScreen( std::vector<Brick> bricks, std::vector<Ball> balls, std::ve
 		//center = (x + w, y + h);
 		center.x = w; // Updated 4.28
 		center.y = h; // Updated 4.28
-		paddlePictures.addPictureToFrameRotation(paddle.getPictureID(), x, y, angle, vFlip, hFlip, center);
+		paddlePictures.addPictureToFrameResize(paddle.getPictureID(), x, y, w, h);
 	}
 	TrelGraphics2::drawFrame( );
 }

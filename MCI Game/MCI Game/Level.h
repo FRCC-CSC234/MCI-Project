@@ -22,6 +22,9 @@ class Level
 	//#SimonM if player has a second paddle this will be true. Once player loses a life this becomes false
 	bool bonusPaddle;
 
+	//#SimonM if player has the 'one time shield' power up the ball will just bounce off the bottom of the screen once.
+	bool invincible;
+
 	vector<Ball> balls;
 	vector<Brick> bricks;
 	vector<Paddle> paddles;
@@ -34,12 +37,14 @@ class Level
 public:
 	Level();
 	Level(int x);
+	
+	void createBricks();
 
 	int getPictureID( ) { return pictureID; }
 	void setPictureID( int pictureID ) { this->pictureID = pictureID; }
 
 	int moveObjects(int direction, Player &player);
-	void checkPowerUps(int brickLocation);
+	void checkPowerUps(Player &playeer, int brickLocation);
 
 	void setLevelNumber(int x) { levelNumber = x; }
 	void setComplete(bool c) { complete = c; }
@@ -49,7 +54,9 @@ public:
 	void moveBall(bool b) { balls.at(0).setMoveable(b);}
 	void setBonusBall(bool isBonus) { this->bonusBall = isBonus; }
 	void setBonusPaddle(bool isBonus) { this->bonusPaddle = isBonus; }
+	void setInvincible(bool isInvincible) { this->invincible = isInvincible; }
 
+	bool getInvincible() { return invincible; }
 	bool getBonusPaddle() { return bonusPaddle; }
 	bool getBonusBall() { return bonusBall; }
 	int getLevelNumber() { return levelNumber;}

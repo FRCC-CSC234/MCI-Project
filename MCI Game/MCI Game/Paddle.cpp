@@ -13,5 +13,6 @@ Description: Constructor
 Paddle::Paddle( )
 {
 	GameObject( );
+
 	// This needs width and height values to be set
 }

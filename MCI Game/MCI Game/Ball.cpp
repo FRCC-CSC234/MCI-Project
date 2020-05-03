@@ -48,7 +48,7 @@ int Ball::move(int paddleLocation, int paddleWidth, vector<Brick> bricks)
 	else if (xLocation >= 720 || xLocation <= 0) { //if the ball hits the right or left side of the screen
 		speedX = speedX * -1;
 	}
-	else if ((yLocation == 400)) {
+	else if ((yLocation > 386 && yLocation < 400)) {
 		if ( xLocation >= paddleLocation && xLocation <= paddleLocation + paddleWidth) { //if the ball hits the paddle
 		speedY = (speedY * -1);
 			moveX();
@@ -92,7 +92,7 @@ int Ball::move2(int paddleLocation, int paddle2Location, int paddleWidth, vector
 	else if (xLocation >= 720 || xLocation <= 0) { //if the ball hits the right or left side of the screen
 		speedX = speedX * -1;
 	}
-	else if ((yLocation == 400)) {
+	else if ((yLocation > 386 && yLocation < 400)) {
 		if (xLocation >= paddleLocation && xLocation <= paddleLocation + paddleWidth) { //if the ball hits the paddle
 			speedY = (speedY * -1);
 			moveX();
