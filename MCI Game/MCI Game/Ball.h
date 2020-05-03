@@ -1,5 +1,8 @@
 #pragma once
 #include "GameObject.h"
+#include "Brick.h"
+#include <vector>
+#include <iostream>
 
 //#SimonM Object class for Brick objects
 
@@ -10,20 +13,24 @@ private:
 	double direction;
 	double speedX;
 	double speedY;
+	bool movable;
 
 public:
 	//Constructor
 	Ball( );
 
-	void move(int paddleLocation);
+	int move(int paddleLocation, int paddleWidth, vector<Brick> bricks);
+	int move2(int paddleLocation, int paddle2Location, int paddleWidth, vector<Brick> bricks);
 	void moveX();
 	double getAngle();
-	void setSpeedX(int x) {speedX = x;}
-	void setSpeedY(int y) { speedY = y; }
-	void setDirection(double newDirection) { direction = newDirection; }
+	void setSpeedX(double x) {speedX = x;}
+	void setSpeedY(double y) { speedY = y; }
+	void setDirection(double newDirection) { this->direction = newDirection; }
+	void setMoveable(bool move) { this->movable = move; }
 
-	int getSpeedX() { return speedX; }
-	int getSpeedY() { return speedY; }
+	bool getMoveable() { return movable; }
+	double getSpeedX() { return speedX; }
+	double getSpeedY() { return speedY; }
 	double getDirection() { return direction; }
 };
 

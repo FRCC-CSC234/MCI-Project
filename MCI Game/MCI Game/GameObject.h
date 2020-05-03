@@ -19,10 +19,10 @@ protected:
 	int width;
 
 	//x-axis location
-	int xLocation;
+	double xLocation;
 
 	//y-axis location
-	int yLocation;
+	double yLocation;
 
 	//speed at which the object moves
 	double speed;
@@ -35,16 +35,16 @@ public:
 	//getters
 	int getHeight( );
 	int getWidth( );
-	int getX( );
-	int getY( );
+	double getX( );
+	double getY( );
 	double getSpeed( );
 	int getPictureID( ); // *** Changed from ID String to pictureID int
 
 	//setters
 	void setHeight( int h );
 	void setWidth( int w );
-	void setX( int x );
-	void setY( int y );
+	void setX( double x );
+	void setY(double y );
 	void setSpeed( double newSpeed );
 	void setPictureID( int pictureID ); // *** Changed from ID String to pictureID int
 };

@@ -47,7 +47,7 @@ int GameObject::getWidth( )
 Name: getX
 Description: getter, returns xLocation
 **********************************************************/
-int GameObject::getX( )
+double GameObject::getX( )
 {
 	return xLocation;
 }
@@ -57,7 +57,7 @@ int GameObject::getX( )
 Name: getY
 Description: getter, returns yLocation
 **********************************************************/
-int GameObject::getY( )
+double GameObject::getY( )
 {
 	return yLocation;
 }
@@ -110,7 +110,7 @@ void GameObject::setWidth( int w )
 Name: setX
 Description: setter, takes int parameter and sets to xLocation
 **********************************************************/
-void GameObject::setX( int x )
+void GameObject::setX(double x )
 {
 	this->xLocation = x;
 }
@@ -120,7 +120,7 @@ void GameObject::setX( int x )
 Name: setY
 Description: setter, takes int parameter and sets to yLocation
 **********************************************************/
-void GameObject::setY( int y )
+void GameObject::setY(double y )
 {
 	this->yLocation = y;
 }

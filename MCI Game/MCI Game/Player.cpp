@@ -16,20 +16,20 @@ Description: Constructors
 
 Player::Player( )
 {
-	playerName = "No Name";
-	playerScore = 0;
-	playerLives = 0;
-	Paddle playerPaddle;
-	Level currentLevel;
+	//playerName = "No Name";
+	//playerScore = 0;
+	playerLives = 4;
+	//Paddle playerPaddle;
+	//Level currentLevel;
 }
-Player::Player( string name )
-{
-	playerName = name;
-	playerScore = 0;
-	playerLives = 5;
-	playerPaddle;
-	currentLevel;
-}
+//Player::Player( string name )
+//{
+//	playerName = name;
+//	playerScore = 0;
+//	playerLives = 5;
+//	playerPaddle;
+//	currentLevel;
+//}
 
 /***********************************************************
 #KyleD
@@ -37,10 +37,10 @@ Name: Player
 Description: Setter, updates level.
 **********************************************************/
 
-void Player::setLevel( Level levelNumber )
-{
-	currentLevel = levelNumber;
-}
+//void Player::setLevel( Level levelNumber )
+//{
+//	currentLevel = levelNumber;
+//}
 
 /***********************************************************
 #KyleD
@@ -48,10 +48,10 @@ Name: Player
 Description: Setter, adds score
 **********************************************************/
 
-void Player::addScore( int score )
-{
-	playerScore = playerScore + score;
-}
+//void Player::addScore( int score )
+//{
+//	playerScore = playerScore + score;
+//}
 
 /***********************************************************
 #KyleD
@@ -59,10 +59,10 @@ Name: Player
 Description: Setter, subtracts score
 **********************************************************/
 
-void Player::takeScore( int score )
-{
-	playerScore = playerScore - score;
-}
+//void Player::takeScore( int score )
+//{
+//	playerScore = playerScore - score;
+//}
 
 /***********************************************************
 #KyleD
@@ -73,6 +73,10 @@ Description: Setter, adds lives
 void Player::addLives( int lives )
 {
 	playerLives = playerLives + lives;
+	if (playerLives > 5)
+	{
+		playerLives = 5;
+	}
 }
 
 /***********************************************************
@@ -92,10 +96,10 @@ Name: Player
 Description: Getter, returns level info
 **********************************************************/
 
-Level Player::getLevelDetails( )
-{
-	return currentLevel;
-}
+//Level Player::getLevelDetails( )
+//{
+//	return currentLevel;
+//}
 
 /***********************************************************
 #KyleD
@@ -104,10 +108,10 @@ Description: Getter, returns Paddle information
 **********************************************************/
 
 
-Paddle Player::getPlayerPaddle( )
-{
-	return playerPaddle;
-}
+//Paddle Player::getPlayerPaddle( )
+//{
+//	return playerPaddle;
+//}
 
 /***********************************************************
 #KyleD
@@ -115,10 +119,10 @@ Name: Player
 Description: Getter, returns score
 **********************************************************/
 
-int Player::getScore( )
-{
-	return playerScore;
-}
+//int Player::getScore( )
+//{
+//	return playerScore;
+//}
 
 /***********************************************************
 #KyleD
