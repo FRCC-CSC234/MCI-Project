@@ -1,4 +1,5 @@
 #include "Level.h"
+#include <vector>
 
 //Written by Nick Pallotti, edited by Simon Martin
 
@@ -11,39 +12,19 @@ int playerLives = 4;
 
 Level::Level() {
 
-	
+
+	Paddle paddle( 350, 500 );
+	setPaddle( paddle );
 
 	Ball ball(400, 380);
 	addBall(ball);
+	
+	
 
-	Paddle paddle(350, 500);
-	setPaddle(paddle);
 
 	ball.setSpeedY(-2);
 	
 	createBricks();
-	//currently  have a defualt array for testing, this should be changed eventualy
-	//for (int i = 0; i < 30; i++) {
-	//	Brick brick;
-	//	brick.setX((i % 10) * 72);
-	//	brick.setY((i / 10) * 29);
-	//	if (brick.getX() == 0 && brick.getY() == 0)
-	//	{
-	//		brick.setPowerupID(0);
-	//	}
-	//	if (i == 5)
-	//	{
-	//		brick.setPowerupID(5);
-	//	}
-	//	if (i == 25)
-	//	{
-	//		brick.setPowerupID(9);
-	//	}
-
-	//	addBrick(brick);
-	//}
-
-	//level.setPictureID(0);
 }
 
 Level::Level(int x) {
