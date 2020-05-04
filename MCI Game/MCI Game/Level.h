@@ -5,7 +5,6 @@
 #include "Ball.h"
 #include "Brick.h"
 #include "Paddle.h"
-#include "Player.h"
 #include <vector>
 
 using namespace std;
@@ -43,8 +42,8 @@ public:
 	int getPictureID( ) { return pictureID; }
 	void setPictureID( int pictureID ) { this->pictureID = pictureID; }
 
-	int moveObjects(int direction, Player &player);
-	void checkPowerUps(Player &playeer, int brickLocation);
+	//int moveObjects(int direction, Player &player);
+	void checkPowerUps(int brickLocation);
 
 	void setLevelNumber(int x) { levelNumber = x; }
 	void setComplete(bool c) { complete = c; }
@@ -55,7 +54,8 @@ public:
 	void setBonusBall(bool isBonus) { this->bonusBall = isBonus; }
 	void setBonusPaddle(bool isBonus) { this->bonusPaddle = isBonus; }
 	void setInvincible(bool isInvincible) { this->invincible = isInvincible; }
-	int Level::collision();
+	void gameFrame( );
+	int checkCollision();
 
 	bool getInvincible() { return invincible; }
 	bool getBonusPaddle() { return bonusPaddle; }

@@ -19,9 +19,7 @@ public:
 	//Constructor
 	Ball(double x, double y );
 
-	int move(int paddleLocation, int paddleWidth, vector<Brick> bricks);
-	int move2(int paddleLocation, int paddle2Location, int paddleWidth, vector<Brick> bricks);
-	void moveX();
+	int move();
 	double getAngle();
 	void setSpeedX(double x) {speedX = x;}
 	void setSpeedY(double y) { speedY = y; }

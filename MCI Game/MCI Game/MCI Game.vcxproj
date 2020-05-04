@@ -151,7 +151,6 @@
     <ClInclude Include="GraphicsMethods.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="Paddle.h" />
-    <ClInclude Include="Player.h" />
     <ClInclude Include="TrelGraphics2.h" />
     <ClInclude Include="TrelTexture.h" />
   </ItemGroup>
@@ -163,7 +162,6 @@
     <ClCompile Include="GraphicsMethods.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="Paddle.cpp" />
-    <ClCompile Include="Player.cpp" />
     <ClCompile Include="TrelGraphics2.cpp" />
     <ClCompile Include="TrelTexture.cpp" />
   </ItemGroup>

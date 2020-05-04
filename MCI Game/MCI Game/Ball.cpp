@@ -28,6 +28,15 @@ Ball::Ball(double x, double y ) :GameObject(0, 9, 6, x, y, 0)
 
 }
 
+
+
+int Ball::move()
+{
+	xLocation += speedX;
+	yLocation += speedY;
+	return 0;
+}
+
 /***************************************
 #nick pallotti
 
@@ -91,8 +100,6 @@ double Ball::getAngle() {
 
 		angle = atan(sideY / sideX) * (180 / 3.1415); //no need to add  anything since we are in quadrant 1
 	}
-
-	//ball is irented at 90 degrees so this makes up for that 
-	angle = angle + 90;
+ 	
 	return angle;
 }

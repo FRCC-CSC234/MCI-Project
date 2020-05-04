@@ -11,24 +11,21 @@
 using namespace std;
 
 
-void startGame(Player player);
+void startGame();
 void endGame();
-void playGame(Player &player);
+void playGame();
 //void startMusic();
 
-vector<Brick> bricks;
-vector<Ball> balls;
-Paddle paddle;
+
 Level level; //*** exists to make me not have to delete stuff from drawScreen();
 
 
 int main( int argc, char** argv ) // Main must have these specific arguments for SDL to work 
 {
 
-	Player player;
-	
-	startGame(player);
-	playGame(player);
+
+	startGame();
+	playGame();
 	//startMusic();
 	endGame();
 	
@@ -39,20 +36,19 @@ int main( int argc, char** argv ) // Main must have these specific arguments for
 }
 
 
-//*** moved game.cpp over to here
 
 
-void startGame(Player player)
+void startGame()
 {
 	//#nick pallotti
 	//i changed the games width to 720 to better fit the blocks as well as the blue
 	//backgrounds width to 720 but not the other colors
-	TrelGraphics2::start( "Insert MCI Game Name Here", 720, 500 ); //*** needed a TrelGraphics::start call, made up a size.
+	TrelGraphics2::start( "Insert MCI Game Name Here", 600, 600 ); //*** needed a TrelGraphics::start call, made up a size.
 	cout << "in Gamemain startGame - NEEDS TO BE IMPLEMENTED" << endl;
 	
 }
 
-void playGame(Player &player)
+void playGame()
 {
 	cout << "in Gamemain playGame - NEEDS TO BE IMPLEMENTED" << endl;
 	SDL_Event e;
@@ -117,13 +113,15 @@ void playGame(Player &player)
 			//#SimonM the moveObjects method returns an int -1 for death, 0 for normal, 1 for moving to next level
 			for (int i = 0; i < 4 && gameState == 0; i++)
 			{
-				gameState = level.moveObjects(direction, player);
+				//gameState = level.moveObjects(direction, player);
+				level.gameFrame( );
 			}
 			// removed draw code. Draw Flat screen needs to be used to draw things to the screen 
 			drawFlatScreen(level.getBricks(), level.getBalls(), level.getPaddles(), level);
 
 			//#SimonM
 			//if player is out of lives, quit. Need to put in way to exit this method and move to endGame method here instead.
+			/*
 			if (gameState == -1)
 			{
 				cout << endl << "you dead womp womp" << endl;
@@ -136,6 +134,7 @@ void playGame(Player &player)
 				cout << endl << "Next level time" << endl;
 				quit = true;
 			}
+			*/
 		}
 }
 
