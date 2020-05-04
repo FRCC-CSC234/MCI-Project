@@ -13,7 +13,7 @@
 Name: Ball
 Description: Constructor
 **********************************************************/
-Ball::Ball(double x, double y ) :GameObject(0, 9, 6, x, y, 0)
+Ball::Ball( double x, double y ):GameObject( 0, 9, 6, x, y, 0 )
 {
 	// this needs width and height values to be set.
 
@@ -28,13 +28,23 @@ Ball::Ball(double x, double y ) :GameObject(0, 9, 6, x, y, 0)
 
 }
 
-
-
-int Ball::move()
+/***********************************************************
+#NickB
+Name: move
+Description: code to move the ball in a given direction
+**********************************************************/
+int Ball::move(Paddle p)
 {
-	xLocation += speedX;
-	yLocation += speedY;
-	return 0;
+	if ( movable )
+	{
+		xLocation += speedX;
+		yLocation += speedY;
+		return 0;
+	}
+	else
+	{
+		xLocation = p.getX( );
+	}
 }
 
 /***************************************
@@ -60,8 +70,8 @@ radians, in order to convert form degrees to radians
 you can mutiply the result by (180/pi).
 ***************************************/
 double Ball::getAngle() {
-	int sideX;
-	int sideY;
+	double sideX;
+	double sideY;
 
 	double angle;
 	//bassicly if spedX is 0 atan blows up so this handles that case
@@ -84,14 +94,14 @@ double Ball::getAngle() {
 		sideX = speedX * -1;
 		sideY = speedY;
 
-		angle = atan(sideY / sideX) * (180 / 3.1415); //find the angle
+		angle = atan(sideX / sideY) * (180 / 3.1415); //find the angle *****Nick P Check this
 		angle = angle + 90; //add 90 since we are in quadrant 2
 	}
 	else if (speedY < 0) { //if direction is in in quadrant 4
 		sideX = speedX;
 		sideY = speedY * -1;
 
-		angle = atan(sideY / sideX) * (180 / 3.1415); //find the degree
+		angle = atan(sideX / sideY) * (180 / 3.1415); //find the degree *****Nick P Check this
 		angle = angle + 270; //add 270 since we are in quadrant 4
 	}
 	else { //if direction is in quadrant 1

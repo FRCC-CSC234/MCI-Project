@@ -1,6 +1,7 @@
 #pragma once
 #include "GameObject.h"
 #include "Brick.h"
+#include "Paddle.h"
 #include <vector>
 #include <iostream>
 
@@ -13,20 +14,24 @@ private:
 	double direction;
 	double speedX;
 	double speedY;
+
+	//#SimonM sets the ability of the ball to be moved on the y-axis
 	bool movable;
 
 public:
 	//Constructor
 	Ball(double x, double y );
 
-	int move();
+	int move(Paddle p);
 	double getAngle();
+
+	//getters/setters
 	void setSpeedX(double x) {speedX = x;}
 	void setSpeedY(double y) { speedY = y; }
 	void setDirection(double newDirection) { this->direction = newDirection; }
-	void setMoveable(bool move) { this->movable = move; }
+	void setMovable(bool move) { this->movable = move; }
 
-	bool getMoveable() { return movable; }
+	bool getMovable() { return movable; }
 	double getSpeedX() { return speedX; }
 	double getSpeedY() { return speedY; }
 	double getDirection() { return direction; }

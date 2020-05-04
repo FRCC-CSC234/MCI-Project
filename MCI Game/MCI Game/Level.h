@@ -5,9 +5,12 @@
 #include "Ball.h"
 #include "Brick.h"
 #include "Paddle.h"
+#include "GraphicsMethods.h"
 #include <vector>
 
 using namespace std;
+
+//Written by Nick Pallotti, edited by Simon Martin, Nick Brady, Trel Johnson, and Kyle Dexter
 
 class Level
 {
@@ -18,11 +21,17 @@ class Level
 	//If bonus ball hits bottom, this will become false but no lifes reduced
 	bool bonusBall; 
 
-	//#SimonM if player has a second paddle this will be true. Once player loses a life this becomes false
+	//#SimonM if player has a second paddle this will be true. Once player 
+	//loses a life this becomes false
 	bool bonusPaddle;
 
-	//#SimonM if player has the 'one time shield' power up the ball will just bounce off the bottom of the screen once.
+	//#SimonM if player has the 'one time shield' power up the ball will 
+	//just bounce off the bottom of the screen once.
 	bool invincible;
+
+	//#SimonM if player has the super ball power up this will be true.
+	//makes the ball bounce through all bricks until it hits the top
+	bool superBall;
 
 	vector<Ball> balls;
 	vector<Brick> bricks;
@@ -34,29 +43,38 @@ class Level
 	void develop( );
 
 public:
+
+	static bool quit;
+	//#NickP constructors
 	Level();
 	Level(int x);
 	
+	//randomizes and draws bricks on the screen
 	void createBricks();
 
-	int getPictureID( ) { return pictureID; }
-	void setPictureID( int pictureID ) { this->pictureID = pictureID; }
+	//need comments
+	void gameFrame( );
+	int checkCollision();
+	void shouldTheBallBeHere( );
 
-	//int moveObjects(int direction, Player &player);
-	void checkPowerUps(int brickLocation);
-
-	void setLevelNumber(int x) { levelNumber = x; }
-	void setComplete(bool c) { complete = c; }
+	//#NickP add items to vectors
 	void addBall(Ball ball) { balls.push_back(ball); }
 	void addBrick(Brick brick) { bricks.push_back(brick); }
+
+	//#NathanM checks a brick in the vector for powerups and activates as necessary	
+	void checkPowerUps(int brickLocation);
+	
+	//getters/setters
+	void setLevelNumber(int x) { levelNumber = x; }
+	void setComplete(bool c) { complete = c; }
 	void setPaddle(Paddle paddle) { paddles.push_back(paddle); }
-	void moveBall(bool b) { balls.at(0).setMoveable(b);}
 	void setBonusBall(bool isBonus) { this->bonusBall = isBonus; }
 	void setBonusPaddle(bool isBonus) { this->bonusPaddle = isBonus; }
 	void setInvincible(bool isInvincible) { this->invincible = isInvincible; }
-	void gameFrame( );
-	int checkCollision();
+	void setPictureID( int pictureID ) { this->pictureID = pictureID; }
 
+	int getPictureID( ) { return pictureID; }
+	void moveBall(bool b) { balls.at(0).setMovable(b);}
 	bool getInvincible() { return invincible; }
 	bool getBonusPaddle() { return bonusPaddle; }
 	bool getBonusBall() { return bonusBall; }
@@ -65,6 +83,5 @@ public:
 	vector<Ball> getBalls() { return balls; }
 	vector<Brick> getBricks() { return bricks; }
 	vector<Paddle> getPaddles() { return paddles; }
-	
 };
 

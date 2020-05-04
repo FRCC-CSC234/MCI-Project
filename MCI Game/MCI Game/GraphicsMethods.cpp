@@ -8,12 +8,13 @@ description: ** this is a prototpye some things will be changed **
 Comments Updated: Ben Jurenka
 **************************/
 
-void drawFlatScreen( std::vector<Brick> bricks, std::vector<Ball> balls, std::vector<Paddle> paddles, Level background )
+void drawFlatScreen( std::vector<Brick> bricks, std::vector<Ball> balls, std::vector<Paddle> paddles, Level background, int powerupID )
 {
 	static TrelGraphics2 brickPictures( "Graphics_Text_Files/brickpictures.txt", 0xFF, 0xFF, 0xFF );
 	static TrelGraphics2 ballPictures( "Graphics_Text_Files/ballpictures.txt", 0xFF, 0xFF, 0xFF );
 	static TrelGraphics2 paddlePictures( "Graphics_Text_Files/paddlepictures.txt", 0xFF, 0xFF, 0xFF );
 	static TrelGraphics2 titleScreens( "Graphics_Text_Files/Title_Screens.txt" ); // No long only holding backgrounds updated name 
+	static TrelGraphics2 factPictures( "powerups_fact.txt", 0xFF, 0xFF, 0xFF );
 	int x, y, w, h;
 	double angle;
 	bool vFlip, hFlip;
@@ -59,9 +60,9 @@ void drawFlatScreen( std::vector<Brick> bricks, std::vector<Ball> balls, std::ve
 	//#nathan: "I attempted to make it so multipal paddles can be drawn on to the screen but have been un succsessful."
 	for (Paddle paddle : paddles)
 	{
-		w = paddle.getWidth();	// This is working under the assumtion that getWidth returns the distance to the edge from the center.
-		h = 14; // This is working under the assumtion that getHeight returns the distance to the edge from teh center.
-		x = paddle.getX();
+		w = paddle.getWidth()/2;	// This is working under the assumtion that getWidth returns the distance to the edge from the center.
+		h = paddle.getHeight( )/2; // This is working under the assumtion that getHeight returns the distance to the edge from teh center.
+		x = paddle.getX()-w;
 		y = paddle.getY() - h;
 		//angle = paddle.getDirection( );
 		angle = 0;
@@ -72,7 +73,11 @@ void drawFlatScreen( std::vector<Brick> bricks, std::vector<Ball> balls, std::ve
 		//center = (x + w, y + h);
 		center.x = w; // Updated 4.28
 		center.y = h; // Updated 4.28
-		paddlePictures.addPictureToFrameResize(paddle.getPictureID(), x, y, w, h);
+		paddlePictures.addPictureToFrameResize(paddle.getPictureID(), x, y, w*2, h*2);
+	}
+	if (powerupID!=-1)
+	{
+		factPictures.addPictureToFrame( powerupID, 150, 200 );
 	}
 	TrelGraphics2::drawFrame( );
 }

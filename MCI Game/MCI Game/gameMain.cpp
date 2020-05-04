@@ -7,47 +7,44 @@
 // Implemented Driver.h to remove having to include more than 1 .h file
 #include "Driver.h"
 
-
 using namespace std;
-
 
 void startGame();
 void endGame();
 void playGame();
 //void startMusic();
 
-
 Level level; //*** exists to make me not have to delete stuff from drawScreen();
-
 
 int main( int argc, char** argv ) // Main must have these specific arguments for SDL to work 
 {
-
-
 	startGame();
 	playGame();
 	//startMusic();
 	endGame();
 	
-
-
 	system( "pause" );
 	return 0;
 }
 
-
-
-
+/***********************************************************
+#NickP
+Name: startGame
+Description: Starts the graphics methods
+**********************************************************/
 void startGame()
 {
-	//#nick pallotti
-	//i changed the games width to 720 to better fit the blocks as well as the blue
-	//backgrounds width to 720 but not the other colors
+	
 	TrelGraphics2::start( "Insert MCI Game Name Here", 600, 600 ); //*** needed a TrelGraphics::start call, made up a size.
 	cout << "in Gamemain startGame - NEEDS TO BE IMPLEMENTED" << endl;
 	
 }
 
+/***********************************************************
+#NickP
+Name: playGame
+Description: Contains calls to SDL and other classes to run the game
+**********************************************************/
 void playGame()
 {
 	cout << "in Gamemain playGame - NEEDS TO BE IMPLEMENTED" << endl;
@@ -55,13 +52,13 @@ void playGame()
 	bool quit = false;
 	int direction = 0;
 	int gameState = 0;
-	while (!quit)
+	while (!Level::quit)
 	{
 			while (SDL_PollEvent(&e) != 0)
 			{
 				if (e.type == SDL_QUIT)
 				{
-					quit = true;
+					Level::quit = true;
 				}
 				else if (e.type == SDL_KEYDOWN)
 				{
@@ -71,10 +68,11 @@ void playGame()
 
 					case SDLK_LEFT:
 						direction = -1;
-						//(level.getPaddle()).setX(paddleLocation - 5);
+						Paddle::setDirection( -1 );
 						break;
 					case SDLK_RIGHT:
 						direction = 1;
+						Paddle::setDirection( 1 );
 						break;
 					case SDLK_1:
 						level.setPictureID(0);
@@ -96,9 +94,11 @@ void playGame()
 					{
 					case SDLK_LEFT:
 						direction = direction == 1 ? 1 : 0;
+						Paddle::setDirection( Paddle::getDirection( ) == 1 ? 1 : 0 );
 						break;
 					case SDLK_RIGHT:
 						direction = direction == -1 ? -1 : 0;
+						Paddle::setDirection( Paddle::getDirection( ) == -1 ? -1 : 0 );
 						break;
 						//#SimonM set spacebar to change balls movable bool to true
 					case SDLK_SPACE:
@@ -111,7 +111,7 @@ void playGame()
 			}
 
 			//#SimonM the moveObjects method returns an int -1 for death, 0 for normal, 1 for moving to next level
-			for (int i = 0; i < 4 && gameState == 0; i++)
+			for (int i = 0; i < 6 && gameState == 0; i++)
 			{
 				//gameState = level.moveObjects(direction, player);
 				level.gameFrame( );
@@ -138,6 +138,11 @@ void playGame()
 		}
 }
 
+/***********************************************************
+#NickP
+Name: endGame
+Description: Calls graphics deletion of objects
+**********************************************************/
 void endGame()
 {
 	cout << "in gameMain endGame - NEEDS TO BE IMPLEMENTED" << endl;
@@ -145,6 +150,11 @@ void endGame()
 
 }
 
+/***********************************************************
+#SimonM
+Name: startMusic
+Description: Plays music
+**********************************************************/
 //void startMusic()
 //{
 //	if (SDL_Init(SDL_INIT_AUDIO) < 0) exit(1);

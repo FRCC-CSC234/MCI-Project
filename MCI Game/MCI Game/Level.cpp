@@ -1,8 +1,16 @@
 #include "Level.h"
 #include <vector>
 
-//Written by Nick Pallotti, edited by Simon Martin
+//Written by Nick Pallotti
+//Edited by Simon Martin, Nick Brady, Trel Johnson, Kyle Dexter
 
+bool Level::quit = false;
+
+/***********************************************************
+#NickP
+Name: develop
+Description: 
+**********************************************************/
 void Level::develop( )
 {
 	cout << "in Level.cpp - NEEDS TO BE IMPLEMENTED" << endl;
@@ -10,302 +18,177 @@ void Level::develop( )
 
 int playerLives = 4;
 
-Level::Level() {
-
-
-	Paddle paddle( 350, 500 );
+/***********************************************************
+#NickP, #NickB, #TrelJ, #SimonM
+Name: Level
+Description: Default Constructor
+**********************************************************/
+Level::Level() 
+{
+	Paddle paddle( 350, 560 );
 	setPaddle( paddle );
 
-	Ball ball(400, 380);
+	Ball ball(350, 550);
+	ball.setSpeedX( 1.0 / 3.0 );
+	ball.setSpeedY( -2.0 / 3.0 );
 	addBall(ball);
-	
-	
-
-
-	ball.setSpeedY(-2);
 	
 	createBricks();
 }
 
-Level::Level(int x) {
-
-	Ball ball(400, 380); // Moving Creation of Ball to Constructor
-	bonusBall = false;
-	addBall(ball);
-
+/***********************************************************
+#NickP, #NickB, #TrelJ, #SimonM
+Name: Level
+Description: Constructor
+**********************************************************/
+Level::Level(int x) 
+{
+	levelNumber = x;
 	
-	Paddle paddle( 350, 400 ); // Moving Paddle Creation to Constructor 
+	Ball ball(350, 550); // Moving Creation of Ball to Constructor
+	ball.setSpeedX(1);
+	ball.setSpeedY(-2);
+	ball.setMovable( false );
+	addBall(ball);
+	
+	Paddle paddle( 350, 560 ); // Moving Paddle Creation to Constructor 
 	paddles.push_back( paddle );
 
+	//set all the powerup booleans to false
+	bonusBall = false;
 	bonusPaddle = false;
+	superBall = false;
 
-	levelNumber = x;
-
-	ball.setSpeedY(-2);
-
-	//currently  have a defualt array for testing, this should be changed eventualy
-	for (int i = 0; i < 30; i++) {
-		Brick brick(((i % 10) * 60)+30, ((i / 10) * 29 + 15) ); // Moved brick making to constructor 
-		addBrick(brick);
-	}
+	createBricks();
 }
 
-//#NickB creates bricks and assigns images at random
+/***********************************************************
+#NickP, #NickB
+Name: createBricks
+Description: randomly fills the bricks array with bricks
+includes their art and power ups if applicable. Ensures only
+2 max bricks contain powerups.
+**********************************************************/
 void Level::createBricks() 
 {
 	int	powerupBrickCount = 0;
 	for (int i = 0; i < 30; i++)
 	{
-
+		//instantiate brick object
 		Brick brick((i % 10) * 60+30,(i / 10) * 29+15);
 
+		//random number for brick type
 		int randomPercent = rand() % 100 + 1;
-		if (randomPercent >= 90 && powerupBrickCount != 2) // are we generating a power up brick
-		{
-			int random = rand() % 8 + 4;  // Generating 4-13
+
+		// are we generating a power up brick
+		//if (randomPercent >= 90 && powerupBrickCount != 2) 
+		//{
+			int random = rand() % 10 + 4;  // Generating 4-13
 			brick.setPictureID(random); // Set a picture ID to brick
 			brick.setPowerupID((random - 4)); // Set a power id of brick from 0 -9
 			addBrick(brick);
 			powerupBrickCount++;
-		}
-		else
-		{
-			int random = rand() % 4;  // Generating 0-4
-			brick.setPictureID(random); // Set a picture ID to brick
-			brick.setPowerupID(-1); // No power up
-			addBrick(brick);
-		}
+		//}
+		// normal brick
+		//else
+		//{
+			//int random = rand() % 4;  // Generating 0-4
+			//brick.setPictureID(random); // Set a picture ID to brick
+			//brick.setPowerupID(-1); // No power up
+			//addBrick(brick);
+		//}
 	}
 
 }
 
-//#nick pallotti
-//this method moves the ball and also checks for collision with the paddle
-/*
-int Level::moveObjects(int direction, Player &player) {
-
-	//for each ball on the board move the ball
-	for (int i = 0; i < balls.size(); i++) {
-		
-		//for loop checks for the balls collision with the bricks
-		for (int j = 0; j < bricks.size(); j++) {
-
-			//ball x/y are the balls x and y coordinates	
-			int ballx = (balls.at(i)).getX() + 7;
-			int bally = (balls.at(i)).getY();
-
-
-			//the bounds/edges of the brick
-			int xLeftBound = bricks.at(j).getX();
-			int xRightBound = bricks.at(j).getX() + 72;
-
-			int yBottomBound = bricks.at(j).getY();
-			int yTopBound = bricks.at(j).getY() + 29;
-
-			//if block checking that the ball intersects with the y and x coordinateds of the block
-			if (bally >= yBottomBound && bally <= yTopBound) {
-				if(ballx >= xLeftBound && ballx <= xRightBound) {
-					//if there is an collision, check for powerup, erase the block and send the ball back
-					checkPowerUps(player, j);
-					bricks.erase(bricks.begin() + j);
-					//#SimonM if the array of bricks is empty, move on to next level
-					if (bricks.size() == 0)
-					{
-						return 1;
-					}
-					else
-					{
-					int newSpeed = balls.at(i).getSpeedY() * -1;
-					(balls.at(i)).setSpeedY(newSpeed);
-					}		
-				}
-			}
-		}
-		for (int k = 0; k < paddles.size(); k++)
-		{
-			//#SimonM added an if for double paddle since this will have to be another method with another paddle Xlocation sent
-			if (paddles.size() > 1)
-			{
-				if (balls.at(i).move2(paddles.at(0).getX(), paddles.at(1).getX(), paddles.at(k).getWidth(), bricks) == -1)
-				{
-					//#SimonMcheck if there's a second ball, in which case do not reduce lives, just delete extra ball
-					if (bonusBall == true)
-					{
-						bonusBall = false;
-						balls.erase(balls.begin() + i);
-						return 0;
-					}
-					else if (invincible == true)
-					{
-						balls.at(i).setSpeedY(balls.at(i).getSpeedY() * -1);
-						invincible = false;
-					}
-					else
-					{
-						//#SimonM reduce players life count by one, prints the player's lives for testing
-						player.takeLives(1);
-						cout << player.getLives();
-						//#SimonM remove extra paddle if true
-						bonusPaddle = false;
-
-						//#SimonM if player is out of lives, end game.
-						if (player.getLives() < 0)
-						{
-							cout << "Game over!" << endl;
-							paddles.at(k).setX(350);
-							paddles.at(k).setY(400);
-
-							balls.at(i).setSpeedX(0);
-							balls.at(i).setSpeedY(0);
-							return -1;
-						}
-
-						//#SimonM reset all paddles to middle
-						for (int k = 0; k < paddles.size(); k++)
-						{
-							//#SimonM checks if there are multiple paddles, if so deletes any extras
-							if (paddles.size() > 1)
-							{
-								paddles.erase(paddles.begin() + (k + 1));
-							}
-							paddles.at(k).setX(350 + (200 * k));
-							paddles.at(k).setY(400);
-							paddles.at(k).setWidth(100);
-						}
-
-						balls.at(i).setX(400);
-						balls.at(i).setY(380);
-						balls.at(i).setSpeedY(-2);
-
-						//#SimonM set ball to immovable so that it waits for the space key to start moving again
-						balls.at(i).setMoveable(false);
-					}
-				}
-			}
-			//if there aren't 2 paddles, just send Xlocation of original.
-			else
-			{
-				//#SimonM if move returns -1, means the ball is dead, resets to paddle waits for space to launch
-				if (balls.at(i).move(paddles.at(k).getX(), paddles.at(k).getWidth(), bricks) == -1)
-				{
-					//if player has a second ball in play, delete extra ball. no lives lost.
-					if (bonusBall == true)
-					{
-						bonusBall = false;
-						balls.erase(balls.begin() + i);
-						return 0;
-					}
-					//#SimonM if player has invincibility, just bounce the ball back up and set invincibility back to false.
-					else if (invincible == true)
-					{
-						balls.at(i).setSpeedY(balls.at(i).getSpeedY() * -1);
-						invincible = false;
-					}
-					else
-					{
-						//#SimonM reduce players life count by one, prints the player's lives for testing
-						player.takeLives(1);
-						cout << player.getLives();
-						bonusPaddle = false;
-
-						//#SimonM if player is out of lives, end game.
-						if (player.getLives() < 0)
-						{
-							cout << "Game over!" << endl;
-							paddles.at(k).setX(350);
-							paddles.at(k).setY(400);
-
-							balls.at(i).setSpeedX(0);
-							balls.at(i).setSpeedY(0);
-							return -1;
-						}
-
-						//#SimonM reset all paddles to middle
-						for (int k = 0; k < paddles.size(); k++)
-						{
-							//#SimonM checks if there are multiple paddles, if so deletes any extras
-							if (paddles.size() > 1)
-							{
-								paddles.erase(paddles.begin() + (k + 1));
-							}
-							paddles.at(k).setX(350 + (200 * k));
-							paddles.at(k).setY(400);
-						}
-
-						balls.at(i).setX(400);
-						balls.at(i).setY(380);
-						balls.at(i).setSpeedY(-2);
-
-						//#SimonM set ball to immovable so that it waits for the space key to start moving again
-						balls.at(i).setMoveable(false);
-					}
-				}
-			}
-		}
-	}
-
-	//move the paddle in the apporpriate direction
-	if (direction == 1) 
-	{
-		for (int k = 0; k < paddles.size(); k++)
-		{
-			paddles.at(k).setX(paddles.at(k).getX() + (8/4));
-		}
-	}
-
-	if (direction == -1) 
-	{
-		for (int k = 0; k < paddles.size(); k++)
-		{
-			paddles.at(k).setX(paddles.at(k).getX() - (8/4));
-		}
-	}
-	return 0;
-}
-*/
-
+/***********************************************************
+#NickP, #NickB, TrelJ
+Name: gameFrame
+Description: 
+**********************************************************/
 void Level::gameFrame()
 {
-	for (int i=0; i<balls.size(); i++)
+	bool canPaddleMove = true; 
+	for (int howManyBalls=0; howManyBalls <balls.size(); howManyBalls++)
 	{
-		balls.at( i ).move( );
-		checkCollision( );
+		balls.at( howManyBalls ).move(paddles.at(0));
 	}
+	checkCollision( );
+
+	// Check to see if the paddles can move
+	int paddlesWidth = (paddles.at( 0 ).getWidth( ))/2; // Cender to Edge X
+	int direction = Paddle::getDirection( );
+		
+	// Is the left paddle moving off the screen
+	if ( paddles.at( 0 ).getX( )- paddlesWidth < 0 && direction == -1 )
+	{
+		canPaddleMove = false; 
+	}
+
+	if ( paddles.at( paddles.size()-1 ).getX( ) + paddlesWidth > 600 && direction == 1 )
+	{
+		canPaddleMove = false;
+	}
+
+	if ( canPaddleMove == true )
+	{
+		for ( int howManyPaddles = 0; howManyPaddles < paddles.size( ); howManyPaddles++ )
+		{
+			paddles.at( howManyPaddles ).move( );
+		}
+	}
+
+	shouldTheBallBeHere( );
 }
 
-
+/***********************************************************
+#NickP, #NickB, TrelJ
+Name: checkCollision
+Description: 
+**********************************************************/
 int Level::checkCollision()
 {
 	for (int howManyBalls = 0; howManyBalls < balls.size(); howManyBalls++)
 	{
-
 		// X and Y Location of the Ball 
 		int ballXLocation = balls.at( howManyBalls ).getX( );
 		int ballYLocation = balls.at(howManyBalls).getY();
+
 		// X and Y speed of the Ball
 		double ballXSpeed = balls.at( howManyBalls ).getSpeedX( );
 		double ballYSpeed = balls.at( howManyBalls ).getSpeedY( );
 		
-		// Collision Checks 
-
+		// Collision Checks - bottom of screen
 		if ( ballYLocation >= 591 ) // if the ball hits the bottom of the screen 
 		{
-			balls.at( howManyBalls ).setSpeedY( ballYSpeed * -1 );
-			return -1; // Return -1, ****Need something to handle the -1
+			//balls.at( howManyBalls ).setSpeedY( ballYSpeed * -1 );
+			
+
+
+return -1; // Return -1, ****Need something to handle the -1
 		}
-		
+	
+		// Collision Checks - top of screen
 		if ( ballYLocation <= 9 ) // if ball hits the top of the screen
 		{
 			balls.at( howManyBalls ).setSpeedY( ballYSpeed * -1 );
+			superBall = false;
 		}
 		if ( ballXLocation>=591 || ballXLocation<=9 ) // if ball hits the left or right side of the screen
 		{
 			balls.at( howManyBalls ).setSpeedX( ballXSpeed * -1 ); 
 		}
 
+		vector<int> brickRemove;
+		brickRemove.clear();
+		bool xCollide = false;
+		bool yCollide = false;
+		bool brickCollide = false;
+
 		for ( int howManyBricks = 0; howManyBricks < bricks.size( ); howManyBricks++ )
 		{
 			// Center the Brick
+			brickCollide = false;
 			int bricksXLocation = bricks.at( howManyBricks ).getX( );  
 			int bricksYLocation = bricks.at( howManyBricks ).getY( ); 
 
@@ -325,38 +208,63 @@ int Level::checkCollision()
 			{
 				if ( abs (ballYLocation - top) < 9 ) // Is the ball on top of the brick 
 				{
-					balls.at( howManyBalls ).setSpeedY( ballYSpeed * -1 );
-					bricks.erase(bricks.begin() + howManyBricks);
+					//balls.at( howManyBalls ).setSpeedY( ballYSpeed * -1 );
+					yCollide = true;
+					
+					//bricks.erase(bricks.begin() + howManyBricks);
+					brickCollide = true;
 				}
 
 				if ( abs (ballYLocation - bottom) < 9 ) // Is the ball on bottom of the brick 
 				{
-					balls.at( howManyBalls ).setSpeedY( ballYSpeed * -1 );
-					bricks.erase(bricks.begin() + howManyBricks);
-				}
+					//balls.at( howManyBalls ).setSpeedY( ballYSpeed * -1 );
+					yCollide = true;
 
+					//bricks.erase(bricks.begin() + howManyBricks);
+					brickCollide = true;
+				}
 			}
 			
 			if ( abs(ballYLocation >= bottom) && ballYLocation <= top )
 			{
 				if ( abs(ballYLocation - left) < 9 ) // Is the ball on top of the brick 
 				{
-					balls.at( howManyBalls ).setSpeedX( ballXSpeed * -1 );
-					checkPowerUps( howManyBricks );
-					bricks.erase( bricks.begin( ) + howManyBricks );
+					//balls.at( howManyBalls ).setSpeedX( ballXSpeed * -1 );
+					xCollide=true;
+					//checkPowerUps( howManyBricks );
+					//bricks.erase( bricks.begin( ) + howManyBricks );
+					brickCollide=true;
 				}
 
 				if ( abs(ballYLocation - right) < 9 ) // Is the ball on bottom of the brick 
 				{
-					balls.at( howManyBalls ).setSpeedX( ballXSpeed * -1 );
-					bricks.erase(bricks.begin() + howManyBricks);
+					//balls.at( howManyBalls ).setSpeedX( ballXSpeed * -1 );
+					xCollide = true;
+					//checkPowerUps( howManyBricks );
+					//bricks.erase(bricks.begin() + howManyBricks);
+					brickCollide = true;
 				}
-
 			}
 
-			
+			if (brickCollide)
+			{
+				brickRemove.push_back( howManyBricks );
+			}
 
 
+		}
+		if ( xCollide && !superBall )
+		{
+		balls.at( howManyBalls ).setSpeedX( ballXSpeed * -1 );
+		}
+		if (yCollide && !superBall)
+		{
+		balls.at( howManyBalls ).setSpeedY( ballYSpeed * -1 );
+		}
+		for (int remove=brickRemove.size()-1; remove>=0; remove--)
+		{
+			checkPowerUps( brickRemove.at( remove ) );
+			bricks.erase( bricks.begin( ) + brickRemove.at( remove ) );
 		}
 
 		for ( int howManyPaddles = 0; howManyPaddles < paddles.size( ); howManyPaddles++ )
@@ -402,17 +310,101 @@ int Level::checkCollision()
 				{
 					balls.at( howManyBalls ).setSpeedX( ballXSpeed * -1 );
 				}
-
 			}
-
 		}
-		
 	}
-
-
 }
 
+/***********************************************************
+#NickP, #NickB, TrelJ
+Name: shouldTheBallBeHere
+Description: 
+**********************************************************/
+void Level::shouldTheBallBeHere( )
+{
+	for ( int howManyBalls = 0; howManyBalls < balls.size( ); howManyBalls++ )
+	{
+		bool ballInsidePaddle = false; 
+		int ballXLocation = balls.at( howManyBalls ).getX( );
+		int ballYLocation = balls.at( howManyBalls ).getY( );
+		double ballXSpeed = balls.at( howManyBalls ).getSpeedX( );
+		double ballYSpeed = balls.at( howManyBalls ).getSpeedY( );
 
+		for ( int howManyPaddles = 0; howManyPaddles < paddles.size( ); howManyPaddles++ )
+		{
+			int paddleXLocation = paddles.at( howManyPaddles ).getX( );
+			int paddleYLocation = paddles.at( howManyPaddles ).getY( );
+			int paddlesWidth = (paddles.at( howManyPaddles ).getWidth( )) / 2; // Cender to Edge X
+			int paddlesHeight = (bricks.at( howManyPaddles ).getHeight( )) / 2; // Center to Edge Y
+
+			int top, bottom, left, right;
+			top = paddleYLocation - paddlesHeight; // Brick Top
+			bottom = paddleYLocation + paddlesHeight; // Brick Bottom
+			left = paddleXLocation - paddlesWidth; // Left of Brick 
+			right = paddleXLocation + paddlesWidth; // Right of Brick
+
+			// Is the ball in the paddle 
+			// Is the distance between the line and center 9  
+			//Center of ball (X/Y Ball) & Edge of Brick ( See Above ) 
+			if ( ballXLocation >= left && ballXLocation <= right )
+			{
+				if ( abs( ballYLocation - top ) < 9 ) // Is the ball on top of the brick 
+				{
+					// Is the ball going the right direction
+					if ( ballYSpeed > 0 )
+					{
+						balls.at( howManyBalls ).setSpeedY( ballYSpeed * -1 );
+					}
+
+					ballInsidePaddle = true; 
+				}
+
+				if ( abs( ballYLocation - bottom ) < 9 ) // Is the ball on bottom of the brick 
+				{
+					// Is the ball going the right direction
+
+					if ( ballYSpeed < 0 )
+					{
+						balls.at( howManyBalls ).setSpeedY( ballYSpeed * -1 );
+					}
+
+					ballInsidePaddle = true;
+				}
+			}
+
+			if ( ballYLocation >= bottom && ballYLocation <= top )
+			{
+				if ( abs( ballYLocation - left ) < 9 ) // Is the ball on top of the brick 
+				{
+					// Is the ball going the right direction
+					if ( ballXSpeed > 0 )
+					{
+						balls.at( howManyBalls ).setSpeedX( ballXSpeed * -1 );
+					}
+
+					ballInsidePaddle = true;
+				}
+
+				if ( abs( ballYLocation - right < 9 ) ) // Is the ball on bottom of the brick 
+				{
+					// Is the ball going the right direction?
+					if ( ballXSpeed < 0 )
+					{
+						balls.at( howManyBalls ).setSpeedX( ballXSpeed * -1 );
+					}
+
+					ballInsidePaddle = true;
+				}
+			}
+		}
+		
+		// If ball inside paddle move it
+		if ( ballInsidePaddle == true )
+		{
+			balls.at( howManyBalls ).move(paddles.at(0) );
+		}
+	}
+}
 
 /******************************************************************
 # Nathan McIntrye
@@ -426,68 +418,7 @@ void Level::checkPowerUps(int brickLocation)
 {
 	if (bricks.at(brickLocation).getPowerupID() > -1)
 	{
-		if (bricks.at(brickLocation).getPowerupID() == 9) // add a ball
-		{
-			cout << "bonus ball" << endl;
-			Ball ball2(bricks.at(brickLocation).getX(), bricks.at(brickLocation).getY());
-			ball2.setMoveable(true);
-			bonusBall = true;
-			ball2.setX(paddles.at(0).getX());
-			ball2.setY(paddles.at(0).getY());
-			ball2.setSpeedY(2);
-			addBall(ball2);
-		}
-		if (bricks.at(brickLocation).getPowerupID() == 6)// slows the ball down
-		{
-			cout << "slow ball" << endl;
-			//set speed for all balls to half of their current speed
-			for (int i = 0; i < balls.size(); i++)
-			{
-				balls.at(i).setSpeedY(balls.at(i).getSpeedY() / 2);
-			}
-
-		}
-		if (bricks.at(brickLocation).getPowerupID() == 8) // one time shield
-		{
-			cout << "invincibility" << endl;
-			//#SimonM added a boolean for this power up, should make ball bounce off bottom border once.
-			invincible = true;
-		}
-		if (bricks.at(brickLocation).getPowerupID() == 2) // changes the size of the paddle
-		{
-			cout << "big paddle" << endl;
-			for (int i = 0; i < paddles.size(); i++)
-			{
-				paddles.at(i).setWidth(150);
-			}
-		}
-		if (bricks.at(brickLocation).getPowerupID() == 1) // paddle shrinks
-		{
-			cout << "small paddle" << endl;
-			for (int i = 0; i < paddles.size(); i++)
-			{
-				paddles.at(i).setWidth(75);
-			}
-		}
-		if (bricks.at(brickLocation).getPowerupID() == 5) // add a paddle
-		{
-			cout << "bonus paddle" << endl;
-			if (bonusPaddle == false)
-			{
-				Paddle paddle2( paddles.at( 0 ).getX( ) - 150, 400 );
-				setPaddle(paddle2);
-				bonusPaddle = true;
-			}
-		}
-		if (bricks.at(brickLocation).getPowerupID() == 7) // ball sticks to paddle
-		{
-			cout << "sticky paddle" << endl;
-			//#SimonM used the moveable boolean to adjust this power up. Needs testing.
-				balls.at(0).setMoveable(false);
-				balls.at(0).setX(400);
-				balls.at(0).setY(380);
-				balls.at(0).setSpeedY(2);
-		}
+		//speed up ball
 		if (bricks.at(brickLocation).getPowerupID() == 0)// ball speeds up
 		{
 			cout << "fast ball" << endl;
@@ -497,16 +428,123 @@ void Level::checkPowerUps(int brickLocation)
 				balls.at(i).setSpeedY(balls.at(i).getSpeedY()*1.5);
 			}
 		}
+		
+		//small paddle
+		if (bricks.at(brickLocation).getPowerupID() == 1) // paddle shrinks
+		{
+			cout << "small paddle" << endl;
+			for (int i = 0; i < paddles.size(); i++)
+			{
+				paddles.at(i).setWidth(75);
+			}
+		}
+		
+		//big paddle
+		if (bricks.at(brickLocation).getPowerupID() == 2) // changes the size of the paddle
+		{
+			cout << "big paddle" << endl;
+			for (int i = 0; i < paddles.size(); i++)
+			{
+				paddles.at(i).setWidth(150);
+			}
+		}
+		
+		//extra life
 		if (bricks.at(brickLocation).getPowerupID() == 3)// extra life
 		{
 			cout << "Bonus life! Lives now: " << playerLives << endl;
 			//#SimonM add a life to player
 			playerLives++;
 		}
+		
+		//power ball
 		if (bricks.at(brickLocation).getPowerupID() == 4) //ball breaks through multipal bricks
 		{
 			cout << "power ball" << endl;
+			superBall = true;
+		}
+		
+		//extra paddle
+		if (bricks.at(brickLocation).getPowerupID() == 5) // add a paddle
+		{
+			cout << "bonus paddle" << endl;
+			if (bonusPaddle == false)
+			{
+				Paddle paddle2( paddles.at( 0 ));
+				paddle2.setX( paddle2.getX( ) + 200 );
+				setPaddle(paddle2);
+				bonusPaddle = true;
+			}
+		}
+		
+		//slow ball
+		if (bricks.at(brickLocation).getPowerupID() == 6)// slows the ball down
+		{
+			cout << "slow ball" << endl;
+			//set speed for all balls to half of their current speed
+			for (int i = 0; i < balls.size(); i++)
+			{
+				balls.at(i).setSpeedY(balls.at(i).getSpeedY() / 2);
+			}
+		}
+		
+		//sticky paddle
+		if (bricks.at(brickLocation).getPowerupID() == 7) // ball sticks to paddle
+		{
+			cout << "sticky paddle" << endl;
+			//#SimonM used the movable boolean to adjust this power up. Needs testing.
+			balls.at(0).setMovable(false);
+			balls.at(0).setX(400);
+			balls.at(0).setY(380);
+			balls.at(0).setSpeedY(2);
+		}
+		
+		if (bricks.at(brickLocation).getPowerupID() == 8) // one time shield
+		{
+			cout << "invincibility" << endl;
+			//#SimonM added a boolean for this power up, should make ball bounce off bottom border once.
+			invincible = true;
+		}
+		
+		//extra ball
+		if (bricks.at(brickLocation).getPowerupID() == 9) // add a ball
+		{
+			//#NathanM add a second ball
+			cout << "bonus ball" << endl;
+			Ball ball2(balls.at(0));
+			ball2.setX( paddles.at( 0 ).getX());
+			ball2.setY( paddles.at( 0 ).getY() );
+			ball2.setSpeedX( (ball2.getSpeedX( )) * -1 ); 
+			ball2.setMovable(true);
+			bonusBall = true;
+			
+		
+			addBall(ball2);
 		}
 	}
-	
+
+	bool pause = true;
+	int powerupPic = bricks.at( brickLocation ).getPowerupID() * 2 + (rand( )%2);
+	SDL_Event e;
+	while (!quit && pause)
+	{
+		while (SDL_PollEvent(&e)!=0)
+		{
+			switch ( e.type )
+			{
+			case SDL_QUIT:
+				quit = true;
+				break;
+			case SDL_KEYDOWN:
+				if ( e.key.keysym.sym == SDLK_SPACE )
+				{
+					pause = false;
+				}
+			}
+		}
+
+		drawFlatScreen( bricks, balls, paddles, *this, powerupPic );
+	}
+
+
 }
