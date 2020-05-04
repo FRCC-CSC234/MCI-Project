@@ -144,30 +144,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Ball.h" />
-    <ClInclude Include="Brick.h" />
-    <ClInclude Include="Driver.h" />
-    <ClInclude Include="GameObject.h" />
-    <ClInclude Include="GraphicsMethods.h" />
-    <ClInclude Include="Level.h" />
-    <ClInclude Include="Paddle.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="TrelGraphics2.h" />
-    <ClInclude Include="TrelTexture.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Ball.cpp" />
-    <ClCompile Include="Brick.cpp" />
-    <ClCompile Include="gameMain.cpp" />
-    <ClCompile Include="GameObject.cpp" />
-    <ClCompile Include="GraphicsMethods.cpp" />
-    <ClCompile Include="Level.cpp" />
-    <ClCompile Include="Paddle.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="TrelGraphics2.cpp" />
-    <ClCompile Include="TrelTexture.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <Image Include="Circular_Level\Bricks\Row_1\Circle_Row_1_Brick_0_MCI_Blue.bmp" />
     <Image Include="Circular_Level\Bricks\Row_1\Circle_Row_1_Brick_0_MCI_Gray.bmp" />
     <Image Include="Circular_Level\Bricks\Row_1\Circle_Row_1_Brick_0_MCI_Light_Blue.bmp" />
