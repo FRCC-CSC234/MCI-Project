@@ -17,7 +17,7 @@ private:
 
 public:
 	//Constructor
-	Ball( );
+	Ball(double x, double y );
 
 	int move(int paddleLocation, int paddleWidth, vector<Brick> bricks);
 	int move2(int paddleLocation, int paddle2Location, int paddleWidth, vector<Brick> bricks);

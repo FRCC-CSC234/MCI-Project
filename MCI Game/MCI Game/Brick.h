@@ -11,7 +11,7 @@ private:
 
 public:
 	//Constructor
-	Brick( );
+	Brick(double x, double y, int pic=0; int powID=-1 );
 
 	//getters/setters
 	int getPowerupID( );

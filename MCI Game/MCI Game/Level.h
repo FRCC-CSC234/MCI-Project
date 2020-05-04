@@ -55,6 +55,7 @@ public:
 	void setBonusBall(bool isBonus) { this->bonusBall = isBonus; }
 	void setBonusPaddle(bool isBonus) { this->bonusPaddle = isBonus; }
 	void setInvincible(bool isInvincible) { this->invincible = isInvincible; }
+	int Level::collision();
 
 	bool getInvincible() { return invincible; }
 	bool getBonusPaddle() { return bonusPaddle; }

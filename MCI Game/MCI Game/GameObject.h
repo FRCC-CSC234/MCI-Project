@@ -30,7 +30,7 @@ protected:
 
 public:
 	//Constructor
-	GameObject( );
+	GameObject(int pic=0, int h=0, int w=0, double x=0, double y=0, double s=0 );
 
 	//getters
 	int getHeight( );

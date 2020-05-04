@@ -9,15 +9,15 @@ void Level::develop( )
 
 Level::Level() {
 
-	Ball ball;
-	ball.setX(400);
-	ball.setY(380);
+	Ball ball(400, 380);
+	//ball.setX(400);
+	//ball.setY(380);
 	addBall(ball);
 
-	Paddle paddle;
-	paddle.setX(350);
-	paddle.setY(400);
-	paddle.setWidth(100);
+	Paddle paddle(350, 400);
+	//paddle.setX(350);
+	//paddle.setY(400);
+	//paddle.setWidth(100);
 	setPaddle(paddle);
 
 	ball.setSpeedY(-2);
@@ -49,10 +49,10 @@ Level::Level() {
 
 Level::Level(int x) {
 
-	Ball ball;
+	Ball ball(400, 380);
 	bonusBall = false;
-	ball.setX(400);
-	ball.setY(380);
+	//ball.setX(400);
+	//ball.setY(380);
 	addBall(ball);
 
 	//Paddle paddle;
@@ -309,6 +309,91 @@ int Level::moveObjects(int direction, Player &player) {
 		}
 	}
 	return 0;
+}
+
+int Level::collision()
+{
+	for (int howManyBalls = 0; howManyBalls < balls.size(); howManyBalls++)
+	{
+		int ylocation = balls.at(howManyBalls).getY();
+
+	}
+}
+
+
+//#nick pallotti
+//method for randomly changing the balls speed in the x direction
+void Ball::moveX() {
+	//int xmoveAmount = rand() % 5;    //how fast the x direction speed changes
+	//int xmoveDirection = rand() % 2;  //whether the speed changes in the left or right direction
+
+	////if xMoveDirection == 1 speed up to the right
+	//if (xmoveDirection == 1) {
+
+	//	//this if block decides how much the speed changes
+	//	if (xmoveAmount == 1) {
+	//		speedX += 1;
+	//	}
+	//	else if (xmoveAmount == 2) {
+	//		speedX += 2;
+	//	}
+	//	else if (xmoveAmount == 3) {
+	//		speedX += 3;
+	//	}
+	//	else if (xmoveAmount == 4) {
+	//		speedX += 4;
+	//	}
+	//	else {
+	//		speedX += 5;
+	//	}
+	//	//makes sure the ball doesnt go to fast
+	//	if (speedX > 5) {
+	//		speedX = 5;
+	//	}
+
+	//}
+	////if xMoveDirection != 1 speed up to the left
+	//else {
+	//	//this if block decides how much the speed changes
+	//	if (xmoveAmount == 1) {
+	//		speedX -= 1;
+	//	}
+	//	else if (xmoveAmount == 2) {
+	//		speedX -= 2;
+	//	}
+	//	else if (xmoveAmount == 3) {
+	//		speedX -= 3;
+	//	}
+	//	else if (xmoveAmount == 4) {
+	//		speedX -= 4;
+	//	}
+	//	else {
+	//		speedX -= 5;
+	//	}
+	//	//makes sure the ball doesnt move to fast
+	//	if (speedX < -5) {
+	//		speedX = -5;
+	//	}
+	//}
+	srand(time(NULL));
+	int moveX = rand() % 3;
+	//int moveAmount = rand() % 3;
+
+	if (moveX == 1) {
+		speedX += 3;
+		if (speedX > 6) {
+			speedX = 6;
+		}
+	}
+	else if (moveX == 2) {
+		speedX -= 3;
+		if (speedX < -6) {
+			speedX = -6;
+		}
+	}
+	else if (moveX == 3) {
+
+	}
 }
 
 /******************************************************************

@@ -10,14 +10,14 @@
 Name: GameObject
 Description: Constructor
 **********************************************************/
-GameObject::GameObject( )
+GameObject::GameObject(int pic, int h, int w, double x, double y, double s )
 {
-	pictureID = 0; // Changed from ID to picture ID. ID needs to be in an int for graphics
-	height = 0;
-	width = 0;
-	xLocation = 0;
-	yLocation = 0;
-	speed = 0;
+	pictureID = pic; // Changed from ID to picture ID. ID needs to be in an int for graphics
+	height = h;
+	width = w;
+	xLocation = x;
+	yLocation = y;
+	speed = s;
 	
 }
 

@@ -9,7 +9,7 @@ private:
 
 public:
 	//Constructor
-	Paddle( );
+	Paddle(double x, double y );
 	
 };
 
