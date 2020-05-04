@@ -1,1 +1,2 @@
 paddlepictures.bmp
+Circular_Paddle.bmp
