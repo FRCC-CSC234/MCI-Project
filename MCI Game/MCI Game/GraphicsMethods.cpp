@@ -106,3 +106,46 @@ void drawTitleScreen( int titleImageID )
 	titleImage.addPictureToFrame( titleImageID, 0, 0 );
 	TrelGraphics2::drawFrame( );
 }
+
+
+void drawLivesScreen(int lives)
+{
+	static TrelGraphics2 titleImage( "Graphics_Text_Files/Title_Screens.txt", 0xFF, 0xFF, 0xFF );// Best way to handle it, not worth making a new constructor for one image, and doing seperalty is a bad idea with static local variables
+
+	SDL_Event e;
+	for ( int i = 0; i < 90 && !Level::quit; i++ )
+	{
+		while ( SDL_PollEvent( &e ) != 0 )
+		{
+			switch ( e.type )
+			{
+			case SDL_QUIT:
+				Level::quit = true;
+			}
+		}
+		titleImage.addPictureToFrame( 7, 0, 0 );
+		titleImage.addPictureToFrame( lives+8, 330, 290 );
+		TrelGraphics2::drawFrame( );
+	}
+	for ( int i = 0; i < 90 && !Level::quit; i++ )
+	{
+		while ( SDL_PollEvent( &e ) != 0 )
+		{
+			switch ( e.type )
+			{
+			case SDL_QUIT:
+				Level::quit = true;
+			}
+		}
+		if ( lives > 0 )
+		{
+			titleImage.addPictureToFrame( 7, 0, 0 );
+			titleImage.addPictureToFrame( lives - 1 + 8, 330, 290 );
+		}
+		else
+		{
+			titleImage.addPictureToFrame( 5, 0, 0 );
+			}
+		TrelGraphics2::drawFrame( );
+	}
+}

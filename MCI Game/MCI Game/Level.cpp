@@ -16,7 +16,7 @@ void Level::develop( )
 	cout << "in Level.cpp - NEEDS TO BE IMPLEMENTED" << endl;
 }
 
-int playerLives = 4;
+
 
 /***********************************************************
 #NickP, #NickB, #TrelJ, #SimonM
@@ -25,15 +25,8 @@ Description: Default Constructor
 **********************************************************/
 Level::Level() 
 {
-	Paddle paddle( 350, 560 );
-	setPaddle( paddle );
-
-	Ball ball(350, 550);
-	ball.setSpeedX( 1.0 / 3.0 );
-	ball.setSpeedY( -2.0 / 3.0 );
-	addBall(ball);
-	
-	createBricks();
+	playerlives = 4;
+	pictureID = 0;
 }
 
 /***********************************************************
@@ -62,6 +55,25 @@ Level::Level(int x)
 	createBricks();
 }
 
+void Level::startLevel()
+{
+
+	Ball ball(350, 550); // Moving Creation of Ball to Constructor
+	ball.setSpeedX(1.0 / 3.0);
+	ball.setSpeedY(-2.0 / 3.0);
+	ball.setMovable( false );
+	addBall(ball);
+	
+	Paddle paddle( 350, 560 ); // Moving Paddle Creation to Constructor 
+	paddles.push_back( paddle );
+
+	bonusBall = false;
+	bonusPaddle = false;
+	superBall = false;
+
+	createBricks();
+}
+
 /***********************************************************
 #NickP, #NickB
 Name: createBricks
@@ -79,7 +91,8 @@ void Level::createBricks()
 		Brick brick((i % 10) * 60+30,(i / 10) * 29+15);
 
 		//random number for brick type
-		int randomPercent = rand() % 100 + 1;
+		// int randomPercent = rand() % 100 + 1;  
+		int randomPercent = 1;
 
 		// are we generating a power up brick
 		if (randomPercent >= 90 && powerupBrickCount != 2) 
@@ -95,7 +108,7 @@ void Level::createBricks()
 		{
 			int random = rand() % 4;  // Generating 0-4
 			brick.setPictureID(random); // Set a picture ID to brick
-			brick.setPowerupID(-1); // No power up
+			brick.setPowerupID(5); // No power up
 			addBrick(brick);
 		}
 	}
@@ -116,12 +129,6 @@ void Level::gameFrame()
 	}
 
 	checkCollision( );
-
-	if (balls.size() < 1)
-	{
-
-	}
-
 
 	// Check to see if the paddles can move
 	int paddlesWidth = (paddles.at( 0 ).getWidth( ))/2; // Cender to Edge X
@@ -185,6 +192,7 @@ void Level::checkCollision()
 			else
 			{
 				////reduce player lives
+				drawLivesScreen( playerLives );
 				playerLives--;
 				cout << "Lives: " << playerLives << endl;
 
@@ -200,7 +208,16 @@ void Level::checkCollision()
 				ball.setSpeedY(-2.0 / 3.0);
 				ball.setMovable(false);
 				addBall(ball);
+								
+				//erase all paddles
+				for (int i = 0; i <= paddles.size(); i++)
+				{
+					paddles.erase(paddles.begin());
+				}
+
+				//generate new paddle
 				Paddle paddle(350, 560);
+				setPaddle(paddle);
 
 				//set all powerups to false
 				invincible = false;
@@ -317,8 +334,8 @@ void Level::checkCollision()
 			int paddleXLocation = paddles.at( howManyPaddles ).getX( );
 			int paddleYLocation = paddles.at( howManyPaddles ).getY( );
 
-			int paddlesWidth = (paddles.at( howManyPaddles ).getWidth( )) / 2; // Cender to Edge X
-			int paddlesHeight = (bricks.at( howManyPaddles ).getHeight( )) / 2; // Center to Edge Y
+			double paddlesWidth = (paddles.at( howManyPaddles ).getWidth( )) / 2; // Cender to Edge X
+			double paddlesHeight = (bricks.at( howManyPaddles ).getHeight( )) / 2; // Center to Edge Y
 			int top, bottom, left, right;
 			top = paddleYLocation - paddlesHeight; // Brick Top
 			bottom = paddleYLocation + paddlesHeight; // Brick Bottom

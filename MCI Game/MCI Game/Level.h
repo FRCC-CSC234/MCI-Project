@@ -41,6 +41,7 @@ class Level
 
 	//*** Adding Picture ID to level for background images
 	int pictureID; // ID value for background image.
+	int playerlives;
 
 	void develop( );
 
@@ -50,6 +51,8 @@ public:
 	//#NickP constructors
 	Level();
 	Level(int x);
+
+	void startLevel( );
 	
 	//randomizes and draws bricks on the screen
 	void createBricks();

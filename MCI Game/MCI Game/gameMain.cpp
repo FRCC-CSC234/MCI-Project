@@ -14,17 +14,30 @@ void showIntroSceen( );
 void endGame();
 void playGame();
 void startMusic();
+void nextLevel( );
 
 Level level; //*** exists to make me not have to delete stuff from drawScreen();
 
-
 int main( int argc, char** argv ) // Main must have these specific arguments for SDL to work 
 {
+
 	startGame();
-	showIntroSceen( );
-	playGame();
+
+	showIntroSceen();
+	level.setLevelNumber(0);
+	if (level.getLevelNumber() == 0)
+	{
+		playGame();
+		level.setLevelNumber(1);
+	}
+	if (level.getLevelNumber() == 1) 
+	{
+		playGame();
+		
+	}
+
 	endGame();
-	
+
 	system( "pause" );
 	return 0;
 }
@@ -37,9 +50,16 @@ Description: Starts the graphics methods
 void startGame()
 {
 	Level::quit = false; // Added to have intro and instructions show on screen 
+	startMusic();
 	TrelGraphics2::start( "Insert MCI Game Name Here", 600, 600 ); //*** needed a TrelGraphics::start call, made up a size.
 	cout << "in Gamemain startGame - NEEDS TO BE IMPLEMENTED" << endl;
 	
+}
+
+void nextLevel()
+{
+
+
 }
 
 /***********************************************************
@@ -51,7 +71,8 @@ void playGame()
 {
 	cout << "in Gamemain playGame - NEEDS TO BE IMPLEMENTED" << endl;
 
-	startMusic();
+	
+
 
 	SDL_Event e;
 	int direction = 0;
@@ -114,6 +135,8 @@ void playGame()
 				}
 			}
 
+
+
 			//#SimonM the moveObjects method returns an int -1 for death, 0 for normal, 1 for moving to next level
 			for (int i = 0; i < 6 && gameState == 0; i++)
 			{
@@ -122,6 +145,13 @@ void playGame()
 			}
 			// removed draw code. Draw Flat screen needs to be used to draw things to the screen 
 			drawFlatScreen(level.getBricks(), level.getBalls(), level.getPaddles(), level);
+
+
+
+
+
+
+
 
 			//#SimonM
 			//if player is out of lives, quit. Need to put in way to exit this method and move to endGame method here instead.
