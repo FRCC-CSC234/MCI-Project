@@ -15,23 +15,49 @@ The game was written in C++ using SDL (Simple DirectMedia Layer) libraries.  App
 SDL_tff is not needed as text was rendered as images.
 
 ## Project Flow
-Class gameMain solely contains:
-    
+Class gameMain contains:    
    	StartGame():
+    ShowIntro():
    	PlayGame():
+    StartMusic():
    	EndGame():
-Class game calls: 
-   
-    DrawGame(): TrelGraphics2 & TrelTexture    
-    Player():
-    Level ():  
-    PowerUps(): Contraception Facts, Attribute changes 
-    GameObjects(): Paddle, Ball, Brick and their attributes
-    HandleEvent():
-    GameStateUpdate():
-    GameOver():
+
+Class graphicsMethods contains:
+    drawFlatScreen(): for levels 1 and 2 game play
+    drawCircularScreen(): for level 3 game play
+    drawTitleScreen(): for StartGame()
     
- 
+Class level contains:
+    createBricks():
+    gameFrame():
+    checkCollision():
+    shouldTheBallBeHere():
+    addBall():
+    addBrick():
+    checkPowerUps():
+    
+Classes paddle, brick and ball primarily contains:
+    move():
+    
+Class TrelGraphics2 primarily contains (some methods have permutations):
+    start():
+	close( ):
+	TrelGraphics2(): creates a graphics object
+	createPictureFromFile( ):	
+	readImageListFromFile( ):	
+	addPictureToFrame( ):  adds a picture to a frame
+	addRectToFrame():
+    drawFrame( ):
+    clearFrame( ):
+    
+Class TrelTexture contains:
+    TrelTexture( ):
+	~TrelTexture( ):
+	loadFromFile():
+	free( ):
+	render( ):
+	renderResize( ):
+    setColor():
 
 ## Copyright/License Agreement
 Copyright 2020, Front Range Community College
