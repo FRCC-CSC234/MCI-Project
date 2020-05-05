@@ -46,8 +46,8 @@ Level::Level(int x)
 	levelNumber = x;
 	
 	Ball ball(350, 550); // Moving Creation of Ball to Constructor
-	ball.setSpeedX(1);
-	ball.setSpeedY(-2);
+	ball.setSpeedX(1.0 / 3.0);
+	ball.setSpeedY(-2.0 / 3.0);
 	ball.setMovable( false );
 	addBall(ball);
 	
@@ -81,22 +81,22 @@ void Level::createBricks()
 		int randomPercent = rand() % 100 + 1;
 
 		// are we generating a power up brick
-		//if (randomPercent >= 90 && powerupBrickCount != 2) 
-		//{
+		if (randomPercent >= 90 && powerupBrickCount != 2) 
+		{
 			int random = rand() % 10 + 4;  // Generating 4-13
 			brick.setPictureID(random); // Set a picture ID to brick
 			brick.setPowerupID((random - 4)); // Set a power id of brick from 0 -9
 			addBrick(brick);
 			powerupBrickCount++;
-		//}
+		}
 		// normal brick
-		//else
-		//{
-			//int random = rand() % 4;  // Generating 0-4
-			//brick.setPictureID(random); // Set a picture ID to brick
-			//brick.setPowerupID(-1); // No power up
-			//addBrick(brick);
-		//}
+		else
+		{
+			int random = rand() % 4;  // Generating 0-4
+			brick.setPictureID(random); // Set a picture ID to brick
+			brick.setPowerupID(-1); // No power up
+			addBrick(brick);
+		}
 	}
 
 }
@@ -113,7 +113,14 @@ void Level::gameFrame()
 	{
 		balls.at( howManyBalls ).move(paddles.at(0));
 	}
+
 	checkCollision( );
+
+	if (balls.size() < 1)
+	{
+
+	}
+
 
 	// Check to see if the paddles can move
 	int paddlesWidth = (paddles.at( 0 ).getWidth( ))/2; // Cender to Edge X
@@ -146,7 +153,7 @@ void Level::gameFrame()
 Name: checkCollision
 Description: 
 **********************************************************/
-int Level::checkCollision()
+void Level::checkCollision()
 {
 	for (int howManyBalls = 0; howManyBalls < balls.size(); howManyBalls++)
 	{
@@ -161,11 +168,41 @@ int Level::checkCollision()
 		// Collision Checks - bottom of screen
 		if ( ballYLocation >= 591 ) // if the ball hits the bottom of the screen 
 		{
-			//balls.at( howManyBalls ).setSpeedY( ballYSpeed * -1 );
-			
+			//if you have a second ball, just erase it
+			if (bonusBall)
+			{
+				balls.erase(balls.begin() + howManyBalls);
+				bonusBall = false;
+			}
+			//if you have invincibility, the ball will bounce off the bottom one time
+			else if (invincible)
+			{
+				balls.at( howManyBalls ).setSpeedY( ballYSpeed * -1 );
+				invincible = false;
+			}
+			//if no power ups, you just dead.
+			else
+			{
+				////reduce player lives
+				playerLives--;
+				cout << "Lives: " << playerLives << endl;
 
+				//reset ball and paddle to middle of screen
+				balls.erase(balls.begin() + howManyBalls);
 
-return -1; // Return -1, ****Need something to handle the -1
+				Ball ball(350, 550); 
+				ball.setSpeedX(1.0 / 3.0);
+				ball.setSpeedY(-2.0 / 3.0);
+				ball.setMovable(false);
+				addBall(ball);
+				Paddle paddle(350, 560);
+
+				//set all powerups to false
+				invincible = false;
+				bonusBall = false;
+				bonusPaddle = false;
+				superBall = false;
+			}
 		}
 	
 		// Collision Checks - top of screen
@@ -174,7 +211,9 @@ return -1; // Return -1, ****Need something to handle the -1
 			balls.at( howManyBalls ).setSpeedY( ballYSpeed * -1 );
 			superBall = false;
 		}
-		if ( ballXLocation>=591 || ballXLocation<=9 ) // if ball hits the left or right side of the screen
+
+		// if ball hits the left or right side of the screen
+		if ( ballXLocation>=591 || ballXLocation<=9 ) 
 		{
 			balls.at( howManyBalls ).setSpeedX( ballXSpeed * -1 ); 
 		}
@@ -250,17 +289,18 @@ return -1; // Return -1, ****Need something to handle the -1
 			{
 				brickRemove.push_back( howManyBricks );
 			}
-
-
 		}
+
 		if ( xCollide && !superBall )
 		{
 		balls.at( howManyBalls ).setSpeedX( ballXSpeed * -1 );
 		}
+
 		if (yCollide && !superBall)
 		{
 		balls.at( howManyBalls ).setSpeedY( ballYSpeed * -1 );
 		}
+
 		for (int remove=brickRemove.size()-1; remove>=0; remove--)
 		{
 			checkPowerUps( brickRemove.at( remove ) );
@@ -418,7 +458,7 @@ void Level::checkPowerUps(int brickLocation)
 {
 	if (bricks.at(brickLocation).getPowerupID() > -1)
 	{
-		//speed up ball
+		//fast ball
 		if (bricks.at(brickLocation).getPowerupID() == 0)// ball speeds up
 		{
 			cout << "fast ball" << endl;
@@ -493,57 +533,74 @@ void Level::checkPowerUps(int brickLocation)
 		{
 			cout << "sticky paddle" << endl;
 			//#SimonM used the movable boolean to adjust this power up. Needs testing.
-			balls.at(0).setMovable(false);
-			balls.at(0).setX(400);
-			balls.at(0).setY(380);
-			balls.at(0).setSpeedY(2);
-		}
-		
-		if (bricks.at(brickLocation).getPowerupID() == 8) // one time shield
-		{
-			cout << "invincibility" << endl;
-			//#SimonM added a boolean for this power up, should make ball bounce off bottom border once.
-			invincible = true;
+			balls.erase(balls.begin() + 0);
+
+			Paddle paddle(350, 560);
+
+			Ball ball(paddles.at(0).getX(), (paddles.at(0).getY() - 10));
+			ball.setSpeedX(1.0 / 3.0);
+			ball.setSpeedY(-2.0 / 3.0);
+			ball.setMovable(false);
+			addBall(ball);
+
 		}
 		
 		//extra ball
-		if (bricks.at(brickLocation).getPowerupID() == 9) // add a ball
+		if (bricks.at(brickLocation).getPowerupID() == 8) // add a ball
 		{
 			//#NathanM add a second ball
 			cout << "bonus ball" << endl;
 			Ball ball2(balls.at(0));
-			ball2.setX( paddles.at( 0 ).getX());
-			ball2.setY( paddles.at( 0 ).getY() );
-			ball2.setSpeedX( (ball2.getSpeedX( )) * -1 ); 
+			ball2.setX(paddles.at(0).getX());
+			ball2.setY(paddles.at(0).getY());
+			ball2.setSpeedX(1.0 / 3.0);
+			ball2.setSpeedY(-2.0 / 3.0);
+			//ball2.setSpeedX( (ball2.getSpeedX( )) * -1 ); 
 			ball2.setMovable(true);
 			bonusBall = true;
-			
-		
+
 			addBall(ball2);
+		}
+
+		//invincibility
+		if (bricks.at(brickLocation).getPowerupID() == 9) // one time shield
+		{
+			cout << "invincibility" << endl;
+			//#SimonM added a boolean for this power up, should make ball bounce off bottom border once.
+			invincible = true;
 		}
 	}
 
 	bool pause = true;
 	int powerupPic = bricks.at( brickLocation ).getPowerupID() * 2 + (rand( )%2);
 	SDL_Event e;
-	while (!quit && pause)
+	if (bricks.at(brickLocation).getPowerupID() != -1)
 	{
-		while (SDL_PollEvent(&e)!=0)
+		while (!quit && pause)
 		{
-			switch ( e.type )
+			while (SDL_PollEvent(&e) != 0)
 			{
-			case SDL_QUIT:
-				quit = true;
-				break;
-			case SDL_KEYDOWN:
-				if ( e.key.keysym.sym == SDLK_SPACE )
+				switch (e.type)
 				{
-					pause = false;
+				case SDL_QUIT:
+					quit = true;
+					break;
+				case SDL_KEYUP:
+					if (e.key.keysym.sym == SDLK_SPACE)
+					{
+						if (bricks.at(brickLocation).getPowerupID() == 7)
+							balls.at(0).setMovable(false);
+						pause = false;
+					}
+					else
+					{
+						pause = false;
+					}
 				}
 			}
-		}
 
-		drawFlatScreen( bricks, balls, paddles, *this, powerupPic );
+			drawFlatScreen(bricks, balls, paddles, *this, powerupPic);
+		}
 	}
 
 

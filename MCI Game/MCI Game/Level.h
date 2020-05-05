@@ -54,7 +54,7 @@ public:
 
 	//need comments
 	void gameFrame( );
-	int checkCollision();
+	void checkCollision();
 	void shouldTheBallBeHere( );
 
 	//#NickP add items to vectors
