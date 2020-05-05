@@ -193,20 +193,19 @@ void showIntroSceen( )
 
 
 /***********************************************************
-#SimonM
+#PattiW
 Name: startMusic
 Description: Plays music
 **********************************************************/
 void startMusic()
 {
-	if (SDL_Init(SDL_INIT_AUDIO) < 0) exit(1);
+	//if (SDL_Init(SDL_INIT_AUDIO) < 0) exit(1);
 
-	Mix_OpenAudio(22050, AUDIO_S16SYS, 2, 640);
-	Mix_Music* mus;  // Background Music
+	//Mix_OpenAudio(22050, AUDIO_S16SYS, 2, 640);
+	//Mix_Music* mus;  // Background Music
 
-	mus = Mix_LoadMUS("MCIsong2.wav");
+	//mus = Mix_LoadMUS("MCIsong2.wav");
 
-	Mix_PlayMusic(mus, -1); //Music loop: -1 for continuous play
-
-}
+	//Mix_PlayMusic(mus, -1); //Music loop: -1 for continuous play
+} 
 
