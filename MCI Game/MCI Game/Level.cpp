@@ -104,8 +104,8 @@ void Level::createCircleBricks()
 	int BrickRowNumber;
 	const int numberOfBricksInRow = 16;
 	
-	int numOfRow1Powerup = 1;
-	int numOfRow2Powerup = 2;
+	int numOfRow1PowerUp = 1;
+	int numOfRow2PowerUp = 2;
 	int numOfRow3PowerUp = 1;
 
 
@@ -155,16 +155,47 @@ void Level::createCircleBricks()
 	b1.push_back(brick14);
 	b1.push_back(brick15);
 
+	//Loop to assign values to type 0 brick
 	for(int i = 0; i < 8; i++)
 	{
 		int randomPercent = rand() % 100 + 1;  
 
+		//if brick is powerup brick
 		if (randomPercent >= 90 && numOfRow1PowerUp != 0)
 		{
-			int randomNumber = rand() 
+			
+			numOfRow1PowerUp--;
+		}
+		//otherwise just randomly choose a color 
+		else
+		{
+			int random = rand() % 4;  // Generating color 0-3
+			b0.at(i).setPictureID(random); // Set a picture ID to brick
+			b0.at(i).setPowerupID(-1); // No power up
 		}
 
 	}
+
+	//Loop to assign values to type 1 brick
+	for(int i = 0; i < 8; i++)
+	{
+		int randomPercent = rand() % 100 + 1;  
+
+		//if brick is powerup brick
+		if (randomPercent >= 90 && numOfRow1PowerUp != 0)
+		{
+			
+			numOfRow1PowerUp--;
+		}
+		//otherwise just randomly choose a color 
+		else
+		{
+			//TO FIX: how do picIDs work? right now would generate same bricks as flat level
+			int random = rand() % 4 + 4;  // Generating color 4-7 (same colors, different brick)
+			b1.at(i).setPictureID(random); // Set a picture ID to brick
+			b1.at(i).setPowerupID(-1); // No power up
+		}
+
 
 
 	
@@ -216,7 +247,7 @@ void Level::createBricks()
 		// normal brick
 		else
 		{
-			int random = rand() % 4;  // Generating 0-4
+			int random = rand() % 4;  // Generating 0-3
 			brick.setPictureID(random); // Set a picture ID to brick
 			brick.setPowerupID(7); // No power up
 			addBrick(brick);
