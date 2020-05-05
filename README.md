@@ -5,8 +5,8 @@ The MCI Brick Break Game was created as a tool for publishing information regard
 
 # The Game 
 
-This brick break game is a 2 dimensional, 1980's style game.  The game consists of 2 levels.  Level one is the standard straight attack brick break game.  Level two is "brick break in the round".  Both levels contain hidden powerup bricks which not only display a message regarding male contraception but alter the player's game (i.e. changing speeds, changing paddle sizes ...).
-This is a single person game however scores may be kept for multiple players.
+This brick break game is a 2 dimensional, 1980's style game.  The game consists of 3 levels.  Levels one and two are the standard straight attack brick break game.  Level three is "brick break in the round".  Both levels contain hidden powerup bricks which not only display a message regarding male contraception but alter the player's game (i.e. changing speeds, changing paddle sizes ...).
+This is a single person game.
 
 ## Game Structure
 
