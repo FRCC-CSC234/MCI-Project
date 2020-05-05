@@ -37,7 +37,7 @@ bool TrelTexture::loadFromFile( std::string fileName, SDL_Renderer* gRenderer )
     SDL_Surface* loadedSurface = SDL_LoadBMP( fileName.c_str( ) );
     if ( loadedSurface == NULL )
     {
-        cout << "image could not load" << endl;
+        cout << fileName << "could not load" << endl; // Updated to show fileName
     }
     else
     {
@@ -73,7 +73,7 @@ bool TrelTexture::loadFromFileColor( string fileName, SDL_Renderer* gRenderer, U
     SDL_Surface* loadedSurface = SDL_LoadBMP( fileName.c_str( ) );
     if ( loadedSurface == NULL )
     {
-        cout << "image could not load" << endl;
+        cout << fileName << "could not load" << endl; // Updated to show fileName
     }
     else
     {

@@ -1,0 +1,49 @@
+ROW 1:
+Brick 1 
+	Top left corner: (300, 27)
+	Center: (351, 47)
+Brick 2
+	Top left corner: (397, 49)
+	Center: (443, 85)
+Brick 3
+	Top left corner: (478, 109)
+	Center: (514, 155)
+Brick 4
+	Top left corner: (531, 197)
+	Center: (551, 248)
+Brick 5
+	Top left corner: (531, 300)
+	Center: (551, 351)
+Brick 6
+	Top left corner: (478, 397)
+	Center: (514, 443)
+Brick 7
+	Top left corner: (397, 478)
+	Center: (443, 514)
+Brick 8
+	Top left corner: (300, 531)
+	Center: (351, 551)
+Brick 9
+	Top left corner: (197, 531)
+	Center: (248, 551)
+Brick 10
+	Top left corner: (109, 478)
+	Center: (155, 514)
+Brick 11
+	Top left corner: (49, 397)
+	Center: (85, 444)
+Brick 12
+	Top left corner: (27, 300)
+	Center:(47, 351)
+Brick 13
+	Top left corner: (27, 197)
+	Center:(47, 248)
+Brick 14
+	Top left corner: (49, 109)
+	Center: (85, 155)
+Brick 15
+	Top left corner: (109, 49)
+	Center:(155, 85)
+Brick 16
+	Top left corner: (197, 27)
+	Center: (248, 47)

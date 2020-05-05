@@ -1,4 +1,14 @@
 Title_Screens/Backgrounds/background1.bmp
 Title_Screens/Backgrounds/background2.bmp
 Title_Screens/Backgrounds/background3.bmp
+Title_Screens/Intro.bmp
+Title_Screens/How_To_Play.bmp
 Title_Screens/Game_over_screen.bmp
+Title_Screens/You_Won.bmp
+Title_Screens/Lives/Simple_Lives.bmp
+Title_Screens/Lives/Zero.bmp
+Title_Screens/Lives/One.bmp
+Title_Screens/Lives/Two.bmp
+Title_Screens/Lives/Three.bmp
+Title_Screens/Lives/Four.bmp
+Title_Screens/Lives/Five.bmp

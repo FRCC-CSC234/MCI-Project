@@ -102,7 +102,7 @@ description: creates a static TrelGraphics2 object that holds
 **********************************************************/
 void drawTitleScreen( )
 {
-	static TrelGraphics2 titleImage( "titleImage.txt" );// Best way to handle it, not worth making a new constructor for one image, and doing seperalty is a bad idea with static local variables
-	titleImage.addPictureToFrame( 0, 0, 0 );
+	static TrelGraphics2 titleImage( "Title_Screens.txt" );// Best way to handle it, not worth making a new constructor for one image, and doing seperalty is a bad idea with static local variables
+	titleImage.addPictureToFrame( 4, 0, 0 );
 	TrelGraphics2::drawFrame( );
 }

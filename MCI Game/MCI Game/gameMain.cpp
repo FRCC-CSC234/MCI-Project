@@ -10,15 +10,18 @@
 using namespace std;
 
 void startGame();
+// void showIntroSceen( );
 void endGame();
 void playGame();
 //void startMusic();
 
 Level level; //*** exists to make me not have to delete stuff from drawScreen();
+bool quit = false; // Added to have intro and instructions show on screen 
 
 int main( int argc, char** argv ) // Main must have these specific arguments for SDL to work 
 {
 	startGame();
+	// showIntroSceen( );
 	playGame();
 	//startMusic();
 	endGame();
@@ -149,6 +152,54 @@ void endGame()
 	TrelGraphics2::close( );
 
 }
+
+/***********************************************************
+#NickB
+Name: showIntroScreen
+Description: Shows intro screen, gives player an option to see instuction
+**********************************************************/
+
+
+void showIntroSceen( )
+{
+	// Intro is 3, how to play is 4
+	bool pause = true;
+	int titleScreentoDisplay = 3; 
+	SDL_Event e;
+
+	drawTitleScreen( );
+
+	while ( !quit && pause )
+	{
+		while ( SDL_PollEvent( &e ) != 0 )
+		{
+			switch ( e.type )
+			{
+			case SDL_QUIT:
+				quit = true;
+				break;
+			case SDLK_LEFT:
+				drawTitleScreen(  );
+				break;
+			case SDL_KEYDOWN:
+				if ( e.key.keysym.sym == SDLK_SPACE )
+				{
+					pause = false;
+				}
+				break;
+			}
+			
+			
+		}
+
+		
+	}
+}
+
+
+
+
+
 
 /***********************************************************
 #SimonM

@@ -1,0 +1,50 @@
+ROW 3:
+	Same flipping/rotating as Row 1
+Brick 1 
+	Top left corner: (300, 74)
+	Center: (342, 92)
+Brick 2
+	Top left corner: (379, 93)
+	Center: (418, 123)
+Brick 3
+	Top left corner: (446, 142)
+	Center: (476, 181)
+Brick 4
+	Top left corner: (489, 215)
+	Center: (507, 257)
+Brick 5
+	Top left corner: (489, 300)
+	Center: (507, 342)
+Brick 6
+	Top left corner: (446, 379)
+	Center: (476, 418)
+Brick 7
+	Top left corner: (379, 446)
+	Center: (418, 476)
+Brick 8
+	Top left corner: (300, 489)
+	Center: (342, 507)
+Brick 9
+	Top left corner: (215, 489)
+	Center: (257, 507)
+Brick 10
+	Top left corner: (142, 446)
+	Center: (181, 476)
+Brick 11
+	Top left corner: (123, 418)
+	Center: (123, 418)
+Brick 12
+	Top left corner: (74, 300)
+	Center:(92, 342)
+Brick 13
+	Top left corner: (74, 215)
+	Center:(92, 257)
+Brick 14
+	Top left corner: (93, 142)
+	Center: (123, 181)
+Brick 15
+	Top left corner: (142, 93)
+	Center:(181, 123)
+Brick 16
+	Top left corner: (215, 74)
+	Center: (257, 92)
