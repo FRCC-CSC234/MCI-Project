@@ -51,13 +51,16 @@ Level::Level(int x)
 	bonusBall = false;
 	bonusPaddle = false;
 	superBall = false;
+	stickyBall = 0; 
 
 	createBricks();
 }
 
-void Level::startLevel()
+void Level::startFlatLevel()
 {
-
+	balls.clear();
+	paddles.clear();
+	bricks.clear();
 	Ball ball(350, 550); // Moving Creation of Ball to Constructor
 	ball.setSpeedX(1.0 / 3.0);
 	ball.setSpeedY(-2.0 / 3.0);
@@ -70,8 +73,60 @@ void Level::startLevel()
 	bonusBall = false;
 	bonusPaddle = false;
 	superBall = false;
+	stickyBall = 0; 
 
 	createBricks();
+}
+
+void Level::startCircularLevel()
+{
+	balls.clear();
+	paddles.clear();
+	bricks.clear();
+
+	//Ball ball();
+	
+
+	cout << "This don't EXIST" << endl;
+}
+
+void Level::createCircleBricks()
+{
+	int numberOfBricksinLevel;
+	int numberOfPowerUpInLevel;
+	int BrickRowNumber;
+	const int numberOfBricksInRow = 16;
+
+	srand(time(NULL)); // Truely Random 
+	int	powerupBrickCount = 0; // How many powerup
+
+	// Brick Constructor = Brick( double x, double y, int pic, int powID ):GameObject(pic, 29, 60, x, y, 0)
+
+	//Creating Row 1:
+
+	Brick brick1(300,27); //0
+	Brick brick2(397,49); //1
+	Brick brick3(478,109); //1 vertical flip, rotate 90
+	Brick brick4(531,197); //0 vertical flip, rotate 90
+	Brick brick5(531,300); //0 flip brick4 vertical
+	Brick brick6(478,397); //1 flip brick3 vertical
+	Brick brick7(397,478); //1 flip brick2 vertical
+	Brick brick8(300,531); //0 flip brick1 vertical
+	Brick brick9(197,531); //0 flip brick8 horizontal
+	Brick brick10(109,478); //1 flip brick7 horizontal
+	Brick brick11(49,397); //1 flip brick6 horizontal
+	Brick brick12(27,300); //0 repeat 5, flip horizontal
+	Brick brick13(27,197); //0 repeat 4, flip horizontal
+	Brick brick14(49,109); //1 repeat 3, flip horizontal
+	Brick brick15(109,49); //1 repeat 2, flip horizontal
+	Brick brick16(197,27); //0 repeat 1, flip horizontal
+
+	bricks.P
+
+
+
+
+	
 }
 
 /***********************************************************
@@ -83,18 +138,33 @@ includes their art and power ups if applicable. Ensures only
 **********************************************************/
 void Level::createBricks() 
 {
+	int levelcount = levelNumber; 
+	int numberOfBricksInLevel;
+	int numberOfPowerUpInLevel;
+
+	if (levelcount == 0)
+	{
+		numberOfBricksInLevel = 30; 
+		numberOfPowerUpInLevel = 2;
+	}
+	else
+	{
+		numberOfBricksInLevel = 50; 
+		numberOfPowerUpInLevel = 4;
+	}
+	
 	srand(time(NULL)); // Truely Random 
 	int	powerupBrickCount = 0; // How many powerup
-	for (int i = 0; i < 30; i++) // Total Number of Brick
+	for (int brickCount = 0; brickCount < numberOfBricksInLevel; brickCount++) // Total Number of Brick
 	{
 		
-		Brick brick((i % 10) * 60+30,(i / 10) * 29+15); // Create a brick Object 
+		Brick brick((brickCount % 10) * 60+30,(brickCount / 10) * 30+15); // Create a brick Object 
 
 		//random number for brick type
 		int randomPercent = rand() % 100 + 1;  
 
 		// are we generating a power up brick
-		if (randomPercent >= 90 && powerupBrickCount != 2) 
+		if (randomPercent >= 90 && powerupBrickCount != numberOfPowerUpInLevel) 
 		{
 			int random = rand() % 10 + 4;  // Generating 4-13
 			brick.setPictureID(random); // Set a picture ID to brick
@@ -107,7 +177,7 @@ void Level::createBricks()
 		{
 			int random = rand() % 4;  // Generating 0-4
 			brick.setPictureID(random); // Set a picture ID to brick
-			brick.setPowerupID(-1); // No power up
+			brick.setPowerupID(7); // No power up
 			addBrick(brick);
 		}
 	}
@@ -203,10 +273,7 @@ void Level::checkCollision()
 					playerLives--;
 					cout << "Lives: " << playerLives << endl;
 
-					/*int livesPic =
-
-					drawFlatScreen(bricks, balls, paddles, *this, );*/
-
+					
 					//reset ball and paddle to middle of screen
 					balls.erase( balls.begin( ) + howManyBalls );
 
@@ -337,7 +404,8 @@ void Level::checkCollision()
 
 			for ( int howManyPaddles = 0; howManyPaddles < paddles.size( ); howManyPaddles++ )
 			{
-				// Center the Brick
+				// Center the Paddle
+				bool paddleCollision = false; 
 				int paddleXLocation = paddles.at( howManyPaddles ).getX( );
 				int paddleYLocation = paddles.at( howManyPaddles ).getY( );
 
@@ -358,11 +426,13 @@ void Level::checkCollision()
 					if ( abs( ballYLocation - top ) < 9 ) // Is the ball on top of the brick 
 					{
 						balls.at( howManyBalls ).setSpeedY( ballYSpeed * -1 );
+						paddleCollision = true;
 					}
 
 					if ( abs( ballYLocation - bottom ) < 9 ) // Is the ball on bottom of the brick 
 					{
 						balls.at( howManyBalls ).setSpeedY( ballYSpeed * -1 );
+						paddleCollision = true;
 					}
 
 				}
@@ -372,12 +442,23 @@ void Level::checkCollision()
 					if ( abs( ballYLocation - left ) < 9 ) // Is the ball on top of the brick 
 					{
 						balls.at( howManyBalls ).setSpeedX( ballXSpeed * -1 );
+						paddleCollision = true;
 					}
 
 					if ( abs( ballYLocation - right < 9 ) ) // Is the ball on bottom of the brick 
 					{
 						balls.at( howManyBalls ).setSpeedX( ballXSpeed * -1 );
+						paddleCollision = true;
 					}
+				}
+				if (paddleCollision && stickyBall > 0)
+				{
+					balls.at(howManyBalls).setX(paddleXLocation);
+					balls.at(howManyBalls).setY(paddleYLocation-10);
+					balls.at(howManyBalls).setSpeedX( 1.0 / 3.0 );
+					balls.at(howManyBalls).setSpeedY( -2.0 / 3.0 );
+					balls.at(howManyBalls).setMovable( false );
+					stickyBall--;
 				}
 			}
 		}
@@ -398,7 +479,7 @@ void Level::shouldTheBallBeHere( )
 		int ballYLocation = balls.at( howManyBalls ).getY( );
 		double ballXSpeed = balls.at( howManyBalls ).getSpeedX( );
 		double ballYSpeed = balls.at( howManyBalls ).getSpeedY( );
-
+		int stuckTo = -1; 
 		for ( int howManyPaddles = 0; howManyPaddles < paddles.size( ); howManyPaddles++ )
 		{
 			int paddleXLocation = paddles.at( howManyPaddles ).getX( );
@@ -426,6 +507,7 @@ void Level::shouldTheBallBeHere( )
 					}
 
 					ballInsidePaddle = true; 
+					stuckTo=howManyPaddles;
 				}
 
 				if ( abs( ballYLocation - bottom ) < 9 ) // Is the ball on bottom of the brick 
@@ -438,6 +520,7 @@ void Level::shouldTheBallBeHere( )
 					}
 
 					ballInsidePaddle = true;
+					stuckTo=howManyPaddles;
 				}
 			}
 
@@ -452,6 +535,7 @@ void Level::shouldTheBallBeHere( )
 					}
 
 					ballInsidePaddle = true;
+					stuckTo=howManyPaddles;
 				}
 
 				if ( abs( ballYLocation - right < 9 ) ) // Is the ball on bottom of the brick 
@@ -463,6 +547,7 @@ void Level::shouldTheBallBeHere( )
 					}
 
 					ballInsidePaddle = true;
+					stuckTo=howManyPaddles;
 				}
 			}
 		}
@@ -470,7 +555,19 @@ void Level::shouldTheBallBeHere( )
 		// If ball inside paddle move it
 		if ( ballInsidePaddle == true )
 		{
-			balls.at( howManyBalls ).move(paddles.at(0) );
+			if (stickyBall>0)
+			{
+				balls.at(howManyBalls).setX(paddles.at(stuckTo).getX());
+				balls.at(howManyBalls).setY(paddles.at(stuckTo).getY()-10);
+				balls.at(howManyBalls).setSpeedX( 1.0 / 3.0 );
+				balls.at(howManyBalls).setSpeedY( -2.0 / 3.0 );
+				balls.at(howManyBalls).setMovable( false );
+				stickyBall--;
+			}
+			else
+			{
+				balls.at(howManyBalls).move(paddles.at(0));
+			}
 		}
 	}
 }
@@ -560,17 +657,10 @@ void Level::checkPowerUps(int brickLocation)
 		//sticky paddle
 		if (bricks.at(brickLocation).getPowerupID() == 7) // ball sticks to paddle
 		{
-			cout << "sticky paddle" << endl;
-			//#SimonM used the movable boolean to adjust this power up. Needs testing.
-			balls.erase(balls.begin() + 0);
+			cout << "sticky ball" << endl;
 
-			Paddle paddle(350, 560);
+			stickyBall = 3; // Adjust number of times the power up to be used if needed 
 
-			Ball ball(paddles.at(0).getX(), (paddles.at(0).getY() - 10));
-			ball.setSpeedX(1.0 / 3.0);
-			ball.setSpeedY(-2.0 / 3.0);
-			ball.setMovable(false);
-			addBall(ball);
 		}
 		
 		//extra ball

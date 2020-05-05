@@ -50,16 +50,16 @@ void nextLevel()
 
 	if(level.getLevelNumber() == 0)
 	{
-		level.startLevel( );
+		level.startFlatLevel( );
 	}
 	if(level.getLevelNumber() == 1)
 	{
-		level.startLevel( );
+		level.startFlatLevel( );
 	}
-	//if(level.getLevelNumber == 2)
-	//{
-	//	level.startLevel( );
-	//}
+	if(level.getLevelNumber() == 2)
+	{
+		level.startCircularLevel();
+	}
 	
 
 
@@ -72,71 +72,71 @@ Description: Contains calls to SDL and other classes to run the game
 **********************************************************/
 void playGame()
 {
-	for ( int levelCount = 0 ; levelCount < 2 ; levelCount ++ )
-	{ 
-	nextLevel( );
-
+	
+	level.setLevelNumber(0);
+	nextLevel();
 
 	SDL_Event e;
 	int direction = 0;
 	int gameState = 0;
-	while ( !Level::quit )
+	while ( !Level::quit && level.getLevelNumber()<3)
 	{
-		while ( SDL_PollEvent( &e ) != 0 )
-		{
-			if ( e.type == SDL_QUIT )
+			while (SDL_PollEvent(&e) != 0)
 			{
-				Level::quit = true;
-			}
-			else if ( e.type == SDL_KEYDOWN )
-			{
-				int paddleLocation = level.getPaddles( ).at( 0 ).getX( );
-				switch ( e.key.keysym.sym )
+				if (e.type == SDL_QUIT)
 				{
+					Level::quit = true;
+				}
+				else if (e.type == SDL_KEYDOWN)
+				{
+					int paddleLocation = level.getPaddles().at(0).getX();
+					switch (e.key.keysym.sym)
+					{
 
-				case SDLK_LEFT:
-					direction = -1;
-					Paddle::setDirection( -1 );
-					break;
-				case SDLK_RIGHT:
-					direction = 1;
-					Paddle::setDirection( 1 );
-					break;
-				case SDLK_1:
-					level.setPictureID( 0 );
-					break;
-				case SDLK_2:
-					level.setPictureID( 1 );
-					break;
-				case SDLK_3:
-					level.setPictureID( 2 );
-					break;
-				case SDLK_SPACE:
-					level.moveBall( true );
-					break;
+					case SDLK_LEFT:
+						direction = -1;
+						Paddle::setDirection(-1);
+						break;
+					case SDLK_RIGHT:
+						direction = 1;
+						Paddle::setDirection(1);
+						break;
+					case SDLK_1:
+						level.setPictureID(0);
+						break;
+					case SDLK_2:
+						level.setPictureID(1);
+						break;
+					case SDLK_3:
+						level.setPictureID(2);
+						break;
+					case SDLK_SPACE:
+						level.moveBall(true);
+						break;
+					}
+				}
+				else if (e.type == SDL_KEYUP)
+				{
+					switch (e.key.keysym.sym)
+					{
+					case SDLK_LEFT:
+						direction = direction == 1 ? 1 : 0;
+						Paddle::setDirection(Paddle::getDirection() == 1 ? 1 : 0);
+						break;
+					case SDLK_RIGHT:
+						direction = direction == -1 ? -1 : 0;
+						Paddle::setDirection(Paddle::getDirection() == -1 ? -1 : 0);
+						break;
+						//#SimonM set spacebar to change balls movable bool to true
+					case SDLK_SPACE:
+						level.moveBall(true);
+						break;
+					}
+
+
 				}
 			}
-			else if ( e.type == SDL_KEYUP )
-			{
-				switch ( e.key.keysym.sym )
-				{
-				case SDLK_LEFT:
-					direction = direction == 1 ? 1 : 0;
-					Paddle::setDirection( Paddle::getDirection( ) == 1 ? 1 : 0 );
-					break;
-				case SDLK_RIGHT:
-					direction = direction == -1 ? -1 : 0;
-					Paddle::setDirection( Paddle::getDirection( ) == -1 ? -1 : 0 );
-					break;
-					//#SimonM set spacebar to change balls movable bool to true
-				case SDLK_SPACE:
-					level.moveBall( true );
-					break;
-				}
-
-
-			}
-		}
+	
 
 
 
@@ -146,8 +146,20 @@ void playGame()
 			//gameState = level.moveObjects(direction, player);
 			level.gameFrame( );
 		}
+
+
 		// removed draw code. Draw Flat screen needs to be used to draw things to the screen 
 		drawFlatScreen( level.getBricks( ), level.getBalls( ), level.getPaddles( ), level );
+
+
+
+
+		if ( level.getBricks().size() ==  0 )
+		{
+			level.setLevelNumber((level.getLevelNumber()) + 1);
+			nextLevel();
+
+		}
 
 	}
 
@@ -172,7 +184,6 @@ void playGame()
 				quit = true;
 			}
 			*/
-		}
 }
 
 /***********************************************************

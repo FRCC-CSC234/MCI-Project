@@ -35,6 +35,9 @@ class Level
 	//makes the ball bounce through all bricks until it hits the top
 	bool superBall;
 
+	// Nick B adding a certain number of times player can use stickyBall
+	int stickyBall; 
+
 	vector<Ball> balls;
 	vector<Brick> bricks;
 	vector<Paddle> paddles;
@@ -52,8 +55,12 @@ public:
 	Level();
 	Level(int x);
 
-	void startLevel( );
+	void startFlatLevel( );
+	void startCircularLevel();
 	
+	//Randomizes and draws bricks for the circular level
+	void createCircleBricks();
+
 	//randomizes and draws bricks on the screen
 	void createBricks();
 

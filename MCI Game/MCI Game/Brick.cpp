@@ -10,7 +10,7 @@
 Name: Brick
 Description: Constructor
 **********************************************************/
-Brick::Brick( double x, double y, int pic, int powID ):GameObject(pic, 29, 60, x, y, 0)
+Brick::Brick( double x, double y, int pic, int powID ):GameObject(pic, 30, 60, x, y, 0)
 {
 	powerupID = powID;
 	// This needs width and height to be set. 
