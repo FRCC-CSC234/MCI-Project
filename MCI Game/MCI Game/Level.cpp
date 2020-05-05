@@ -6,6 +6,7 @@
 
 bool Level::quit = false;
 
+
 /***********************************************************
 #NickP
 Name: develop
@@ -71,6 +72,7 @@ includes their art and power ups if applicable. Ensures only
 **********************************************************/
 void Level::createBricks() 
 {
+	srand(time(NULL));
 	int	powerupBrickCount = 0;
 	for (int i = 0; i < 30; i++)
 	{
