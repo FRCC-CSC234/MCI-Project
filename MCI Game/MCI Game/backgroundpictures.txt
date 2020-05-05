@@ -1,3 +1,0 @@
-background1.bmp
-background2.bmp
-background3.bmp

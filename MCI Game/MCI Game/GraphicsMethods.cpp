@@ -14,7 +14,7 @@ void drawFlatScreen( std::vector<Brick> bricks, std::vector<Ball> balls, std::ve
 	static TrelGraphics2 ballPictures( "Graphics_Text_Files/ballpictures.txt", 0xFF, 0xFF, 0xFF );
 	static TrelGraphics2 paddlePictures( "Graphics_Text_Files/paddlepictures.txt", 0xFF, 0xFF, 0xFF );
 	static TrelGraphics2 titleScreens( "Graphics_Text_Files/Title_Screens.txt" ); // No long only holding backgrounds updated name 
-	static TrelGraphics2 factPictures( "powerups_fact.txt", 0xFF, 0xFF, 0xFF );
+	static TrelGraphics2 factPictures( "Graphics_Text_Files/powerups_fact.txt", 0xFF, 0xFF, 0xFF );
 	int x, y, w, h;
 	double angle;
 	bool vFlip, hFlip;
@@ -100,9 +100,9 @@ description: creates a static TrelGraphics2 object that holds
 		 one texture loaded from text stored in titleImage.txt file
 		 adds title image to window.
 **********************************************************/
-void drawTitleScreen( )
+void drawTitleScreen( int titleImageID )
 {
-	static TrelGraphics2 titleImage( "Title_Screens.txt" );// Best way to handle it, not worth making a new constructor for one image, and doing seperalty is a bad idea with static local variables
-	titleImage.addPictureToFrame( 4, 0, 0 );
+	static TrelGraphics2 titleImage( "Graphics_Text_Files/Title_Screens.txt" );// Best way to handle it, not worth making a new constructor for one image, and doing seperalty is a bad idea with static local variables
+	titleImage.addPictureToFrame( titleImageID, 0, 0 );
 	TrelGraphics2::drawFrame( );
 }

@@ -10,18 +10,18 @@
 using namespace std;
 
 void startGame();
-// void showIntroSceen( );
+void showIntroSceen( );
 void endGame();
 void playGame();
 //void startMusic();
 
 Level level; //*** exists to make me not have to delete stuff from drawScreen();
-bool quit = false; // Added to have intro and instructions show on screen 
+
 
 int main( int argc, char** argv ) // Main must have these specific arguments for SDL to work 
 {
 	startGame();
-	// showIntroSceen( );
+	showIntroSceen( );
 	playGame();
 	//startMusic();
 	endGame();
@@ -37,7 +37,7 @@ Description: Starts the graphics methods
 **********************************************************/
 void startGame()
 {
-	
+	Level::quit = false; // Added to have intro and instructions show on screen 
 	TrelGraphics2::start( "Insert MCI Game Name Here", 600, 600 ); //*** needed a TrelGraphics::start call, made up a size.
 	cout << "in Gamemain startGame - NEEDS TO BE IMPLEMENTED" << endl;
 	
@@ -52,7 +52,6 @@ void playGame()
 {
 	cout << "in Gamemain playGame - NEEDS TO BE IMPLEMENTED" << endl;
 	SDL_Event e;
-	bool quit = false;
 	int direction = 0;
 	int gameState = 0;
 	while (!Level::quit)
@@ -167,21 +166,22 @@ void showIntroSceen( )
 	int titleScreentoDisplay = 3; 
 	SDL_Event e;
 
-	drawTitleScreen( );
+	drawTitleScreen( 3 );
 
-	while ( !quit && pause )
+	while ( !Level::quit && pause )
 	{
 		while ( SDL_PollEvent( &e ) != 0 )
 		{
 			switch ( e.type )
 			{
 			case SDL_QUIT:
-				quit = true;
-				break;
-			case SDLK_LEFT:
-				drawTitleScreen(  );
+				Level::quit = true;
 				break;
 			case SDL_KEYDOWN:
+				if ( e.key.keysym.sym == SDLK_LEFT )
+				{
+					drawTitleScreen( 4 );
+				}
 				if ( e.key.keysym.sym == SDLK_SPACE )
 				{
 					pause = false;
