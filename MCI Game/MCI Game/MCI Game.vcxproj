@@ -72,7 +72,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>C:\Users\marts\Desktop\SDL2-devel-2.0.12-VC\SDL2-2.0.12\include;C:\Users\Nick\Desktop\SDL2-2.0.10\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\marts\Desktop\SDL2-devel-2.0.12-VC\SDL2-2.0.12\lib\x86;C:\Users\Nick\Desktop\SDL2-2.0.10\lib\x86;$(LibraryPath)</LibraryPath>
+    <LibraryPath>C:\Users\marts\Desktop\SDL2_mixer-2.0.4\lib\x86;C:\Users\marts\Desktop\SDL2-devel-2.0.12-VC\SDL2-2.0.12\lib\x86;C:\Users\Nick\Desktop\SDL2-2.0.10\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -95,7 +95,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -311,6 +311,10 @@
     <Text Include="Graphics_Text_Files\paddlepictures.txt" />
     <Text Include="Graphics_Text_Files\powerups_fact.txt" />
     <Text Include="Graphics_Text_Files\Title_Screens.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="MCIsong.wav" />
+    <Media Include="MCIsong2.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

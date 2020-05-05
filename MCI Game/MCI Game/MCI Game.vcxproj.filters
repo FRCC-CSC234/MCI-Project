@@ -55,6 +55,9 @@
     <Filter Include="Resource Files\Circular_Level\Bricks\Row_3">
       <UniqueIdentifier>{d4a9c4a9-92d4-4a8d-9fee-5b43b4f9a355}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Audio_Files">
+      <UniqueIdentifier>{f1c2d5a9-76e1-459d-b238-fe7da2121a3c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TrelTexture.h">
@@ -546,5 +549,13 @@
     <Text Include="Circular_Level\Bricks\Row_3\Circular Brick Coordinates Row 3.txt">
       <Filter>Resource Files\Circular_Level\Bricks\Row_3</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="MCIsong2.wav">
+      <Filter>Resource Files\Audio_Files</Filter>
+    </Media>
+    <Media Include="MCIsong.wav">
+      <Filter>Resource Files\Audio_Files</Filter>
+    </Media>
   </ItemGroup>
 </Project>

@@ -13,7 +13,7 @@ void startGame();
 void showIntroSceen( );
 void endGame();
 void playGame();
-//void startMusic();
+void startMusic();
 
 Level level; //*** exists to make me not have to delete stuff from drawScreen();
 
@@ -23,7 +23,6 @@ int main( int argc, char** argv ) // Main must have these specific arguments for
 	startGame();
 	showIntroSceen( );
 	playGame();
-	//startMusic();
 	endGame();
 	
 	system( "pause" );
@@ -51,6 +50,9 @@ Description: Contains calls to SDL and other classes to run the game
 void playGame()
 {
 	cout << "in Gamemain playGame - NEEDS TO BE IMPLEMENTED" << endl;
+
+	startMusic();
+
 	SDL_Event e;
 	int direction = 0;
 	int gameState = 0;
@@ -149,7 +151,6 @@ void endGame()
 {
 	cout << "in gameMain endGame - NEEDS TO BE IMPLEMENTED" << endl;
 	TrelGraphics2::close( );
-
 }
 
 /***********************************************************
@@ -157,8 +158,6 @@ void endGame()
 Name: showIntroScreen
 Description: Shows intro screen, gives player an option to see instuction
 **********************************************************/
-
-
 void showIntroSceen( )
 {
 	// Intro is 3, how to play is 4
@@ -188,17 +187,9 @@ void showIntroSceen( )
 				}
 				break;
 			}
-			
-			
 		}
-
-		
 	}
 }
-
-
-
-
 
 
 /***********************************************************
@@ -206,16 +197,16 @@ void showIntroSceen( )
 Name: startMusic
 Description: Plays music
 **********************************************************/
-//void startMusic()
-//{
-//	if (SDL_Init(SDL_INIT_AUDIO) < 0) exit(1);
-//
-//	Mix_OpenAudio(22050, AUDIO_S16SYS, 2, 640);
-//	Mix_Music* mus;  // Background Music
-//
-//	mus = Mix_LoadMUS("MCIsong2.wav");
-//
-//	Mix_PlayMusic(mus, -1); //Music loop: -1 for continuous play
-//
-//}
+void startMusic()
+{
+	if (SDL_Init(SDL_INIT_AUDIO) < 0) exit(1);
+
+	Mix_OpenAudio(22050, AUDIO_S16SYS, 2, 640);
+	Mix_Music* mus;  // Background Music
+
+	mus = Mix_LoadMUS("MCIsong2.wav");
+
+	Mix_PlayMusic(mus, -1); //Music loop: -1 for continuous play
+
+}
 
