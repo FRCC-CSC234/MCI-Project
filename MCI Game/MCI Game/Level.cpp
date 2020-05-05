@@ -121,7 +121,7 @@ void Level::createCircleBricks()
 	Brick brick15(109,49); //1 repeat 2, flip horizontal
 	Brick brick16(197,27); //0 repeat 1, flip horizontal
 
-	bricks.P
+	//bricks.P
 
 
 
@@ -359,9 +359,9 @@ void Level::checkCollision()
 				}
 
 				// Are you between the top and bottom edges  // Y+bricksWidth // Y-bricksWidth
-				if ( abs( ballYLocation >= bottom ) && ballYLocation <= top )
+				if ( abs( ballYLocation <= bottom ) && ballYLocation >= top )
 				{
-					if ( abs( ballYLocation - left ) < 9 ) // Is the ball on top of the brick 
+					if ( abs( ballXLocation - left ) < 9 ) // Is the ball on top of the brick 
 					{
 						//balls.at( howManyBalls ).setSpeedX( ballXSpeed * -1 );
 						xCollide = true;
@@ -370,7 +370,7 @@ void Level::checkCollision()
 						brickCollide = true;
 					}
 
-					if ( abs( ballYLocation - right ) < 9 ) // Is the ball on bottom of the brick 
+					if ( abs( ballXLocation - right ) < 9 ) // Is the ball on bottom of the brick 
 					{
 						//balls.at( howManyBalls ).setSpeedX( ballXSpeed * -1 );
 						xCollide = true;
@@ -437,15 +437,15 @@ void Level::checkCollision()
 
 				}
 
-				if ( ballYLocation >= bottom && ballYLocation <= top )
+				if ( ballYLocation <= bottom && ballYLocation >= top )
 				{
-					if ( abs( ballYLocation - left ) < 9 ) // Is the ball on top of the brick 
+					if ( abs( ballXLocation - left ) < 9 ) // Is the ball on top of the brick 
 					{
 						balls.at( howManyBalls ).setSpeedX( ballXSpeed * -1 );
 						paddleCollision = true;
 					}
 
-					if ( abs( ballYLocation - right < 9 ) ) // Is the ball on bottom of the brick 
+					if ( abs( ballXLocation - right < 9 ) ) // Is the ball on bottom of the brick 
 					{
 						balls.at( howManyBalls ).setSpeedX( ballXSpeed * -1 );
 						paddleCollision = true;
@@ -524,7 +524,7 @@ void Level::shouldTheBallBeHere( )
 				}
 			}
 
-			if ( ballYLocation >= bottom && ballYLocation <= top )
+			if ( ballYLocation <= bottom && ballYLocation >= top )
 			{
 				if ( abs( ballYLocation - left ) < 9 ) // Is the ball on top of the brick 
 				{
@@ -706,8 +706,6 @@ void Level::checkPowerUps(int brickLocation)
 				case SDL_KEYUP:
 					if (e.key.keysym.sym == SDLK_SPACE)
 					{
-						if (bricks.at(brickLocation).getPowerupID() == 7)
-							balls.at(0).setMovable(false);
 						pause = false;
 					}
 					else
