@@ -90,12 +90,24 @@ void Level::startCircularLevel()
 	cout << "This don't EXIST" << endl;
 }
 
+/***********************************************************
+#Kyle, #Sophia
+Name: createCircleBricks
+Description: Creates the bricks for the circle level
+includes their art and power ups if applicable. Ensures only
+4 max bricks contain powerups.
+**********************************************************/
+
 void Level::createCircleBricks()
 {
 	int numberOfBricksinLevel;
-	int numberOfPowerUpInLevel;
 	int BrickRowNumber;
 	const int numberOfBricksInRow = 16;
+	
+	int numOfRow1Powerup = 1;
+	int numOfRow2Powerup = 2;
+	int numOfRow3PowerUp = 1;
+
 
 	srand(time(NULL)); // Truely Random 
 	int	powerupBrickCount = 0; // How many powerup
@@ -121,9 +133,38 @@ void Level::createCircleBricks()
 	Brick brick15(109,49); //1 repeat 2, flip horizontal
 	Brick brick16(197,27); //0 repeat 1, flip horizontal
 
-	bricks.P
+	//Vector for type 0 bricks
+	vector<Brick> b0;
+	b0.push_back(brick1);
+	b0.push_back(brick4);
+	b0.push_back(brick5);
+	b0.push_back(brick8);
+	b0.push_back(brick9);
+	b0.push_back(brick12);
+	b0.push_back(brick13);
+	b0.push_back(brick16);
 
+	//Vector for type 1 bricks
+	vector<Brick> b1;
+	b1.push_back(brick2);
+	b1.push_back(brick3);
+	b1.push_back(brick6);
+	b1.push_back(brick7);
+	b1.push_back(brick10);
+	b1.push_back(brick11);
+	b1.push_back(brick14);
+	b1.push_back(brick15);
 
+	for(int i = 0; i < 8; i++)
+	{
+		int randomPercent = rand() % 100 + 1;  
+
+		if (randomPercent >= 90 && numOfRow1PowerUp != 0)
+		{
+			int randomNumber = rand() 
+		}
+
+	}
 
 
 	
@@ -145,12 +186,12 @@ void Level::createBricks()
 	if (levelcount == 0)
 	{
 		numberOfBricksInLevel = 30; 
-		numberOfPowerUpInLevel = 2;
+		numberOfPowerUpInLevel = 4;
 	}
 	else
 	{
 		numberOfBricksInLevel = 50; 
-		numberOfPowerUpInLevel = 4;
+		numberOfPowerUpInLevel = 6;
 	}
 	
 	srand(time(NULL)); // Truely Random 
