@@ -6,7 +6,6 @@
 
 bool Level::quit = false;
 
-
 /***********************************************************
 #NickP
 Name: develop
@@ -189,6 +188,10 @@ void Level::checkCollision()
 				playerLives--;
 				cout << "Lives: " << playerLives << endl;
 
+				/*int livesPic = 
+
+				drawFlatScreen(bricks, balls, paddles, *this, );*/
+
 				//reset ball and paddle to middle of screen
 				balls.erase(balls.begin() + howManyBalls);
 
@@ -242,9 +245,7 @@ void Level::checkCollision()
 			right = bricksXLocation + bricksWidth; // Right of Brick
 			
 			// Are you between the left and right edges  // X+bricksWidth // X-bricksWidth
-			// Are you between the top and bottom edges  // Y+bricksWidth // Y-bricksWidth
 			// Is the distance between the line and center 9  //Center of ball (X/Y Ball) & Edge of Brick ( See Above ) 
-			
 			if ( ballXLocation >= left && ballXLocation <= right )
 			{
 				if ( abs (ballYLocation - top) < 9 ) // Is the ball on top of the brick 
@@ -266,6 +267,7 @@ void Level::checkCollision()
 				}
 			}
 			
+			// Are you between the top and bottom edges  // Y+bricksWidth // Y-bricksWidth
 			if ( abs(ballYLocation >= bottom) && ballYLocation <= top )
 			{
 				if ( abs(ballYLocation - left) < 9 ) // Is the ball on top of the brick 
@@ -544,7 +546,6 @@ void Level::checkPowerUps(int brickLocation)
 			ball.setSpeedY(-2.0 / 3.0);
 			ball.setMovable(false);
 			addBall(ball);
-
 		}
 		
 		//extra ball
