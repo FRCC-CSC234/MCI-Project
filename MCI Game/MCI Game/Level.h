@@ -41,7 +41,7 @@ class Level
 
 	//*** Adding Picture ID to level for background images
 	int pictureID; // ID value for background image.
-	int playerlives;
+	int playerLives;
 
 	void develop( );
 

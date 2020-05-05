@@ -21,24 +21,13 @@ Level level; //*** exists to make me not have to delete stuff from drawScreen();
 int main( int argc, char** argv ) // Main must have these specific arguments for SDL to work 
 {
 
-	startGame();
-
+	startGame( );
 	showIntroSceen();
-	level.setLevelNumber(0);
-	if (level.getLevelNumber() == 0)
-	{
-		playGame();
-		level.setLevelNumber(1);
-	}
-	if (level.getLevelNumber() == 1) 
-	{
-		playGame();
-		
-	}
-
+	playGame();
 	endGame();
 
 	system( "pause" );
+
 	return 0;
 }
 
@@ -59,6 +48,20 @@ void startGame()
 void nextLevel()
 {
 
+	if(level.getLevelNumber() == 0)
+	{
+		level.startLevel( );
+	}
+	if(level.getLevelNumber() == 1)
+	{
+		level.startLevel( );
+	}
+	//if(level.getLevelNumber == 2)
+	//{
+	//	level.startLevel( );
+	//}
+	
+
 
 }
 
@@ -69,84 +72,84 @@ Description: Contains calls to SDL and other classes to run the game
 **********************************************************/
 void playGame()
 {
-	cout << "in Gamemain playGame - NEEDS TO BE IMPLEMENTED" << endl;
-
-	
+	for ( int levelCount = 0 ; levelCount < 2 ; levelCount ++ )
+	{ 
+	nextLevel( );
 
 
 	SDL_Event e;
 	int direction = 0;
 	int gameState = 0;
-	while (!Level::quit)
+	while ( !Level::quit )
 	{
-			while (SDL_PollEvent(&e) != 0)
+		while ( SDL_PollEvent( &e ) != 0 )
+		{
+			if ( e.type == SDL_QUIT )
 			{
-				if (e.type == SDL_QUIT)
+				Level::quit = true;
+			}
+			else if ( e.type == SDL_KEYDOWN )
+			{
+				int paddleLocation = level.getPaddles( ).at( 0 ).getX( );
+				switch ( e.key.keysym.sym )
 				{
-					Level::quit = true;
-				}
-				else if (e.type == SDL_KEYDOWN)
-				{
-					int paddleLocation = level.getPaddles().at(0).getX();
-					switch (e.key.keysym.sym)
-					{
 
-					case SDLK_LEFT:
-						direction = -1;
-						Paddle::setDirection( -1 );
-						break;
-					case SDLK_RIGHT:
-						direction = 1;
-						Paddle::setDirection( 1 );
-						break;
-					case SDLK_1:
-						level.setPictureID(0);
-						break;
-					case SDLK_2:
-						level.setPictureID(1);
-						break;
-					case SDLK_3:
-						level.setPictureID(2);
-						break;
-					case SDLK_SPACE:
-						level.moveBall(true);
-						break;
-					}
-				}
-				else if (e.type == SDL_KEYUP)
-				{
-					switch (e.key.keysym.sym)
-					{
-					case SDLK_LEFT:
-						direction = direction == 1 ? 1 : 0;
-						Paddle::setDirection( Paddle::getDirection( ) == 1 ? 1 : 0 );
-						break;
-					case SDLK_RIGHT:
-						direction = direction == -1 ? -1 : 0;
-						Paddle::setDirection( Paddle::getDirection( ) == -1 ? -1 : 0 );
-						break;
-						//#SimonM set spacebar to change balls movable bool to true
-					case SDLK_SPACE:
-						level.moveBall(true);
-						break;
-					}
-
-
+				case SDLK_LEFT:
+					direction = -1;
+					Paddle::setDirection( -1 );
+					break;
+				case SDLK_RIGHT:
+					direction = 1;
+					Paddle::setDirection( 1 );
+					break;
+				case SDLK_1:
+					level.setPictureID( 0 );
+					break;
+				case SDLK_2:
+					level.setPictureID( 1 );
+					break;
+				case SDLK_3:
+					level.setPictureID( 2 );
+					break;
+				case SDLK_SPACE:
+					level.moveBall( true );
+					break;
 				}
 			}
-
-
-
-			//#SimonM the moveObjects method returns an int -1 for death, 0 for normal, 1 for moving to next level
-			for (int i = 0; i < 6 && gameState == 0; i++)
+			else if ( e.type == SDL_KEYUP )
 			{
-				//gameState = level.moveObjects(direction, player);
-				level.gameFrame( );
+				switch ( e.key.keysym.sym )
+				{
+				case SDLK_LEFT:
+					direction = direction == 1 ? 1 : 0;
+					Paddle::setDirection( Paddle::getDirection( ) == 1 ? 1 : 0 );
+					break;
+				case SDLK_RIGHT:
+					direction = direction == -1 ? -1 : 0;
+					Paddle::setDirection( Paddle::getDirection( ) == -1 ? -1 : 0 );
+					break;
+					//#SimonM set spacebar to change balls movable bool to true
+				case SDLK_SPACE:
+					level.moveBall( true );
+					break;
+				}
+
+
 			}
-			// removed draw code. Draw Flat screen needs to be used to draw things to the screen 
-			drawFlatScreen(level.getBricks(), level.getBalls(), level.getPaddles(), level);
+		}
 
 
+
+		//#SimonM the moveObjects method returns an int -1 for death, 0 for normal, 1 for moving to next level
+		for ( int i = 0; i < 6 && gameState == 0; i++ )
+		{
+			//gameState = level.moveObjects(direction, player);
+			level.gameFrame( );
+		}
+		// removed draw code. Draw Flat screen needs to be used to draw things to the screen 
+		drawFlatScreen( level.getBricks( ), level.getBalls( ), level.getPaddles( ), level );
+
+	}
 
 
 

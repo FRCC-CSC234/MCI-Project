@@ -168,7 +168,7 @@ Description:
 **********************************************************/
 void Level::checkCollision()
 {
-	if ( bricks.size( ) != 0 ) // If there is no bricks, do not check collision 
+	if ( bricks.size( ) != 0 )
 	{
 		for ( int howManyBalls = 0; howManyBalls < balls.size( ); howManyBalls++ )
 		{
