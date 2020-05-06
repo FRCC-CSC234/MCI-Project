@@ -17,6 +17,51 @@ Brick::Brick( double x, double y, int pic, int powID ):GameObject(pic, 30, 60, x
 }
 
 /***********************************************************
+#Sophia, #Kyle
+Name: Brick 
+Description: Circular brick constructor, overloaded normal brick
+**********************************************************/
+Brick::Brick(double x, double y, int rotateVal, bool verFlip, bool horFlip) : GameObject(0, 30, 60, x, y, 0) //width/height ???? 
+{
+	
+	this->rotateVal = rotateVal;
+	this->verFlip = verFlip;
+	this->horFlip = horFlip;
+}
+
+/***********************************************************
+#Sophia, #Kyle
+Name: GetVerflip
+Description: Get the boolean to say if the brick should be flipped vertically or not
+**********************************************************/
+
+bool Brick::getVerFlip()
+{
+	return verFlip;
+}
+
+/***********************************************************
+#Sophia, #Kyle
+Name: getHorFlip
+Description: Get the boolean to say if the brick should be flipped horizontally 
+**********************************************************/
+bool Brick::getHorFlip()
+{
+	return horFlip;
+}
+
+/***********************************************************
+#Sophia, #Kyle
+Name: getRotate
+Description: Get the boolean to say if the brick should be rotated 90 degrees
+**********************************************************/
+
+int Brick::getRotateVal()
+{
+	return rotateVal;
+}
+
+/***********************************************************
 #SimonM
 Name: getPowerupID
 Description: getter, returns powerupID

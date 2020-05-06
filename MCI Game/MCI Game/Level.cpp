@@ -54,6 +54,11 @@ Level::Level(int x)
 	createBricks();
 }
 
+/***********************************************************
+#
+Name: startFlatLevel
+Description:
+**********************************************************/
 void Level::startFlatLevel()
 {
 	balls.clear();
@@ -81,6 +86,16 @@ void Level::startCircularLevel()
 	balls.clear();
 	paddles.clear();
 	bricks.clear();
+	Ball ball(350, 550); // Moving Creation of Ball to Constructor
+	ball.setSpeedX(1.0 / 3.0);
+	ball.setSpeedY(-2.0 / 3.0);
+	ball.setMovable( false );
+	addBall(ball);
+	
+	Paddle paddle( 350, 560 ); // Moving Paddle Creation to Constructor 
+	paddles.push_back( paddle );
+
+	createCircleBricks();
 
 	//Ball ball();
 
@@ -108,26 +123,28 @@ void Level::createCircleBricks( )
 	srand( time( NULL ) ); // Truely Random 
 	int	powerupBrickCount = 0; // How many powerup
 
-	// Brick Constructor = Brick( double x, double y, int pic, int powID ):GameObject(pic, 29, 60, x, y, 0)
+	// Brick Constructor = Brick::Brick(double x, double y, bool rotate90, bool verFlip, bool horFlip) : GameObject(pic, 30, 60, x, y, 0)
 
-	//Creating Row 1:
 
-	Brick brick1( 300, 27 ); //0
-	Brick brick2( 397, 49 ); //1
-	Brick brick3( 478, 109 ); //1 vertical flip, rotate 90
-	Brick brick4( 531, 197 ); //0 vertical flip, rotate 90
-	Brick brick5( 531, 300 ); //0 flip brick4 vertical
-	Brick brick6( 478, 397 ); //1 flip brick3 vertical
-	Brick brick7( 397, 478 ); //1 flip brick2 vertical
-	Brick brick8( 300, 531 ); //0 flip brick1 vertical
-	Brick brick9( 197, 531 ); //0 flip brick8 horizontal
-	Brick brick10( 109, 478 ); //1 flip brick7 horizontal
-	Brick brick11( 49, 397 ); //1 flip brick6 horizontal
-	Brick brick12( 27, 300 ); //0 repeat 5, flip horizontal
-	Brick brick13( 27, 197 ); //0 repeat 4, flip horizontal
-	Brick brick14( 49, 109 ); //1 repeat 3, flip horizontal
-	Brick brick15( 109, 49 ); //1 repeat 2, flip horizontal
-	Brick brick16( 197, 27 ); //0 repeat 1, flip horizontal
+	/**************************
+	      Creating Row 1
+	**************************/
+	Brick brick1( 300, 27, 0, false, false ); //0
+	Brick brick2( 397, 49, 0, false, false ); //1
+	Brick brick3( 478, 109, 270, true, false ); //1 vertical flip, rotate 90
+	Brick brick4( 531, 197, 90, false, false ); //0 vertical flip, rotate 90
+	Brick brick5( 531, 300, 90, false, false ); //0 flip brick4 vertical //only rotate 90?
+	Brick brick6( 478, 397, 90, false, false ); //1 flip brick3 vertical //only rotate 90?
+	Brick brick7( 397, 478, 90, false, false ); //1 flip brick2 vertical //only rotate 90?
+	Brick brick8( 300, 531, 90, false, false ); //0 flip brick1 vertical //only rotate 90?
+	Brick brick9( 197, 531, 90, false, true ); //0 flip brick8 horizontal
+	Brick brick10( 109, 478, 90, false, true ); //1 flip brick7 horizontal
+	Brick brick11( 49, 397, 90, false, true ); //1 flip brick6 horizontal
+	Brick brick12( 27, 300, 90, false, true ); //0 repeat 5, flip horizontal
+	Brick brick13( 27, 197, 90, true, true ); //0 repeat 4, flip horizontal
+	Brick brick14( 49, 109, 90, true, true ); //1 repeat 3, flip horizontal
+	Brick brick15( 109, 49, 0, false, true ); //1 repeat 2, flip horizontal
+	Brick brick16(197, 27, 0, false, true); //0 repeat 1, flip horizontal
 
 	//Vector for type 0 bricks
 	vector<Brick> b0;
@@ -151,51 +168,84 @@ void Level::createCircleBricks( )
 	b1.push_back( brick14 );
 	b1.push_back( brick15 );
 
+	/*     BRICK TYPE 0     */
 	//Loop to assign values to type 0 brick
 	for ( int i = 0; i < 8; i++ )
 	{
 		int randomPercent = rand( ) % 100 + 1;
 
-		//if brick is powerup brick
+		//if brick is powerup brick, randomly choose powerup
 		if ( randomPercent >= 90 && numOfRow1PowerUp != 0 )
 		{
-
+			int random = rand( ) % 10 + 18; 
+			b0.at( i ).setPictureID( random ); // Set a picture ID to brick using files 19-28
 			numOfRow1PowerUp--;
 		}
 		//otherwise just randomly choose a color 
 		else
 		{
-			int random = rand( ) % 4;  // Generating color 0-3
-			b0.at( i ).setPictureID( random ); // Set a picture ID to brick
-			b0.at( i ).setPowerupID( -1 ); // No power up
+			int random = rand( ) % 4 + 14;  // Generating color, using image files 15-18
+			b0.at( i ).setPictureID( random ); // Set a picture ID to brick color
+			b0.at( i ).setPowerupID( -1 ); // No power up 
 		}
-
+		addBrick(b0.at(i));
 	}
 
+	/*     BRICK TYPE 1     */
 	//Loop to assign values to type 1 brick
 	for ( int i = 0; i < 8; i++ )
 	{
 		int randomPercent = rand( ) % 100 + 1;
 
-		//if brick is powerup brick
+		//if brick is powerup brick, randomly choose powerup
 		if ( randomPercent >= 90 && numOfRow1PowerUp != 0 )
 		{
-
+			int randomPowerUp = rand() % 10 + 32;
+			int random = rand( );
+			b1.at( i ).setPictureID( random ); // Set a picture ID to brick using files 33-42
 			numOfRow1PowerUp--;
 		}
 		//otherwise just randomly choose a color 
 		else
 		{
 			//TO FIX: how do picIDs work? right now would generate same bricks as flat level
-			int random = rand( ) % 4 + 4;  // Generating color 4-7 (same colors, different brick)
-			b1.at( i ).setPictureID( random ); // Set a picture ID to brick
-			b1.at( i ).setPowerupID( -1 ); // No power up
+			int random = rand() % 4 + 28;  // Generating color, using image files 29-32 (same colors, different brick type)
+			b1.at( i ).setPictureID( random ); // Set a picture ID to brick 
+			b1.at( i ).setPowerupID( -1 ); // No power up 
 		}
-
-
-
-
+		addBrick(b1.at(i));
 	}
+	//adding bricks to brick vector
+	
+
+
+/*addBrick(brick1);
+	addBrick(brick2);
+	addBrick(brick3);
+	addBrick(brick4);
+	addBrick(brick5);
+	addBrick(brick6);
+	addBrick(brick7);
+	addBrick(brick8);
+	addBrick(brick9);
+	addBrick(brick10);
+	addBrick(brick11);
+	addBrick(brick12);
+	addBrick(brick13);
+	addBrick(brick14);
+	addBrick(brick15);
+	addBrick(brick16);
+	*/
+	/**************************
+	      Creating Row 2
+	**************************/
+
+
+
+
+	/**************************
+	     Creating Row 3
+	**************************/
 }
 
 /***********************************************************
@@ -266,7 +316,7 @@ void Level::gameFrame()
 	
 		for ( int howManyBalls = 0; howManyBalls < balls.size( ); howManyBalls++ )
 		{
-			balls.at( howManyBalls ).move( paddles.at( 0 ) );
+			//balls.at( howManyBalls ).move( paddles.at( 0 ) );
 		}
 
 		if ( bricks.size( ) != 0 ) // Make sure there bricks available
@@ -736,7 +786,6 @@ void Level::checkPowerUps(int brickLocation)
 			cout << "sticky ball" << endl;
 
 			stickyBall = 3; // Adjust number of times the power up to be used if needed 
-
 		}
 		
 		//extra ball
@@ -812,14 +861,14 @@ Description: Plays music
 **********************************************************/
 void Level::startMusic()
 {
-	//if (SDL_Init(SDL_INIT_AUDIO) < 0) exit(1);
+	if (SDL_Init(SDL_INIT_AUDIO) < 0) exit(1);
 
-	//Mix_OpenAudio(22050, AUDIO_S16SYS, 2, 640);
-	//Mix_Music* mus;  // Background Music
+	Mix_OpenAudio(22050, AUDIO_S16SYS, 2, 640);
+	Mix_Music* mus;  // Background Music
 
-	//mus = Mix_LoadMUS("MCIsong2.wav");
+	mus = Mix_LoadMUS("MCIsong2.wav");
 
-	//Mix_PlayMusic(mus, -1); //Music loop: -1 for continuous play
+	Mix_PlayMusic(mus, -1); //Music loop: -1 for continuous play
 }
 
 /***********************************************************
@@ -829,32 +878,50 @@ Description: Plays sound effect
 **********************************************************/
 void Level::playSound(int x)
 {
-	//if (SDL_Init(SDL_INIT_AUDIO) < 0) exit(1);
+	if (SDL_Init(SDL_INIT_AUDIO) < 0) exit(1);
 
-	//Mix_OpenAudio(22050, AUDIO_S16SYS, 2, 640);
-	//Mix_Chunk* sound;  // Background Music
+	Mix_OpenAudio(22050, AUDIO_S16SYS, 2, 640);
+	Mix_Chunk* sound;  // Background Music
 
-	////ints rep sound effects.
-	//// 0 = bounce, 1 = break, 2 = death, 3 = powerup
-	//switch (x)
-	//{
-	//case 0:
-	//	sound = Mix_LoadWAV("bloop1.wav");
-	//	Mix_PlayChannel(-1, sound, 0); //Music loop: 0 for one play
-	//	break;
-	//case 1:
-	//	sound = Mix_LoadWAV("break.wav");
-	//	Mix_PlayChannel(-1, sound, 0); //Music loop: 0 for one play
-	//	break;
-	//case 2:
-	//	sound = Mix_LoadWAV("death.wav");
-	//	Mix_PlayChannel(-1, sound, 0); //Music loop: 0 for one play
-	//	break;
-	//case 3:
-	//	sound = Mix_LoadWAV("powerup.wav");
-	//	Mix_PlayChannel(-1, sound, 0); //Music loop: 0 for one play
-	//	break;
-	//default:
-	//	break;
-	//}
+	//ints rep sound effects.
+	// 0 = bounce, 1 = break, 2 = death, 3 = powerup
+	switch (x)
+	{
+	case 0:
+		sound = Mix_LoadWAV("bloop1.wav");
+		Mix_PlayChannel(-1, sound, 0); //Music loop: 0 for one play
+		break;
+	case 1:
+		sound = Mix_LoadWAV("break.wav");
+		Mix_PlayChannel(-1, sound, 0); //Music loop: 0 for one play
+		break;
+	case 2:
+		sound = Mix_LoadWAV("death.wav");
+		Mix_PlayChannel(-1, sound, 0); //Music loop: 0 for one play
+		break;
+	case 3:
+	{
+		int randSound = (rand() % 3 + 1);
+		switch (randSound)
+		{
+		case 1:
+			sound = Mix_LoadWAV("allright.wav");
+			break;
+
+		case 2:
+			sound = Mix_LoadWAV("damn.wav");
+			break;
+		case 3:
+			sound = Mix_LoadWAV("ohyeah.wav");
+			break;
+		default:
+			sound = Mix_LoadWAV("powerup.wav");
+			break;
+		}
+	}
+		Mix_PlayChannel(-1, sound, 0); //Music loop: 0 for one play
+		break;
+	default:
+		break;
+	}
 }

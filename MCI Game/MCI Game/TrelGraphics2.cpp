@@ -279,7 +279,7 @@ description: adds a picture to a frame, but does not draw it, call drawFrame() t
 Written By: Trel Johnson
 **********************************************************/
 
-void TrelGraphics2::addPictureToFrameRotation( int pictureID, int x, int y, double degrees, bool vFlip, bool hFlip, SDL_Point center )
+void TrelGraphics2::addPictureToFrameRotation( int pictureID, int x, int y, double degrees, bool vFlip, bool hFlip, SDL_Point *center )
 {
     if ( pictureID >= index || pictureID < 0 )
     {
@@ -298,7 +298,7 @@ void TrelGraphics2::addPictureToFrameRotation( int pictureID, int x, int y, doub
     {
         flip = (SDL_RendererFlip)(SDL_FLIP_HORIZONTAL | SDL_FLIP_VERTICAL);
     }
-    textures[pictureID].render( x, y, gRenderer, degrees, flip, &center );
+    textures[pictureID].render( x, y, gRenderer, degrees, flip, center );
 }
 
 

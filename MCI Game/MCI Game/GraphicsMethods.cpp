@@ -23,21 +23,36 @@ void drawFlatScreen( std::vector<Brick> bricks, std::vector<Ball> balls, std::ve
 	titleScreens.addPictureToFrame( background.getPictureID( ), 0, 0 );
 	for ( Brick brick : bricks )
 	{
-		w = brick.getWidth( )/2;	// This is working under the assumtion that getWidth returns the distance to the edge from the center.
-		h = brick.getHeight( )/2; // This is working under the assumtion that getHeight returns the distance to the edge from teh center.
-		x = brick.getX( ) - w; //*** removed Center to match logic code
-		y = brick.getY( ) - h;
-		//angle = brick.getDirection( );  //*** commentted out as it's not used for other objects.
-		angle = 0;
-		//*** commenting out flipping and replacing with false as we are not doing that here.
-		//vFlip = brick.getVFlip( );	// Temperory concept, likely to be replaced by math, will depend on art and logic team.
-		//hFlip = brick.getHFlip( );	// ^
-		vFlip = false;
-		hFlip = false;
-		//*** incorrect setup for SDL_Point, replacing center = (x + w, y + h);
-		center.x = w; // Updated 4.28
-		center.y = h; // Updated 4.28
-		brickPictures.addPictureToFrameRotation( brick.getPictureID( ), x, y, angle, vFlip, hFlip, center );
+		if (background.getLevelNumber()==2)
+		{
+			x = brick.getX();
+			y = brick.getY();
+			angle = brick.getRotateVal();
+			//angle = 0;
+			vFlip = brick.getVerFlip();
+			hFlip = brick.getHorFlip();
+			//vFlip = false;
+			//hFlip = false;
+			brickPictures.addPictureToFrameRotation( brick.getPictureID( ), x, y, angle, vFlip, hFlip );
+		}
+		else
+		{
+			w = brick.getWidth() / 2;	// This is working under the assumtion that getWidth returns the distance to the edge from the center.
+			h = brick.getHeight() / 2; // This is working under the assumtion that getHeight returns the distance to the edge from teh center.
+			x = brick.getX() - w; //*** removed Center to match logic code
+			y = brick.getY() - h;
+			//angle = brick.getDirection( );  //*** commentted out as it's not used for other objects.
+			angle = 0;
+			//*** commenting out flipping and replacing with false as we are not doing that here.
+			//vFlip = brick.getVFlip( );	// Temperory concept, likely to be replaced by math, will depend on art and logic team.
+			//hFlip = brick.getHFlip( );	// ^
+			vFlip = false;
+			hFlip = false;
+			//*** incorrect setup for SDL_Point, replacing center = (x + w, y + h);
+			center.x = w; // Updated 4.28
+			center.y = h; // Updated 4.28
+			brickPictures.addPictureToFrameRotation( brick.getPictureID( ), x, y, angle, vFlip, hFlip, &center );
+		}
 	}
 	//*** changes above repeated
 	for ( Ball ball : balls )
@@ -55,7 +70,7 @@ void drawFlatScreen( std::vector<Brick> bricks, std::vector<Ball> balls, std::ve
 		//center = (x + w, y + h);
 		center.x = w; // Updated 4.28
 		center.y = h; // Updated 4.28
-		ballPictures.addPictureToFrameRotation( ball.getPictureID( ), x, y, angle+90, vFlip, hFlip, center );
+		ballPictures.addPictureToFrameRotation( ball.getPictureID( ), x, y, angle+90, vFlip, hFlip, &center );
 	}
 	//#nathan: "I attempted to make it so multipal paddles can be drawn on to the screen but have been un succsessful."
 	for (Paddle paddle : paddles)

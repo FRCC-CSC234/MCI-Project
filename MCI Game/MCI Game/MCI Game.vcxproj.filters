@@ -578,5 +578,14 @@
     <Media Include="powerup.wav">
       <Filter>Resource Files\Audio_Files</Filter>
     </Media>
+    <Media Include="ohyeah.wav">
+      <Filter>Resource Files\Audio_Files</Filter>
+    </Media>
+    <Media Include="allright.wav">
+      <Filter>Resource Files\Audio_Files</Filter>
+    </Media>
+    <Media Include="damn.wav">
+      <Filter>Resource Files\Audio_Files</Filter>
+    </Media>
   </ItemGroup>
 </Project>
