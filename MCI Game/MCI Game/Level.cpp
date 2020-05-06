@@ -16,8 +16,6 @@ void Level::develop( )
 	cout << "in Level.cpp - NEEDS TO BE IMPLEMENTED" << endl;
 }
 
-
-
 /***********************************************************
 #NickP, #NickB, #TrelJ, #SimonM
 Name: Level
@@ -85,7 +83,6 @@ void Level::startCircularLevel()
 	bricks.clear();
 
 	//Ball ball();
-	
 
 	cout << "This don't EXIST" << endl;
 }
@@ -97,7 +94,6 @@ Description: Creates the bricks for the circle level
 includes their art and power ups if applicable. Ensures only
 4 max bricks contain powerups.
 **********************************************************/
-
 void Level::createCircleBricks( )
 {
 	int numberOfBricksinLevel;
@@ -211,6 +207,8 @@ includes their art and power ups if applicable. Ensures only
 **********************************************************/
 void Level::createBricks() 
 {
+	startMusic();
+
 	int levelcount = levelNumber; 
 	int numberOfBricksInLevel;
 	int numberOfPowerUpInLevel;
@@ -237,24 +235,23 @@ void Level::createBricks()
 		int randomPercent = rand() % 100 + 1;  
 
 		// are we generating a power up brick
-		if (randomPercent >= 80 && powerupBrickCount != numberOfPowerUpInLevel) 
-		{
+		/*if (randomPercent >= 90 && powerupBrickCount != numberOfPowerUpInLevel) 
+		{*/
 			int random = rand() % 10 + 4;  // Generating 4-13
 			brick.setPictureID(random); // Set a picture ID to brick
 			brick.setPowerupID((random - 4)); // Set a power id of brick from 0 -9
 			addBrick(brick);
 			powerupBrickCount++;
-		}
-		// normal brick
-		else
-		{
-			int random = rand() % 4;  // Generating 0-4
-			brick.setPictureID(random); // Set a picture ID to brick
-			brick.setPowerupID(-1); // No power up
-			addBrick(brick);
-		}
+		//}
+		//// normal brick
+		//else
+		//{
+		//	int random = rand() % 4;  // Generating 0-4
+		//	brick.setPictureID(random); // Set a picture ID to brick
+		//	brick.setPowerupID(-1); // No power up
+		//	addBrick(brick);
+		//}
 	}
-
 }
 
 /***********************************************************
@@ -335,6 +332,7 @@ void Level::checkCollision()
 				//if you have invincibility, the ball will bounce off the bottom one time
 				else if ( invincible )
 				{
+					playSound(0);
 					balls.at( howManyBalls ).setSpeedY( ballYSpeed * -1 );
 					invincible = false;
 				}
@@ -342,6 +340,7 @@ void Level::checkCollision()
 				else
 				{
 					////reduce player lives
+					playSound(2);
 					drawLivesScreen( playerLives );
 					playerLives--;
 					cout << "Lives: " << playerLives << endl;
@@ -377,6 +376,7 @@ void Level::checkCollision()
 			// Collision Checks - top of screen
 			if ( ballYLocation <= 9 ) // if ball hits the top of the screen
 			{
+				playSound(0);
 				balls.at( howManyBalls ).setSpeedY( ballYSpeed * -1 );
 				superBall = false;
 			}
@@ -384,6 +384,7 @@ void Level::checkCollision()
 			// if ball hits the left or right side of the screen
 			if ( ballXLocation >= 591 || ballXLocation <= 9 )
 			{
+				playSound(0);
 				balls.at( howManyBalls ).setSpeedX( ballXSpeed * -1 );
 			}
 
@@ -393,6 +394,7 @@ void Level::checkCollision()
 			bool yCollide = false;
 			bool brickCollide = false;
 
+			//brick collision checks
 			for ( int howManyBricks = 0; howManyBricks < bricks.size( ); howManyBricks++ )
 			{
 				// Center the Brick
@@ -655,6 +657,7 @@ Updated by Simon Martin. Added code for several other power ups.
 ******************************************************************/
 void Level::checkPowerUps(int brickLocation)
 {
+	//handles activating powerups
 	if (bricks.at(brickLocation).getPowerupID() > -1)
 	{
 		//fast ball
@@ -691,9 +694,9 @@ void Level::checkPowerUps(int brickLocation)
 		//extra life
 		if (bricks.at(brickLocation).getPowerupID() == 3)// extra life
 		{
-			cout << "Bonus life! Lives now: " << playerLives << endl;
 			//#SimonM add a life to player
 			playerLives++;
+			cout << "Bonus life! Lives now: " << playerLives << endl;
 		}
 		
 		//power ball
@@ -762,11 +765,16 @@ void Level::checkPowerUps(int brickLocation)
 		}
 	}
 
-	bool pause = true;
+	//random number to show which fact
 	int powerupPic = bricks.at( brickLocation ).getPowerupID() * 2 + (rand( )%2);
+	
+	bool pause = true;
 	SDL_Event e;
+
+	//handles drawing the powerup screen and exiting with key press
 	if (bricks.at(brickLocation).getPowerupID() != -1)
 	{
+		playSound(3);
 		while (!quit && pause)
 		{
 			while (SDL_PollEvent(&e) != 0)
@@ -791,6 +799,62 @@ void Level::checkPowerUps(int brickLocation)
 			drawFlatScreen(bricks, balls, paddles, *this, powerupPic);
 		}
 	}
+	else
+	{
+		playSound(1);
+	}
+}
 
+/***********************************************************
+#PattiW
+Name: startMusic
+Description: Plays music
+**********************************************************/
+void Level::startMusic()
+{
+	//if (SDL_Init(SDL_INIT_AUDIO) < 0) exit(1);
 
+	//Mix_OpenAudio(22050, AUDIO_S16SYS, 2, 640);
+	//Mix_Music* mus;  // Background Music
+
+	//mus = Mix_LoadMUS("MCIsong2.wav");
+
+	//Mix_PlayMusic(mus, -1); //Music loop: -1 for continuous play
+}
+
+/***********************************************************
+#SimonM
+Name: playSound
+Description: Plays sound effect
+**********************************************************/
+void Level::playSound(int x)
+{
+	//if (SDL_Init(SDL_INIT_AUDIO) < 0) exit(1);
+
+	//Mix_OpenAudio(22050, AUDIO_S16SYS, 2, 640);
+	//Mix_Chunk* sound;  // Background Music
+
+	////ints rep sound effects.
+	//// 0 = bounce, 1 = break, 2 = death, 3 = powerup
+	//switch (x)
+	//{
+	//case 0:
+	//	sound = Mix_LoadWAV("bloop1.wav");
+	//	Mix_PlayChannel(-1, sound, 0); //Music loop: 0 for one play
+	//	break;
+	//case 1:
+	//	sound = Mix_LoadWAV("break.wav");
+	//	Mix_PlayChannel(-1, sound, 0); //Music loop: 0 for one play
+	//	break;
+	//case 2:
+	//	sound = Mix_LoadWAV("death.wav");
+	//	Mix_PlayChannel(-1, sound, 0); //Music loop: 0 for one play
+	//	break;
+	//case 3:
+	//	sound = Mix_LoadWAV("powerup.wav");
+	//	Mix_PlayChannel(-1, sound, 0); //Music loop: 0 for one play
+	//	break;
+	//default:
+	//	break;
+	//}
 }

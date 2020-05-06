@@ -566,5 +566,17 @@
     <Media Include="MCIsong.wav">
       <Filter>Resource Files\Audio_Files</Filter>
     </Media>
+    <Media Include="death.wav">
+      <Filter>Resource Files\Audio_Files</Filter>
+    </Media>
+    <Media Include="bloop1.wav">
+      <Filter>Resource Files\Audio_Files</Filter>
+    </Media>
+    <Media Include="break.wav">
+      <Filter>Resource Files\Audio_Files</Filter>
+    </Media>
+    <Media Include="powerup.wav">
+      <Filter>Resource Files\Audio_Files</Filter>
+    </Media>
   </ItemGroup>
 </Project>
