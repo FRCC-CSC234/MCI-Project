@@ -218,12 +218,12 @@ void Level::createBricks()
 	if (levelcount == 0)
 	{
 		numberOfBricksInLevel = 30; 
-		numberOfPowerUpInLevel = 4;
+		numberOfPowerUpInLevel = 2;
 	}
 	else
 	{
 		numberOfBricksInLevel = 50; 
-		numberOfPowerUpInLevel = 6;
+		numberOfPowerUpInLevel = 4;
 	}
 	
 	srand(time(NULL)); // Truely Random 
