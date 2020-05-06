@@ -3,7 +3,6 @@
 //written by: Patty Wiens 4/18/20
 //edited by:  Trel Johnson, Nick Brady 4/22, Simon Martin 4/29
 
-
 // Implemented Driver.h to remove having to include more than 1 .h file
 #include "Driver.h"
 
@@ -13,14 +12,12 @@ void startGame();
 void showIntroSceen( );
 void endGame();
 void playGame();
-//void startMusic();
 void nextLevel( );
 
 Level level; //*** exists to make me not have to delete stuff from drawScreen();
 
 int main( int argc, char** argv ) // Main must have these specific arguments for SDL to work 
 {
-
 	startGame( );
 	showIntroSceen();
 	playGame();
@@ -39,15 +36,17 @@ Description: Starts the graphics methods
 void startGame()
 {
 	Level::quit = false; // Added to have intro and instructions show on screen 
-	//startMusic();
 	TrelGraphics2::start( "Insert MCI Game Name Here", 600, 600 ); //*** needed a TrelGraphics::start call, made up a size.
 	cout << "in Gamemain startGame - NEEDS TO BE IMPLEMENTED" << endl;
-	
 }
 
+/***********************************************************
+#
+Name: nextLevel
+Description:
+**********************************************************/
 void nextLevel()
 {
-
 	if(level.getLevelNumber() == 0)
 	{
 		level.startFlatLevel( );
@@ -60,9 +59,6 @@ void nextLevel()
 	{
 		level.startCircularLevel();
 	}
-	
-
-
 }
 
 /***********************************************************
@@ -72,7 +68,6 @@ Description: Contains calls to SDL and other classes to run the game
 **********************************************************/
 void playGame()
 {
-	
 	level.setLevelNumber(0);
 	nextLevel();
 
@@ -92,7 +87,6 @@ void playGame()
 					int paddleLocation = level.getPaddles().at(0).getX();
 					switch (e.key.keysym.sym)
 					{
-
 					case SDLK_LEFT:
 						direction = -1;
 						Paddle::setDirection(-1);
@@ -132,14 +126,9 @@ void playGame()
 						level.moveBall(true);
 						break;
 					}
-
-
 				}
 			}
 	
-
-
-
 		//#SimonM the moveObjects method returns an int -1 for death, 0 for normal, 1 for moving to next level
 		for ( int i = 0; i < 6 && gameState == 0; i++ )
 		{
@@ -147,43 +136,15 @@ void playGame()
 			level.gameFrame( );
 		}
 
-
 		// removed draw code. Draw Flat screen needs to be used to draw things to the screen 
 		drawFlatScreen( level.getBricks( ), level.getBalls( ), level.getPaddles( ), level );
-
-
-
 
 		if ( level.getBricks().size() ==  0 )
 		{
 			level.setLevelNumber((level.getLevelNumber()) + 1);
 			nextLevel();
-
 		}
-
 	}
-
-
-
-
-
-
-			//#SimonM
-			//if player is out of lives, quit. Need to put in way to exit this method and move to endGame method here instead.
-			/*
-			if (gameState == -1)
-			{
-				cout << endl << "you dead womp womp" << endl;
-				quit = true;
-			}
-
-			if (gameState == 1)
-			{
-				//do level progression code here
-				cout << endl << "Next level time" << endl;
-				quit = true;
-			}
-			*/
 }
 
 /***********************************************************
@@ -234,22 +195,4 @@ void showIntroSceen( )
 		}
 	}
 }
-
-//
-///***********************************************************
-//#PattiW
-//Name: startMusic
-//Description: Plays music
-//**********************************************************/
-//void startMusic()
-//{
-//	//if (SDL_Init(SDL_INIT_AUDIO) < 0) exit(1);
-//
-//	//Mix_OpenAudio(22050, AUDIO_S16SYS, 2, 640);
-//	//Mix_Music* mus;  // Background Music
-//
-//	//mus = Mix_LoadMUS("MCIsong2.wav");
-//
-//	//Mix_PlayMusic(mus, -1); //Music loop: -1 for continuous play
-//} 
 

@@ -18,7 +18,6 @@ GameObject::GameObject(int pic, int h, int w, double x, double y, double s )
 	xLocation = x;
 	yLocation = y;
 	speed = s;
-	
 }
 
 /***********************************************************
