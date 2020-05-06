@@ -861,14 +861,14 @@ Description: Plays music
 **********************************************************/
 void Level::startMusic()
 {
-	if (SDL_Init(SDL_INIT_AUDIO) < 0) exit(1);
+	//if (SDL_Init(SDL_INIT_AUDIO) < 0) exit(1);
 
-	Mix_OpenAudio(22050, AUDIO_S16SYS, 2, 640);
-	Mix_Music* mus;  // Background Music
+	//Mix_OpenAudio(22050, AUDIO_S16SYS, 2, 640);
+	//Mix_Music* mus;  // Background Music
 
-	mus = Mix_LoadMUS("MCIsong2.wav");
+	//mus = Mix_LoadMUS("MCIsong2.wav");
 
-	Mix_PlayMusic(mus, -1); //Music loop: -1 for continuous play
+	//Mix_PlayMusic(mus, -1); //Music loop: -1 for continuous play
 }
 
 /***********************************************************
@@ -878,50 +878,50 @@ Description: Plays sound effect
 **********************************************************/
 void Level::playSound(int x)
 {
-	if (SDL_Init(SDL_INIT_AUDIO) < 0) exit(1);
+	//if (SDL_Init(SDL_INIT_AUDIO) < 0) exit(1);
 
-	Mix_OpenAudio(22050, AUDIO_S16SYS, 2, 640);
-	Mix_Chunk* sound;  // Background Music
+	//Mix_OpenAudio(22050, AUDIO_S16SYS, 2, 640);
+	//Mix_Chunk* sound;  // Background Music
 
-	//ints rep sound effects.
-	// 0 = bounce, 1 = break, 2 = death, 3 = powerup
-	switch (x)
-	{
-	case 0:
-		sound = Mix_LoadWAV("bloop1.wav");
-		Mix_PlayChannel(-1, sound, 0); //Music loop: 0 for one play
-		break;
-	case 1:
-		sound = Mix_LoadWAV("break.wav");
-		Mix_PlayChannel(-1, sound, 0); //Music loop: 0 for one play
-		break;
-	case 2:
-		sound = Mix_LoadWAV("death.wav");
-		Mix_PlayChannel(-1, sound, 0); //Music loop: 0 for one play
-		break;
-	case 3:
-	{
-		int randSound = (rand() % 3 + 1);
-		switch (randSound)
-		{
-		case 1:
-			sound = Mix_LoadWAV("allright.wav");
-			break;
+	////ints rep sound effects.
+	//// 0 = bounce, 1 = break, 2 = death, 3 = powerup
+	//switch (x)
+	//{
+	//case 0:
+	//	sound = Mix_LoadWAV("bloop1.wav");
+	//	Mix_PlayChannel(-1, sound, 0); //Music loop: 0 for one play
+	//	break;
+	//case 1:
+	//	sound = Mix_LoadWAV("break.wav");
+	//	Mix_PlayChannel(-1, sound, 0); //Music loop: 0 for one play
+	//	break;
+	//case 2:
+	//	sound = Mix_LoadWAV("death.wav");
+	//	Mix_PlayChannel(-1, sound, 0); //Music loop: 0 for one play
+	//	break;
+	//case 3:
+	//{
+	//	int randSound = (rand() % 3 + 1);
+	//	switch (randSound)
+	//	{
+	//	case 1:
+	//		sound = Mix_LoadWAV("allright.wav");
+	//		break;
 
-		case 2:
-			sound = Mix_LoadWAV("damn.wav");
-			break;
-		case 3:
-			sound = Mix_LoadWAV("ohyeah.wav");
-			break;
-		default:
-			sound = Mix_LoadWAV("powerup.wav");
-			break;
-		}
-	}
-		Mix_PlayChannel(-1, sound, 0); //Music loop: 0 for one play
-		break;
-	default:
-		break;
-	}
+	//	case 2:
+	//		sound = Mix_LoadWAV("damn.wav");
+	//		break;
+	//	case 3:
+	//		sound = Mix_LoadWAV("ohyeah.wav");
+	//		break;
+	//	default:
+	//		sound = Mix_LoadWAV("powerup.wav");
+	//		break;
+	//	}
+	//}
+	//	Mix_PlayChannel(-1, sound, 0); //Music loop: 0 for one play
+	//	break;
+	//default:
+	//	break;
+	//}
 }
