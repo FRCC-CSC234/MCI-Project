@@ -13,7 +13,7 @@ void startGame();
 void showIntroSceen( );
 void endGame();
 void playGame();
-void startMusic();
+//void startMusic();
 void nextLevel( );
 
 Level level; //*** exists to make me not have to delete stuff from drawScreen();
@@ -39,7 +39,7 @@ Description: Starts the graphics methods
 void startGame()
 {
 	Level::quit = false; // Added to have intro and instructions show on screen 
-	startMusic();
+	//startMusic();
 	TrelGraphics2::start( "Insert MCI Game Name Here", 600, 600 ); //*** needed a TrelGraphics::start call, made up a size.
 	cout << "in Gamemain startGame - NEEDS TO BE IMPLEMENTED" << endl;
 	
@@ -235,21 +235,21 @@ void showIntroSceen( )
 	}
 }
 
-
-/***********************************************************
-#PattiW
-Name: startMusic
-Description: Plays music
-**********************************************************/
-void startMusic()
-{
-	//if (SDL_Init(SDL_INIT_AUDIO) < 0) exit(1);
-
-	//Mix_OpenAudio(22050, AUDIO_S16SYS, 2, 640);
-	//Mix_Music* mus;  // Background Music
-
-	//mus = Mix_LoadMUS("MCIsong2.wav");
-
-	//Mix_PlayMusic(mus, -1); //Music loop: -1 for continuous play
-} 
+//
+///***********************************************************
+//#PattiW
+//Name: startMusic
+//Description: Plays music
+//**********************************************************/
+//void startMusic()
+//{
+//	//if (SDL_Init(SDL_INIT_AUDIO) < 0) exit(1);
+//
+//	//Mix_OpenAudio(22050, AUDIO_S16SYS, 2, 640);
+//	//Mix_Music* mus;  // Background Music
+//
+//	//mus = Mix_LoadMUS("MCIsong2.wav");
+//
+//	//Mix_PlayMusic(mus, -1); //Music loop: -1 for continuous play
+//} 
 

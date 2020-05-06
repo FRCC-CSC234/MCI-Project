@@ -10,8 +10,8 @@ Flat_Level/Bricks/Brick_Powerup_Money.bmp
 Flat_Level/Bricks/Brick_Powerup_Multiple_BC.bmp
 Flat_Level/Bricks/Brick_Powerup_Pill.bmp
 Flat_Level/Bricks/Brick_Powerup_Reversal.bmp
-Flat_Level/Bricks/Brick_Powerup_Scissors.bmp
 Flat_Level/Bricks/Brick_Powerup_Sperm.bmp
+Flat_Level/Bricks/Brick_Powerup_Scissors.bmp
 Circular_Level/Bricks/Row_1/Circle_Row_1_Brick_0_MCI_Blue.bmp
 Circular_Level/Bricks/Row_1/Circle_Row_1_Brick_0_MCI_Gray.bmp
 Circular_Level/Bricks/Row_1/Circle_Row_1_Brick_0_MCI_Light_Blue.bmp
