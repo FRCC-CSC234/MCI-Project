@@ -90,44 +90,116 @@ void Level::startCircularLevel()
 	cout << "This don't EXIST" << endl;
 }
 
-void Level::createCircleBricks()
+/***********************************************************
+#Kyle, #Sophia
+Name: createCircleBricks
+Description: Creates the bricks for the circle level
+includes their art and power ups if applicable. Ensures only
+4 max bricks contain powerups.
+**********************************************************/
+
+void Level::createCircleBricks( )
 {
 	int numberOfBricksinLevel;
-	int numberOfPowerUpInLevel;
 	int BrickRowNumber;
 	const int numberOfBricksInRow = 16;
 
-	srand(time(NULL)); // Truely Random 
+	int numOfRow1PowerUp = 1;
+	int numOfRow2PowerUp = 2;
+	int numOfRow3PowerUp = 1;
+
+
+	srand( time( NULL ) ); // Truely Random 
 	int	powerupBrickCount = 0; // How many powerup
 
 	// Brick Constructor = Brick( double x, double y, int pic, int powID ):GameObject(pic, 29, 60, x, y, 0)
 
 	//Creating Row 1:
 
-	Brick brick1(300,27); //0
-	Brick brick2(397,49); //1
-	Brick brick3(478,109); //1 vertical flip, rotate 90
-	Brick brick4(531,197); //0 vertical flip, rotate 90
-	Brick brick5(531,300); //0 flip brick4 vertical
-	Brick brick6(478,397); //1 flip brick3 vertical
-	Brick brick7(397,478); //1 flip brick2 vertical
-	Brick brick8(300,531); //0 flip brick1 vertical
-	Brick brick9(197,531); //0 flip brick8 horizontal
-	Brick brick10(109,478); //1 flip brick7 horizontal
-	Brick brick11(49,397); //1 flip brick6 horizontal
-	Brick brick12(27,300); //0 repeat 5, flip horizontal
-	Brick brick13(27,197); //0 repeat 4, flip horizontal
-	Brick brick14(49,109); //1 repeat 3, flip horizontal
-	Brick brick15(109,49); //1 repeat 2, flip horizontal
-	Brick brick16(197,27); //0 repeat 1, flip horizontal
+	Brick brick1( 300, 27 ); //0
+	Brick brick2( 397, 49 ); //1
+	Brick brick3( 478, 109 ); //1 vertical flip, rotate 90
+	Brick brick4( 531, 197 ); //0 vertical flip, rotate 90
+	Brick brick5( 531, 300 ); //0 flip brick4 vertical
+	Brick brick6( 478, 397 ); //1 flip brick3 vertical
+	Brick brick7( 397, 478 ); //1 flip brick2 vertical
+	Brick brick8( 300, 531 ); //0 flip brick1 vertical
+	Brick brick9( 197, 531 ); //0 flip brick8 horizontal
+	Brick brick10( 109, 478 ); //1 flip brick7 horizontal
+	Brick brick11( 49, 397 ); //1 flip brick6 horizontal
+	Brick brick12( 27, 300 ); //0 repeat 5, flip horizontal
+	Brick brick13( 27, 197 ); //0 repeat 4, flip horizontal
+	Brick brick14( 49, 109 ); //1 repeat 3, flip horizontal
+	Brick brick15( 109, 49 ); //1 repeat 2, flip horizontal
+	Brick brick16( 197, 27 ); //0 repeat 1, flip horizontal
 
-	//bricks.P
+	//Vector for type 0 bricks
+	vector<Brick> b0;
+	b0.push_back( brick1 );
+	b0.push_back( brick4 );
+	b0.push_back( brick5 );
+	b0.push_back( brick8 );
+	b0.push_back( brick9 );
+	b0.push_back( brick12 );
+	b0.push_back( brick13 );
+	b0.push_back( brick16 );
+
+	//Vector for type 1 bricks
+	vector<Brick> b1;
+	b1.push_back( brick2 );
+	b1.push_back( brick3 );
+	b1.push_back( brick6 );
+	b1.push_back( brick7 );
+	b1.push_back( brick10 );
+	b1.push_back( brick11 );
+	b1.push_back( brick14 );
+	b1.push_back( brick15 );
+
+	//Loop to assign values to type 0 brick
+	for ( int i = 0; i < 8; i++ )
+	{
+		int randomPercent = rand( ) % 100 + 1;
+
+		//if brick is powerup brick
+		if ( randomPercent >= 90 && numOfRow1PowerUp != 0 )
+		{
+
+			numOfRow1PowerUp--;
+		}
+		//otherwise just randomly choose a color 
+		else
+		{
+			int random = rand( ) % 4;  // Generating color 0-3
+			b0.at( i ).setPictureID( random ); // Set a picture ID to brick
+			b0.at( i ).setPowerupID( -1 ); // No power up
+		}
+
+	}
+
+	//Loop to assign values to type 1 brick
+	for ( int i = 0; i < 8; i++ )
+	{
+		int randomPercent = rand( ) % 100 + 1;
+
+		//if brick is powerup brick
+		if ( randomPercent >= 90 && numOfRow1PowerUp != 0 )
+		{
+
+			numOfRow1PowerUp--;
+		}
+		//otherwise just randomly choose a color 
+		else
+		{
+			//TO FIX: how do picIDs work? right now would generate same bricks as flat level
+			int random = rand( ) % 4 + 4;  // Generating color 4-7 (same colors, different brick)
+			b1.at( i ).setPictureID( random ); // Set a picture ID to brick
+			b1.at( i ).setPowerupID( -1 ); // No power up
+		}
 
 
 
 
-	
-}
+	}
 
 /***********************************************************
 #NickP, #NickB
