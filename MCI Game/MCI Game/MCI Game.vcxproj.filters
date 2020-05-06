@@ -517,6 +517,15 @@
     <Image Include="Circular_Level\Bricks\Row_3\Circle_Row_3_Brick_0_MCI_Blue.bmp">
       <Filter>Resource Files\Circular_Level\Bricks\Row_3</Filter>
     </Image>
+    <Image Include="Title_Screens\Next_level.bmp">
+      <Filter>Resource Files\Title_Screens</Filter>
+    </Image>
+    <Image Include="Title_Screens\Game_win_screen.bmp">
+      <Filter>Resource Files\Title_Screens</Filter>
+    </Image>
+    <Image Include="Title_Screens\Final_level.bmp">
+      <Filter>Resource Files\Title_Screens</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Circular_Level\Bricks\Row_1\Circle Brick Row 1 Instructions.txt">

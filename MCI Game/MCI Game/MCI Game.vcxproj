@@ -288,7 +288,9 @@
     <Image Include="Title_Screens\Backgrounds\background2.bmp" />
     <Image Include="Title_Screens\Backgrounds\background3.bmp" />
     <Image Include="Title_Screens\Credits.bmp" />
+    <Image Include="Title_Screens\Final_level.bmp" />
     <Image Include="Title_Screens\Game_over_screen.bmp" />
+    <Image Include="Title_Screens\Game_win_screen.bmp" />
     <Image Include="Title_Screens\How_To_Play.bmp" />
     <Image Include="Title_Screens\Intro.bmp" />
     <Image Include="Title_Screens\Lives\Five.bmp" />
@@ -298,6 +300,7 @@
     <Image Include="Title_Screens\Lives\Three.bmp" />
     <Image Include="Title_Screens\Lives\Two.bmp" />
     <Image Include="Title_Screens\Lives\Zero.bmp" />
+    <Image Include="Title_Screens\Next_level.bmp" />
     <Image Include="Title_Screens\You_Won.bmp" />
   </ItemGroup>
   <ItemGroup>
