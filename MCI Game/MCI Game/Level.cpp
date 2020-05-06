@@ -205,52 +205,52 @@ Description: randomly fills the bricks array with bricks
 includes their art and power ups if applicable. Ensures only
 2 max bricks contain powerups.
 **********************************************************/
-void Level::createBricks() 
+void Level::createBricks( )
 {
-	startMusic();
+	startMusic( );
 
-	int levelcount = levelNumber; 
+	int levelcount = levelNumber;
 	int numberOfBricksInLevel;
 	int numberOfPowerUpInLevel;
 
-	if (levelcount == 0)
+	if ( levelcount == 0 )
 	{
-		numberOfBricksInLevel = 30; 
+		numberOfBricksInLevel = 30;
 		numberOfPowerUpInLevel = 4;
 	}
 	else
 	{
-		numberOfBricksInLevel = 50; 
+		numberOfBricksInLevel = 50;
 		numberOfPowerUpInLevel = 6;
 	}
-	
-	srand(time(NULL)); // Truely Random 
+
+	srand( time( NULL ) ); // Truely Random 
 	int	powerupBrickCount = 0; // How many powerup
-	for (int brickCount = 0; brickCount < numberOfBricksInLevel; brickCount++) // Total Number of Brick
+	for ( int brickCount = 0; brickCount < numberOfBricksInLevel; brickCount++ ) // Total Number of Brick
 	{
-		
-		Brick brick((brickCount % 10) * 60+30,(brickCount / 10) * 30+15); // Create a brick Object 
+
+		Brick brick( (brickCount % 10) * 60 + 30, (brickCount / 10) * 30 + 15 ); // Create a brick Object 
 
 		//random number for brick type
-		int randomPercent = rand() % 100 + 1;  
+		int randomPercent = rand( ) % 100 + 1;
 
 		// are we generating a power up brick
-		/*if (randomPercent >= 90 && powerupBrickCount != numberOfPowerUpInLevel) 
-		{*/
-			int random = rand() % 10 + 4;  // Generating 4-13
-			brick.setPictureID(random); // Set a picture ID to brick
-			brick.setPowerupID((random - 4)); // Set a power id of brick from 0 -9
-			addBrick(brick);
-			powerupBrickCount++;
-		//}
-		//// normal brick
-		//else
-		//{
-		//	int random = rand() % 4;  // Generating 0-4
-		//	brick.setPictureID(random); // Set a picture ID to brick
-		//	brick.setPowerupID(-1); // No power up
-		//	addBrick(brick);
-		//}
+		if (randomPercent >= 90 && powerupBrickCount != numberOfPowerUpInLevel)
+		
+		int random = rand( ) % 10 + 4;  // Generating 4-13
+		brick.setPictureID( random ); // Set a picture ID to brick
+		brick.setPowerupID( (random - 4) ); // Set a power id of brick from 0 -9
+		addBrick( brick );
+		powerupBrickCount++;
+
+		//normal brick
+		else
+		{
+		int random = rand( ) % 4;  // Generating 0-4
+		brick.setPictureID( random ); // Set a picture ID to brick
+		brick.setPowerupID( -1 ); // No power up
+		addBrick( brick );
+		}
 	}
 }
 
