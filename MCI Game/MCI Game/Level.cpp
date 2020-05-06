@@ -236,13 +236,13 @@ void Level::createBricks( )
 
 		// are we generating a power up brick
 		if (randomPercent >= 90 && powerupBrickCount != numberOfPowerUpInLevel)
-		
-		int random = rand( ) % 10 + 4;  // Generating 4-13
-		brick.setPictureID( random ); // Set a picture ID to brick
-		brick.setPowerupID( (random - 4) ); // Set a power id of brick from 0 -9
-		addBrick( brick );
-		powerupBrickCount++;
-
+		{
+			int random = rand() % 10 + 4;  // Generating 4-13
+			brick.setPictureID(random); // Set a picture ID to brick
+			brick.setPowerupID((random - 4)); // Set a power id of brick from 0 -9
+			addBrick(brick);
+			powerupBrickCount++;
+		}
 		//normal brick
 		else
 		{
