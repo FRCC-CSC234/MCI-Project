@@ -97,8 +97,6 @@ void Level::startCircularLevel()
 
 	createCircleBricks();
 
-	//Ball ball();
-
 	cout << "This don't EXIST" << endl;
 }
 
@@ -131,18 +129,18 @@ void Level::createCircleBricks( )
 	**************************/
 	Brick brick1( 300, 27, 0, false, false ); //0
 	Brick brick2( 397, 49, 0, false, false ); //1
-	Brick brick3( 478, 109, 270, true, false ); //1 vertical flip, rotate 90
-	Brick brick4( 531, 197, 90, false, false ); //0 vertical flip, rotate 90
-	Brick brick5( 531, 300, 90, false, false ); //0 flip brick4 vertical //only rotate 90?
-	Brick brick6( 478, 397, 90, false, false ); //1 flip brick3 vertical //only rotate 90?
-	Brick brick7( 397, 478, 90, false, false ); //1 flip brick2 vertical //only rotate 90?
-	Brick brick8( 300, 531, 90, false, false ); //0 flip brick1 vertical //only rotate 90?
-	Brick brick9( 197, 531, 90, false, true ); //0 flip brick8 horizontal
-	Brick brick10( 109, 478, 90, false, true ); //1 flip brick7 horizontal
-	Brick brick11( 49, 397, 90, false, true ); //1 flip brick6 horizontal
-	Brick brick12( 27, 300, 90, false, true ); //0 repeat 5, flip horizontal
-	Brick brick13( 27, 197, 90, true, true ); //0 repeat 4, flip horizontal
-	Brick brick14( 49, 109, 90, true, true ); //1 repeat 3, flip horizontal
+	Brick brick3( 468, 119, 270, true, false ); //1 vertical flip, rotate 90 //USES ORIGINAL TL CORNER
+	Brick brick4( 501, 227, 90, false, true ); //0 vertical flip, rotate 90
+	Brick brick5( 501, 330, 90, false, false ); //0 flip brick4 vertical //only rotate 90?
+	Brick brick6( 468, 407, 90, false, false ); //1 flip brick3 vertical //only rotate 90?
+	Brick brick7( 397, 478, 0, true, false ); //1 flip brick2 vertical //only rotate 90?
+	Brick brick8( 300, 531, 0, true, false ); //0 flip brick1 vertical //only rotate 90?
+	Brick brick9( 197, 531, 0, true, true ); //0 flip brick8 horizontal
+	Brick brick10( 109, 478, 0, true, true ); //1 flip brick7 horizontal
+	Brick brick11( 38, 406, 270, false, true ); //1 flip brick6 horizontal
+	Brick brick12( -5, 330, 270, false, true ); //0 repeat 5, flip horizontal
+	Brick brick13( -5, 227, 90, true, true ); //0 repeat 4, flip horizontal
+	Brick brick14( 39, 119, 90, true, true ); //1 repeat 3, flip horizontal
 	Brick brick15( 109, 49, 0, false, true ); //1 repeat 2, flip horizontal
 	Brick brick16(197, 27, 0, false, true); //0 repeat 1, flip horizontal
 
