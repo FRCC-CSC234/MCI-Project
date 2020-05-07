@@ -206,7 +206,6 @@ void Level::createCircleBricks( )
 		//otherwise just randomly choose a color 
 		else
 		{
-			//TO FIX: how do picIDs work? right now would generate same bricks as flat level
 			int random = rand() % 4 + 28;  // Generating color, using image files 29-32 (same colors, different brick type)
 			b1.at( i ).setPictureID( random ); // Set a picture ID to brick 
 			b1.at( i ).setPowerupID( -1 ); // No power up 
