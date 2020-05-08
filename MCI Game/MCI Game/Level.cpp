@@ -198,8 +198,7 @@ void Level::createCircleBricks( )
 		//if brick is powerup brick, randomly choose powerup
 		if ( randomPercent >= 90 && numOfRow1PowerUp != 0 )
 		{
-			int randomPowerUp = rand() % 10 + 32;
-			int random = rand( );
+			int random = rand() % 10 + 32;
 			b1.at( i ).setPictureID( random ); // Set a picture ID to brick using files 33-42
 			numOfRow1PowerUp--;
 		}
@@ -212,37 +211,184 @@ void Level::createCircleBricks( )
 		}
 		addBrick(b1.at(i));
 	}
-	//adding bricks to brick vector
-	
 
-
-/*addBrick(brick1);
-	addBrick(brick2);
-	addBrick(brick3);
-	addBrick(brick4);
-	addBrick(brick5);
-	addBrick(brick6);
-	addBrick(brick7);
-	addBrick(brick8);
-	addBrick(brick9);
-	addBrick(brick10);
-	addBrick(brick11);
-	addBrick(brick12);
-	addBrick(brick13);
-	addBrick(brick14);
-	addBrick(brick15);
-	addBrick(brick16);
-	*/
 	/**************************
 	      Creating Row 2
 	**************************/
+	Brick brick17( 300, 51, 0, false, false ); //0
+	Brick brick18( 388, 71, 0, false, false ); //1
+	Brick brick19( 452, 135, 270, true, false ); //1 vertical flip, rotate 90 //USES ORIGINAL TL CORNER
+	Brick brick20( 483, 233, 90, false, true ); //0 vertical flip, rotate 90
+	Brick brick21( 483, 327, 90, false, false ); //0 flip brick4 vertical //only rotate 90?
+	Brick brick22( 452, 398, 90, false, false ); //1 flip brick3 vertical //only rotate 90?
+	Brick brick23( 388, 462, 0, true, false ); //1 flip brick2 vertical //only rotate 90?
+	Brick brick24( 300, 510, 0, true, false ); //0 flip brick1 vertical //only rotate 90?
+	Brick brick25( 206, 510, 0, true, true ); //0 flip brick8 horizontal
+	Brick brick26( 125, 462, 0, true, true ); //1 flip brick7 horizontal
+	Brick brick27( 61, 398, 270, false, true ); //1 flip brick6 horizontal
+	Brick brick28( 22, 327, 270, false, true ); //0 repeat 5, flip horizontal
+	Brick brick29( 22, 233, 90, true, true ); //0 repeat 4, flip horizontal
+	Brick brick30( 61, 135, 90, true, true ); //1 repeat 3, flip horizontal
+	Brick brick31( 125, 71, 0, false, true ); //1 repeat 2, flip horizontal
+	Brick brick32( 206, 51, 0, false, true ); //0 repeat 1, flip horizontal
 
+	//Vector for type 0 bricks
+	vector<Brick> b0r2;
+	b0r2.push_back( brick17 );
+	b0r2.push_back( brick20 );
+	b0r2.push_back( brick21 );
+	b0r2.push_back( brick24 );
+	b0r2.push_back( brick25 );
+	b0r2.push_back( brick28 );
+	b0r2.push_back( brick29 );
+	b0r2.push_back( brick32 );
 
+	//Vector for type 1 bricks
+	vector<Brick> b1r2;
+	b1r2.push_back( brick18 );
+	b1r2.push_back( brick19 );
+	b1r2.push_back( brick22 );
+	b1r2.push_back( brick23 );
+	b1r2.push_back( brick26 );
+	b1r2.push_back( brick27 );
+	b1r2.push_back( brick30 );
+	b1r2.push_back( brick31 );
 
+	/*     BRICK TYPE 0     */
+	//Loop to assign values to type 0 brick
+	for ( int i = 0; i < 8; i++ )
+	{
+		int randomPercent = rand( ) % 100 + 1;
 
+		//if brick is powerup brick, randomly choose powerup
+		if ( randomPercent >= 90 && numOfRow2PowerUp != 0 )
+		{
+			int random = rand( ) % 10 + 46;
+			b0r2.at( i ).setPictureID( random ); // Set a picture ID to brick using files 46-55
+			numOfRow2PowerUp--;
+		}
+		//otherwise just randomly choose a color 
+		else
+		{
+			int random = rand( ) % 4 + 42;  // Generating color, using image files 42-45
+			b0r2.at( i ).setPictureID( random ); // Set a picture ID to brick color
+			b0r2.at( i ).setPowerupID( -1 ); // No power up 
+		}
+		addBrick( b0r2.at( i ) );
+	}
+
+	/*     BRICK TYPE 1     */
+	//Loop to assign values to type 1 brick
+	for ( int i = 0; i < 8; i++ )
+	{
+		int randomPercent = rand( ) % 100 + 1;
+
+		//if brick is powerup brick, randomly choose powerup
+		if ( randomPercent >= 90 && numOfRow2PowerUp != 0 )
+		{
+			int random = rand( ) % 10 + 60;
+			b1r2.at( i ).setPictureID( random ); // Set a picture ID to brick using files 60-69
+			numOfRow2PowerUp--;
+		}
+		//otherwise just randomly choose a color 
+		else
+		{
+			int random = rand( ) % 4 + 56;  // Generating color, using image files 56-59 (same colors, different brick type)
+			b1r2.at( i ).setPictureID( random ); // Set a picture ID to brick 
+			b1r2.at( i ).setPowerupID( -1 ); // No power up 
+		}
+		addBrick( b1r2.at( i ) );
+	}
+
+	
 	/**************************
 	     Creating Row 3
 	**************************/
+	Brick brick33( 300, 74, 0, false, false ); //0
+	Brick brick34( 379, 93, 0, false, false ); //1
+	Brick brick35( 437, 152, 270, true, false ); //1 vertical flip, rotate 90 //USES ORIGINAL TL CORNER
+	Brick brick36( 465, 239, 90, false, true ); //0 vertical flip, rotate 90
+	Brick brick37( 465, 324, 90, false, false ); //0 flip brick4 vertical //only rotate 90?
+	Brick brick38( 437, 388, 90, false, false ); //1 flip brick3 vertical //only rotate 90?
+	Brick brick39( 379, 446, 0, true, false ); //1 flip brick2 vertical //only rotate 90?
+	Brick brick40( 300, 489, 0, true, false ); //0 flip brick1 vertical //only rotate 90?
+	Brick brick41( 215, 489, 0, true, true ); //0 flip brick8 horizontal
+	Brick brick42( 142, 446, 0, true, true ); //1 flip brick7 horizontal
+	Brick brick43( 84, 388, 270, false, true ); //1 flip brick6 horizontal
+	Brick brick44( 49, 324, 270, false, true ); //0 repeat 5, flip horizontal
+	Brick brick45( 49, 239, 90, true, true ); //0 repeat 4, flip horizontal
+	Brick brick46( 84, 152, 90, true, true ); //1 repeat 3, flip horizontal
+	Brick brick47( 142, 93, 0, false, true ); //1 repeat 2, flip horizontal
+	Brick brick48( 215, 74, 0, false, true ); //0 repeat 1, flip horizontal
+
+	//Vector for type 0 bricks
+	vector<Brick> b0r3;
+	b0r3.push_back( brick33 );
+	b0r3.push_back( brick36 );
+	b0r3.push_back( brick37 );
+	b0r3.push_back( brick40 );
+	b0r3.push_back( brick41 );
+	b0r3.push_back( brick44 );
+	b0r3.push_back( brick45 );
+	b0r3.push_back( brick48 );
+
+	//Vector for type 1 bricks
+	vector<Brick> b1r3;
+	b1r3.push_back( brick34 );
+	b1r3.push_back( brick35 );
+	b1r3.push_back( brick38 );
+	b1r3.push_back( brick39 );
+	b1r3.push_back( brick42 );
+	b1r3.push_back( brick43 );
+	b1r3.push_back( brick46 );
+	b1r3.push_back( brick47 );
+
+	/*     BRICK TYPE 0     */
+	//Loop to assign values to type 0 brick
+	for ( int i = 0; i < 8; i++ )
+	{
+		int randomPercent = rand( ) % 100 + 1;
+
+		//if brick is powerup brick, randomly choose powerup
+		if ( randomPercent >= 90 && numOfRow3PowerUp != 0 )
+		{
+			int random = rand( ) % 10 + 74;
+			b0r3.at( i ).setPictureID( random ); // Set a picture ID to brick using files 74-83
+			numOfRow3PowerUp--;
+		}
+		//otherwise just randomly choose a color 
+		else
+		{
+			int random = rand( ) % 4 + 70;  // Generating color, using image files 70-73
+			b0r3.at( i ).setPictureID( random ); // Set a picture ID to brick color
+			b0r3.at( i ).setPowerupID( -1 ); // No power up 
+		}
+		addBrick( b0r3.at( i ) );
+	}
+
+	/*     BRICK TYPE 1     */
+	//Loop to assign values to type 1 brick
+	for ( int i = 0; i < 8; i++ )
+	{
+		int randomPercent = rand( ) % 100 + 1;
+
+		//if brick is powerup brick, randomly choose powerup
+		if ( randomPercent >= 90 && numOfRow3PowerUp != 0 )
+		{
+			int random = rand( ) % 10 + 88;
+			b1r3.at( i ).setPictureID( random ); // Set a picture ID to brick using files 89-98
+			numOfRow3PowerUp--;
+		}
+		//otherwise just randomly choose a color 
+		else
+		{
+			int random = rand( ) % 4 + 84;  // Generating color, using image files 85-88 (same colors, different brick type)
+			b1r3.at( i ).setPictureID( random ); // Set a picture ID to brick 
+			b1r3.at( i ).setPowerupID( -1 ); // No power up 
+		}
+		addBrick( b1r3.at( i ) );
+	}
+	
 }
 
 /***********************************************************
