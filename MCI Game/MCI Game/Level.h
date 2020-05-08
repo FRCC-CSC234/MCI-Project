@@ -70,8 +70,10 @@ public:
 
 	//need comments
 	void gameFrame( );
-	void checkCollision( );
-	void shouldTheBallBeHere( );
+	void checkFlatCollision( );
+	void checkCollisionCircular( );
+	void shouldTheBallBeHereFlat( );
+	void shouldTheBallBeHereCircular( );
 
 	//#NickP add items to vectors
 	void addBall(Ball ball) { balls.push_back(ball); }
@@ -90,7 +92,7 @@ public:
 	void setPictureID( int pictureID ) { this->pictureID = pictureID; }
 
 	int getPictureID( ) { return pictureID; }
-	void moveBall(bool b) { balls.at(0).setMovable(b);}
+	void moveBall(bool b);
 	bool getInvincible() { return invincible; }
 	bool getBonusPaddle() { return bonusPaddle; }
 	bool getBonusBall() { return bonusBall; }
@@ -99,5 +101,6 @@ public:
 	vector<Ball> getBalls() { return balls; }
 	vector<Brick> getBricks() { return bricks; }
 	vector<Paddle> getPaddles() { return paddles; }
+	int getLives( ) { return playerLives; }
 };
 

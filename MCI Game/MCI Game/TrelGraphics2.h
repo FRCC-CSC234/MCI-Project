@@ -67,6 +67,8 @@ public:
 	// adds a picture to a frame, but does not draw it, call drawFrame() to draw all pictures on frame.
 	// Allows for roation and flipping of image. 
 	void addPictureToFrameRotation( int pictureID, int x, int y, double degrees, bool vFlip, bool hFlip, SDL_Point *center=NULL);
+	
+	void addPictureToFrameRotationResize( int pictureID, int x, int y, int w, int h, double degrees, bool vFlip, bool hFlip, SDL_Point *center=NULL );
 
 	// adds a rectangle to the frame with the given color and transparancy
 	static void addRectToFrame( int x, int y, int w, int h, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool filled = true );

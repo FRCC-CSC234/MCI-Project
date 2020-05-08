@@ -43,7 +43,16 @@ int Ball::move(Paddle p)
 	}
 	else
 	{
-		xLocation = p.getX( );
+		//xLocation = p.getX( );
+		//yLocation = p.getY( ) - p.getHeight( )/2 - height-1;
+
+
+
+		double angle = p.getAngle( );
+		double addX = cos( (angle+90.0) * (3.1415926535987 / 180)) * (p.getHeight( )+height);
+		double subY = sin( (angle+90.0) * (3.1415926535987 / 180)) * (p.getHeight( )+height);
+		xLocation=( p.getX( ) - addX );
+		yLocation=( p.getY( ) - subY );
 	}
 }
 

@@ -21,12 +21,15 @@ Brick::Brick( double x, double y, int pic, int powID ):GameObject(pic, 30, 60, x
 Name: Brick 
 Description: Circular brick constructor, overloaded normal brick
 **********************************************************/
-Brick::Brick(double x, double y, int rotateVal, bool verFlip, bool horFlip) : GameObject(0, 22, 95, x, y, 0) //width/height ???? 
+Brick::Brick(double x, double y, int rotateVal, bool verFlip, bool horFlip, double topR, double bottomR, double leftAngle, double rightAngle) : GameObject(0, 22, 95, x, y, 0) 
 {
-	
 	this->rotateVal = rotateVal;
 	this->verFlip = verFlip;
 	this->horFlip = horFlip;
+	this->topR = topR;
+	this->bottomR = bottomR;
+	this->leftAngle = leftAngle;
+	this->rightAngle = rightAngle;
 }
 
 /***********************************************************

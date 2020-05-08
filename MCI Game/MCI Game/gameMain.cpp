@@ -22,9 +22,7 @@ int main( int argc, char** argv ) // Main must have these specific arguments for
 	showIntroSceen();
 	playGame();
 	endGame();
-
 	system( "pause" );
-
 	return 0;
 }
 
@@ -37,13 +35,13 @@ void startGame()
 {
 	Level::quit = false; // Added to have intro and instructions show on screen 
 	TrelGraphics2::start( "Insert MCI Game Name Here", 600, 600 ); //*** needed a TrelGraphics::start call, made up a size.
-	cout << "in Gamemain startGame - NEEDS TO BE IMPLEMENTED" << endl;
+
 }
 
 /***********************************************************
 #
 Name: nextLevel
-Description:
+Description: Progress the game to the next level 
 **********************************************************/
 void nextLevel()
 {
@@ -68,13 +66,13 @@ Description: Contains calls to SDL and other classes to run the game
 **********************************************************/
 void playGame()
 {
-	level.setLevelNumber(0);
+	level.setLevelNumber(2); //*** Needs to be set back to 0 
 	nextLevel();
 
 	SDL_Event e;
 	int direction = 0;
 	int gameState = 0;
-	while ( !Level::quit && level.getLevelNumber()<3)
+	while ( !Level::quit && level.getLevelNumber()<3&& level.getLives()>=0)
 	{
 			while (SDL_PollEvent(&e) != 0)
 			{
@@ -105,7 +103,10 @@ void playGame()
 						level.setPictureID(2);
 						break;
 					case SDLK_SPACE:
-						level.moveBall(true);
+						if ( e.key.repeat == 0 )
+						{
+							level.moveBall( true );
+						}
 						break;
 					}
 				}
@@ -132,7 +133,6 @@ void playGame()
 		//#SimonM the moveObjects method returns an int -1 for death, 0 for normal, 1 for moving to next level
 		for ( int i = 0; i < 6 && gameState == 0; i++ )
 		{
-			//gameState = level.moveObjects(direction, player);
 			level.gameFrame( );
 		}
 
@@ -154,7 +154,6 @@ Description: Calls graphics deletion of objects
 **********************************************************/
 void endGame()
 {
-	cout << "in gameMain endGame - NEEDS TO BE IMPLEMENTED" << endl;
 	TrelGraphics2::close( );
 }
 

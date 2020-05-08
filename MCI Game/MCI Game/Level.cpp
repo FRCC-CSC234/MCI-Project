@@ -64,6 +64,7 @@ void Level::startFlatLevel()
 	balls.clear();
 	paddles.clear();
 	bricks.clear();
+	pictureID = levelNumber;
 	Ball ball(350, 550); // Moving Creation of Ball to Constructor
 	ball.setSpeedX(1.0 / 3.0);
 	ball.setSpeedY(-2.0 / 3.0);
@@ -81,23 +82,28 @@ void Level::startFlatLevel()
 	createBricks();
 }
 
+/***********************************************************
+#
+Name: startCircularLevel
+Description:
+**********************************************************/
 void Level::startCircularLevel()
 {
 	balls.clear();
 	paddles.clear();
 	bricks.clear();
-	Ball ball(350, 550); // Moving Creation of Ball to Constructor
+	pictureID = levelNumber;
+	Ball ball(250, 250); // Moving Creation of Ball to Constructor
 	ball.setSpeedX(1.0 / 3.0);
 	ball.setSpeedY(-2.0 / 3.0);
 	ball.setMovable( false );
 	addBall(ball);
 	
-	Paddle paddle( 350, 560 ); // Moving Paddle Creation to Constructor 
+	Paddle paddle( 350, 560, true, 0 ); // Moving Paddle Creation to Constructor 
 	paddles.push_back( paddle );
 
 	createCircleBricks();
 
-	cout << "This don't EXIST" << endl;
 }
 
 /***********************************************************
@@ -117,32 +123,31 @@ void Level::createCircleBricks( )
 	int numOfRow2PowerUp = 2;
 	int numOfRow3PowerUp = 1;
 
-
 	srand( time( NULL ) ); // Truely Random 
 	int	powerupBrickCount = 0; // How many powerup
 
-	// Brick Constructor = Brick::Brick(double x, double y, bool rotate90, bool verFlip, bool horFlip) : GameObject(pic, 30, 60, x, y, 0)
-
+	// Brick Constructor =Brick::Brick(double x, double y, int rotateVal, bool verFlip, bool horFlip, double topR, double bottomR, 
+    //                                   double leftAngle, double rightAngle) : GameObject(0, 22, 95, x, y, 0) 
 
 	/**************************
 	      Creating Row 1
 	**************************/
-	Brick brick1( 300, 27, 0, false, false ); //0
-	Brick brick2( 397, 49, 0, false, false ); //1
-	Brick brick3( 468, 119, 270, true, false ); //1 vertical flip, rotate 90 //USES ORIGINAL TL CORNER
-	Brick brick4( 501, 227, 90, false, true ); //0 vertical flip, rotate 90
-	Brick brick5( 501, 330, 90, false, false ); //0 flip brick4 vertical //only rotate 90?
-	Brick brick6( 468, 407, 90, false, false ); //1 flip brick3 vertical //only rotate 90?
-	Brick brick7( 397, 478, 0, true, false ); //1 flip brick2 vertical //only rotate 90?
-	Brick brick8( 300, 531, 0, true, false ); //0 flip brick1 vertical //only rotate 90?
-	Brick brick9( 197, 531, 0, true, true ); //0 flip brick8 horizontal
-	Brick brick10( 109, 478, 0, true, true ); //1 flip brick7 horizontal
-	Brick brick11( 38, 406, 270, false, true ); //1 flip brick6 horizontal
-	Brick brick12( -5, 330, 270, false, true ); //0 repeat 5, flip horizontal
-	Brick brick13( -5, 227, 90, true, true ); //0 repeat 4, flip horizontal
-	Brick brick14( 39, 119, 90, true, true ); //1 repeat 3, flip horizontal
-	Brick brick15( 109, 49, 0, false, true ); //1 repeat 2, flip horizontal
-	Brick brick16(197, 27, 0, false, true); //0 repeat 1, flip horizontal
+	Brick brick1( 300, 27, 0, false, false, 273, 250, 270, 292.5); //0
+	Brick brick2( 397, 49, 0, false, false, 273, 250, 292.5, 315); //1
+	Brick brick3( 468, 119, 270, true, false, 273, 250, 315, 337.5 ); //1 vertical flip, rotate 90 //USES ORIGINAL TL CORNER
+	Brick brick4( 501, 227, 90, false, true, 273, 250, 337.5, 360 ); //0 vertical flip, rotate 90
+	Brick brick5( 501, 330, 90, false, false, 273, 250, 0, 22.5 ); //0 flip brick4 vertical //only rotate 90?
+	Brick brick6( 468, 407, 90, false, false, 273, 250, 22.5, 45 ); //1 flip brick3 vertical //only rotate 90?
+	Brick brick7( 397, 478, 0, true, false, 273, 250, 45, 67.5 ); //1 flip brick2 vertical //only rotate 90?
+	Brick brick8( 300, 531, 0, true, false, 273, 250, 67.5 , 90 ); //0 flip brick1 vertical //only rotate 90?
+	Brick brick9( 197, 531, 0, true, true, 273, 250, 90, 112.5 ); //0 flip brick8 horizontal
+	Brick brick10( 109, 478, 0, true, true, 273, 250, 112.5, 135 ); //1 flip brick7 horizontal
+	Brick brick11( 38, 406, 270, false, true, 273, 250, 135, 157.5 ); //1 flip brick6 horizontal
+	Brick brick12( -5, 330, 270, false, true, 273, 250, 157.5, 180 ); //0 repeat 5, flip horizontal
+	Brick brick13( -5, 227, 90, true, true, 273, 250, 180, 202.5 ); //0 repeat 4, flip horizontal
+	Brick brick14( 39, 119, 90, true, true, 273, 250, 202.5, 225  ); //1 repeat 3, flip horizontal
+	Brick brick15( 109, 49, 0, false, true, 273, 250, 225, 247.5 ); //1 repeat 2, flip horizontal
+	Brick brick16(197, 27, 0, false, true, 273, 250, 247.5, 270 ); //0 repeat 1, flip horizontal
 
 	//Vector for type 0 bricks
 	vector<Brick> b0;
@@ -177,6 +182,7 @@ void Level::createCircleBricks( )
 		{
 			int random = rand( ) % 10 + 18; 
 			b0.at( i ).setPictureID( random ); // Set a picture ID to brick using files 19-28
+			//b0.at( i ).setPictureID( random - 18 ); //setting powerup ID to match image
 			numOfRow1PowerUp--;
 		}
 		//otherwise just randomly choose a color 
@@ -200,6 +206,7 @@ void Level::createCircleBricks( )
 		{
 			int random = rand() % 10 + 32;
 			b1.at( i ).setPictureID( random ); // Set a picture ID to brick using files 33-42
+			//b1.at( i ).setPowerupID( random - 32 ); //setting powerup ID to match image
 			numOfRow1PowerUp--;
 		}
 		//otherwise just randomly choose a color 
@@ -215,22 +222,22 @@ void Level::createCircleBricks( )
 	/**************************
 	      Creating Row 2
 	**************************/
-	Brick brick17( 300, 51, 0, false, false ); //0
-	Brick brick18( 388, 71, 0, false, false ); //1
-	Brick brick19( 452, 135, 270, true, false ); //1 vertical flip, rotate 90 //USES ORIGINAL TL CORNER
-	Brick brick20( 483, 233, 90, false, true ); //0 vertical flip, rotate 90
-	Brick brick21( 483, 327, 90, false, false ); //0 flip brick4 vertical //only rotate 90?
-	Brick brick22( 452, 398, 90, false, false ); //1 flip brick3 vertical //only rotate 90?
-	Brick brick23( 388, 462, 0, true, false ); //1 flip brick2 vertical //only rotate 90?
-	Brick brick24( 300, 510, 0, true, false ); //0 flip brick1 vertical //only rotate 90?
-	Brick brick25( 206, 510, 0, true, true ); //0 flip brick8 horizontal
-	Brick brick26( 125, 462, 0, true, true ); //1 flip brick7 horizontal
-	Brick brick27( 61, 398, 270, false, true ); //1 flip brick6 horizontal
-	Brick brick28( 22, 327, 270, false, true ); //0 repeat 5, flip horizontal
-	Brick brick29( 22, 233, 90, true, true ); //0 repeat 4, flip horizontal
-	Brick brick30( 61, 135, 90, true, true ); //1 repeat 3, flip horizontal
-	Brick brick31( 125, 71, 0, false, true ); //1 repeat 2, flip horizontal
-	Brick brick32( 206, 51, 0, false, true ); //0 repeat 1, flip horizontal
+	Brick brick17( 300, 51, 0, false, false, 249, 227, 270, 292.5) ; //0
+	Brick brick18( 388, 71, 0, false, false, 249, 227 , 292.5, 315 ); //1
+	Brick brick19( 452, 135, 270, true, false, 249, 227 , 315, 337.5 ); //1 vertical flip, rotate 90 //USES ORIGINAL TL CORNER
+	Brick brick20( 483, 233, 90, false, true, 249, 227 , 337.5, 360 ); //0 vertical flip, rotate 90
+	Brick brick21( 483, 327, 90, false, false, 249, 227, 0, 22.5 ); //0 flip brick4 vertical //only rotate 90?
+	Brick brick22( 452, 398, 90, false, false, 249, 227, 22.5, 45 ); //1 flip brick3 vertical //only rotate 90?
+	Brick brick23( 388, 462, 0, true, false, 249, 227, 45, 67.5 ); //1 flip brick2 vertical //only rotate 90?
+	Brick brick24( 300, 510, 0, true, false, 249, 227, 67.5 , 90  ); //0 flip brick1 vertical //only rotate 90?
+	Brick brick25( 206, 510, 0, true, true, 249, 227, 90, 112.5 ); //0 flip brick8 horizontal
+	Brick brick26( 125, 462, 0, true, true, 249, 227, 112.5, 135 ); //1 flip brick7 horizontal
+	Brick brick27( 61, 398, 270, false, true, 249, 227, 135, 157.5 ); //1 flip brick6 horizontal
+	Brick brick28( 22, 327, 270, false, true, 249, 227, 157.5, 180 ); //0 repeat 5, flip horizontal
+	Brick brick29( 22, 233, 90, true, true, 249, 227, 180, 202.5 ); //0 repeat 4, flip horizontal
+	Brick brick30( 61, 135, 90, true, true, 249, 227, 202.5, 225 ); //1 repeat 3, flip horizontal
+	Brick brick31( 125, 71, 0, false, true, 249, 227, 225, 247.5 ); //1 repeat 2, flip horizontal
+	Brick brick32( 206, 51, 0, false, true, 249, 227, 247.5, 270 ); //0 repeat 1, flip horizontal
 
 	//Vector for type 0 bricks
 	vector<Brick> b0r2;
@@ -265,6 +272,7 @@ void Level::createCircleBricks( )
 		{
 			int random = rand( ) % 10 + 46;
 			b0r2.at( i ).setPictureID( random ); // Set a picture ID to brick using files 46-55
+			//b0r2.at( i ).setPowerupID( random - 46 ); //set powerup ID to match picture
 			numOfRow2PowerUp--;
 		}
 		//otherwise just randomly choose a color 
@@ -288,6 +296,7 @@ void Level::createCircleBricks( )
 		{
 			int random = rand( ) % 10 + 60;
 			b1r2.at( i ).setPictureID( random ); // Set a picture ID to brick using files 60-69
+			//b1r2.at( i ).setPowerupID( random - 60 ); //set powerup ID to match picture
 			numOfRow2PowerUp--;
 		}
 		//otherwise just randomly choose a color 
@@ -304,22 +313,22 @@ void Level::createCircleBricks( )
 	/**************************
 	     Creating Row 3
 	**************************/
-	Brick brick33( 300, 74, 0, false, false ); //0
-	Brick brick34( 379, 93, 0, false, false ); //1
-	Brick brick35( 437, 152, 270, true, false ); //1 vertical flip, rotate 90 //USES ORIGINAL TL CORNER
-	Brick brick36( 465, 239, 90, false, true ); //0 vertical flip, rotate 90
-	Brick brick37( 465, 324, 90, false, false ); //0 flip brick4 vertical //only rotate 90?
-	Brick brick38( 437, 388, 90, false, false ); //1 flip brick3 vertical //only rotate 90?
-	Brick brick39( 379, 446, 0, true, false ); //1 flip brick2 vertical //only rotate 90?
-	Brick brick40( 300, 489, 0, true, false ); //0 flip brick1 vertical //only rotate 90?
-	Brick brick41( 215, 489, 0, true, true ); //0 flip brick8 horizontal
-	Brick brick42( 142, 446, 0, true, true ); //1 flip brick7 horizontal
-	Brick brick43( 84, 388, 270, false, true ); //1 flip brick6 horizontal
-	Brick brick44( 49, 324, 270, false, true ); //0 repeat 5, flip horizontal
-	Brick brick45( 49, 239, 90, true, true ); //0 repeat 4, flip horizontal
-	Brick brick46( 84, 152, 90, true, true ); //1 repeat 3, flip horizontal
-	Brick brick47( 142, 93, 0, false, true ); //1 repeat 2, flip horizontal
-	Brick brick48( 215, 74, 0, false, true ); //0 repeat 1, flip horizontal
+	Brick brick33( 300, 74, 0, false, false, 226, 204, 270, 292.5 ); //0
+	Brick brick34( 379, 93, 0, false, false, 226, 204, 292.5, 315 ); //1
+	Brick brick35( 437, 152, 270, true, false, 226, 204, 315, 337.5); //1 vertical flip, rotate 90 //USES ORIGINAL TL CORNER
+	Brick brick36( 465, 239, 90, false, true, 226, 204, 337.5, 360 ); //0 vertical flip, rotate 90
+	Brick brick37( 465, 324, 90, false, false, 226, 204, 0, 22.5 ); //0 flip brick4 vertical //only rotate 90?
+	Brick brick38( 437, 388, 90, false, false, 226, 204, 22.5, 45 ); //1 flip brick3 vertical //only rotate 90?
+	Brick brick39( 379, 446, 0, true, false, 226, 204, 45, 67.5 ); //1 flip brick2 vertical //only rotate 90?
+	Brick brick40( 300, 489, 0, true, false, 226, 204, 67.5, 90 ); //0 flip brick1 vertical //only rotate 90?
+	Brick brick41( 215, 489, 0, true, true, 226, 204, 90, 112.5 ); //0 flip brick8 horizontal
+	Brick brick42( 142, 446, 0, true, true, 226, 204, 112.5, 135 ); //1 flip brick7 horizontal
+	Brick brick43( 84, 388, 270, false, true, 226, 204, 135, 157.5 ); //1 flip brick6 horizontal
+	Brick brick44( 49, 324, 270, false, true, 226, 204, 157.5, 180 ); //0 repeat 5, flip horizontal
+	Brick brick45( 49, 239, 90, true, true, 226, 204, 180, 202.5 ); //0 repeat 4, flip horizontal
+	Brick brick46( 84, 152, 90, true, true, 226, 204, 202.5, 225 ); //1 repeat 3, flip horizontal
+	Brick brick47( 142, 93, 0, false, true, 226, 204, 225, 247.5 ); //1 repeat 2, flip horizontal
+	Brick brick48( 215, 74, 0, false, true, 226, 204, 247.5, 270  ); //0 repeat 1, flip horizontal
 
 	//Vector for type 0 bricks
 	vector<Brick> b0r3;
@@ -354,6 +363,7 @@ void Level::createCircleBricks( )
 		{
 			int random = rand( ) % 10 + 74;
 			b0r3.at( i ).setPictureID( random ); // Set a picture ID to brick using files 74-83
+			//b0r3.at( i ).setPictureID( random - 74); //set powerup ID to match image
 			numOfRow3PowerUp--;
 		}
 		//otherwise just randomly choose a color 
@@ -377,6 +387,7 @@ void Level::createCircleBricks( )
 		{
 			int random = rand( ) % 10 + 88;
 			b1r3.at( i ).setPictureID( random ); // Set a picture ID to brick using files 89-98
+			//b1r3.at( i ).setPowerupID( random - 88 ); //set powerup ID to match image
 			numOfRow3PowerUp--;
 		}
 		//otherwise just randomly choose a color 
@@ -388,7 +399,6 @@ void Level::createCircleBricks( )
 		}
 		addBrick( b1r3.at( i ) );
 	}
-	
 }
 
 /***********************************************************
@@ -428,14 +438,15 @@ void Level::createBricks( )
 		int randomPercent = rand( ) % 100 + 1;
 
 		// are we generating a power up brick
-		if (randomPercent >= 90 && powerupBrickCount != numberOfPowerUpInLevel)
+		if (randomPercent >= 70 && powerupBrickCount != numberOfPowerUpInLevel)
 		{
 			int random = rand() % 10 + 4;  // Generating 4-13
 			brick.setPictureID(random); // Set a picture ID to brick
-			brick.setPowerupID((random - 4)); // Set a power id of brick from 0 -9
+			brick.setPowerupID((random - 4)); // Set a power id of brick from 0-9
 			addBrick(brick);
 			powerupBrickCount++;
 		}
+
 		//normal brick
 		else
 		{
@@ -459,12 +470,19 @@ void Level::gameFrame()
 	
 		for ( int howManyBalls = 0; howManyBalls < balls.size( ); howManyBalls++ )
 		{
-			//balls.at( howManyBalls ).move( paddles.at( 0 ) );
+			balls.at( howManyBalls ).move( paddles.at( 0 ) );
 		}
 
 		if ( bricks.size( ) != 0 ) // Make sure there bricks available
 		{
-			checkCollision( );
+			if (levelNumber==2)
+			{
+				checkCollisionCircular( );
+			}
+			else
+			{
+				checkFlatCollision( );
+			}
 
 		}
 
@@ -490,8 +508,14 @@ void Level::gameFrame()
 				paddles.at( howManyPaddles ).move( );
 			}
 		}
-
-		shouldTheBallBeHere( );
+		if (levelNumber==2)
+		{
+			shouldTheBallBeHereCircular( );
+		}
+		else
+		{
+			shouldTheBallBeHereFlat( );
+		}
 }
 
 /***********************************************************
@@ -499,7 +523,7 @@ void Level::gameFrame()
 Name: checkCollision
 Description: 
 **********************************************************/
-void Level::checkCollision()
+void Level::checkFlatCollision()
 {
 	if ( bricks.size( ) != 0 ) // If there is no bricks, do not check collision 
 	{
@@ -514,7 +538,7 @@ void Level::checkCollision()
 			double ballYSpeed = balls.at( howManyBalls ).getSpeedY( );
 
 			// Collision Checks - bottom of screen
-			if ( ballYLocation >= 591 ) // if the ball hits the bottom of the screen 
+			if ( ballYLocation >= 591 ) // if the ball hits the bottom  
 			{
 				//if you have a second ball, just erase it
 				if ( bonusBall )
@@ -522,6 +546,7 @@ void Level::checkCollision()
 					balls.erase( balls.begin( ) + howManyBalls );
 					bonusBall = false;
 				}
+
 				//if you have invincibility, the ball will bounce off the bottom one time
 				else if ( invincible )
 				{
@@ -529,6 +554,7 @@ void Level::checkCollision()
 					balls.at( howManyBalls ).setSpeedY( ballYSpeed * -1 );
 					invincible = false;
 				}
+
 				//if no power ups, you just dead.
 				else
 				{
@@ -726,7 +752,257 @@ void Level::checkCollision()
 					balls.at(howManyBalls).setSpeedX( 1.0 / 3.0 );
 					balls.at(howManyBalls).setSpeedY( -2.0 / 3.0 );
 					balls.at(howManyBalls).setMovable( false );
-					stickyBall--;
+					
+				}
+			}
+		}
+	}
+}
+
+void Level::checkCollisionCircular()
+{
+	if ( bricks.size( ) != 0 ) // If there is no bricks, do not check collision 
+	{
+		for ( int howManyBalls = 0; howManyBalls < balls.size( ); howManyBalls++ )
+		{
+			//distance of ball from center
+			double xSection = (300 - balls.at( howManyBalls ).getX( )) * (300 - balls.at( howManyBalls ).getX( ));
+			double ySection = (300 - balls.at( howManyBalls ).getY( )) * (300 - balls.at( howManyBalls ).getY( ));
+			double distance = sqrt(xSection + ySection);
+
+			// X and Y Location of the Ball 
+			int ballXLocation = balls.at( howManyBalls ).getX( );
+			int ballYLocation = balls.at( howManyBalls ).getY( );
+			
+			//angle of ball
+			double angle = acos( (ballXLocation - 300) / distance );
+			
+			// X and Y speed of the Ball
+			double ballXSpeed = balls.at( howManyBalls ).getSpeedX( );
+			double ballYSpeed = balls.at( howManyBalls ).getSpeedY( );
+
+			// Collision Checks - egg
+			if ( distance <= 34 ) // if the ball hits the center/egg of the screen 
+			{
+				//if you have a second ball, just erase it
+				if ( bonusBall )
+				{
+					balls.erase( balls.begin( ) + howManyBalls );
+					bonusBall = false;
+				}
+
+				//if you have invincibility, the ball will bounce off the bottom one time
+				else if ( invincible )
+				{
+					playSound(0);
+					balls.at( howManyBalls ).setSpeedY( ballYSpeed * -1 );
+					invincible = false;
+				}
+
+				//if no power ups, you just dead.
+				else
+				{
+					////reduce player lives
+					playSound(2);
+					drawLivesScreen( playerLives );
+					playerLives--;
+					cout << "Lives: " << playerLives << endl;
+
+					//reset ball and paddle to middle of screen
+					balls.erase( balls.begin( ) + howManyBalls );
+
+					Ball ball( 350, 550 );
+					ball.setSpeedX( 1.0 / 3.0 );
+					ball.setSpeedY( -2.0 / 3.0 );
+					ball.setMovable( false );
+					addBall( ball );
+
+					//erase all paddles
+					for ( int i = 0; i <= paddles.size( ); i++ )
+					{
+						paddles.erase( paddles.begin( ) );
+					}
+
+					//generate new paddle
+					Paddle paddle( 350, 560, true );
+					setPaddle( paddle );
+
+					//set all powerups to false
+					invincible = false;
+					bonusBall = false;
+					bonusPaddle = false;
+					superBall = false;
+				}
+			}
+
+			if (ballYLocation >= 600){
+				playSound(0);
+				balls.at( howManyBalls ).setSpeedY( ballYSpeed * -1 );
+			}
+
+			// Collision Checks - top of screen
+			if ( ballYLocation <= 9 ) // if ball hits the top of the screen
+			{
+				playSound(0);
+				balls.at( howManyBalls ).setSpeedY( ballYSpeed * -1 );
+				superBall = false;
+			}
+
+			// if ball hits the left or right side of the screen
+			if ( ballXLocation >= 591 || ballXLocation <= 9 )
+			{
+				playSound(0);
+				balls.at( howManyBalls ).setSpeedX( ballXSpeed * -1 );
+			}
+
+			vector<int> brickRemove;
+			brickRemove.clear( );
+			bool xCollide = false;
+			bool yCollide = false;
+			bool brickCollide = false;
+
+			//brick collision checks
+			for ( int howManyBricks = 0; howManyBricks < bricks.size( ); howManyBricks++ )
+			{
+
+				// Center the Brick
+				brickCollide = false;
+				double bricksXLocation = bricks.at( howManyBricks ).getX( );
+				int bricksYLocation = bricks.at( howManyBricks ).getY( );
+
+				int bricksWidth = (bricks.at( howManyBricks ).getWidth( )) / 2; // Center to Edge X
+				int bricksHeight = (bricks.at( howManyBricks ).getHeight( )) / 2; // Center to Edge Y
+				double top, bottom, left, right;
+				top = bricks.at( howManyBricks ).getTopR( ); // Brick Top Radius
+				bottom = bricks.at( howManyBricks ).getBottomR( ); // Brick Bottom Radius
+				left = bricks.at( howManyBricks ).getLeftAngle( ); // Left of Brick Angle 
+				right = bricks.at( howManyBricks ).getRightAngle( ); // Right of Brick Angle 
+		
+
+
+				// Are you between the left and right edges  // X+bricksWidth // X-bricksWidth
+				// Is the distance between the line and center 9  //Center of ball (X/Y Ball) & Edge of Brick ( See Above ) 
+				if ( angle >= left && angle <= right )
+				{
+					if ( abs( distance - top ) < 9 ) // Is the ball on top of the brick 
+					{
+						//balls.at( howManyBalls ).setSpeedY( ballYSpeed * -1 );
+						yCollide = true;
+
+						//bricks.erase(bricks.begin() + howManyBricks);
+						brickCollide = true;
+					}
+
+					if ( abs( distance - bottom ) < 9 ) // Is the ball on bottom of the brick 
+					{
+						//balls.at( howManyBalls ).setSpeedY( ballYSpeed * -1 );
+						yCollide = true;
+
+						//bricks.erase(bricks.begin() + howManyBricks);
+						brickCollide = true;
+					}
+				}
+
+				// Are you between the top and bottom edges  // Y+bricksWidth // Y-bricksWidth
+				if ( abs( distance <= bottom ) && distance >= top )
+				{
+					if ( abs( angle - left ) < 9 ) // Is the ball on top of the brick 
+					{
+						//balls.at( howManyBalls ).setSpeedX( ballXSpeed * -1 );
+						xCollide = true;
+						//checkPowerUps( howManyBricks );
+						//bricks.erase( bricks.begin( ) + howManyBricks );
+						brickCollide = true;
+					}
+
+					if ( abs( angle - right ) < 9 ) // Is the ball on bottom of the brick 
+					{
+						//balls.at( howManyBalls ).setSpeedX( ballXSpeed * -1 );
+						xCollide = true;
+						//checkPowerUps( howManyBricks );
+						//bricks.erase(bricks.begin() + howManyBricks);
+						brickCollide = true;
+					}
+				}
+
+				if ( brickCollide )
+				{
+					brickRemove.push_back( howManyBricks );
+				}
+			}
+
+			if ( xCollide && !superBall )
+			{
+				balls.at( howManyBalls ).setSpeedX( ballXSpeed * -1 );
+			}
+
+			if ( yCollide && !superBall )
+			{
+				balls.at( howManyBalls ).setSpeedY( ballYSpeed * -1 );
+			}
+
+			for ( int remove = brickRemove.size( ) - 1; remove >= 0; remove-- )
+			{
+				//checkPowerUps( brickRemove.at( remove ) );
+				//bricks.erase( bricks.begin( ) + brickRemove.at( remove ) );
+			}
+
+			//paddle collision
+			for ( int howManyPaddles = 0; howManyPaddles < paddles.size( ); howManyPaddles++ )
+			{
+				// Center the Paddle
+				bool paddleCollision = false; 
+				int paddleXLocation = paddles.at( howManyPaddles ).getX( );
+				int paddleYLocation = paddles.at( howManyPaddles ).getY( );
+
+				double paddlesWidth = (paddles.at( howManyPaddles ).getWidth( )) / 2; // Cender to Edge X
+				double paddlesHeight = (paddles.at( howManyPaddles ).getHeight( )) / 2; // Center to Edge Y
+				int top, bottom, left, right;
+				top = paddleYLocation - paddlesHeight; // Brick Top
+				bottom = paddleYLocation + paddlesHeight; // Brick Bottom
+				left = paddleXLocation - paddlesWidth; // Left of Brick 
+				right = paddleXLocation + paddlesWidth; // Right of Brick
+
+				// Are you between the left and right edges  // X+bricksWidth // X-bricksWidth
+				// Are you between the top and bottom edges  // Y+bricksWidth // Y-bricksWidth
+				// Is the distance between the line and center 9  //Center of ball (X/Y Ball) & Edge of Brick ( See Above ) 
+				if ( ballXLocation >= left && ballXLocation <= right )
+				{
+					if ( abs( distance - top ) < 9 ) // Is the ball on top of the brick 
+					{
+						balls.at( howManyBalls ).setSpeedY( ballYSpeed * -1 );
+						paddleCollision = true;
+					}
+
+					if ( abs( distance - bottom ) < 9 ) // Is the ball on bottom of the brick 
+					{
+						balls.at( howManyBalls ).setSpeedY( ballYSpeed * -1 );
+						paddleCollision = true;
+					}
+
+				}
+
+				if ( distance <= bottom && distance >= top )
+				{
+					if ( abs( ballXLocation - left ) < 9 ) // Is the ball on top of the brick 
+					{
+						balls.at( howManyBalls ).setSpeedX( ballXSpeed * -1 );
+						paddleCollision = true;
+					}
+
+					if ( abs( ballXLocation - right < 9 ) ) // Is the ball on bottom of the brick 
+					{
+						balls.at( howManyBalls ).setSpeedX( ballXSpeed * -1 );
+						paddleCollision = true;
+					}
+				}
+				if (paddleCollision && stickyBall > 0)
+				{
+					balls.at(howManyBalls).setX(paddleXLocation);
+					balls.at(howManyBalls).setY(paddleYLocation-10);
+					balls.at(howManyBalls).setSpeedX( 1.0 / 3.0 );
+					balls.at(howManyBalls).setSpeedY( -2.0 / 3.0 );
+					balls.at(howManyBalls).setMovable( false );
 				}
 			}
 		}
@@ -735,10 +1011,27 @@ void Level::checkCollision()
 
 /***********************************************************
 #NickP, #NickB, TrelJ
+Name: moveBall
+Description:
+**********************************************************/
+void Level::moveBall( bool b ) 
+{
+	for ( int i = 0; i < balls.size( ); i++ )
+	{
+		if ( balls.at( i ).getMovable()==false && b == true )
+		{
+			stickyBall--;
+		}
+		balls.at( i ).setMovable( b );
+	}
+}
+
+/***********************************************************
+#NickP, #NickB, TrelJ
 Name: shouldTheBallBeHere
 Description: 
 **********************************************************/
-void Level::shouldTheBallBeHere( )
+void Level::shouldTheBallBeHereFlat( )
 {
 	for ( int howManyBalls = 0; howManyBalls < balls.size( ); howManyBalls++ )
 	{
@@ -830,7 +1123,107 @@ void Level::shouldTheBallBeHere( )
 				balls.at(howManyBalls).setSpeedX( 1.0 / 3.0 );
 				balls.at(howManyBalls).setSpeedY( -2.0 / 3.0 );
 				balls.at(howManyBalls).setMovable( false );
-				stickyBall--;
+			}
+			else
+			{
+				balls.at(howManyBalls).move(paddles.at(0));
+			}
+		}
+	}
+}
+
+void Level::shouldTheBallBeHereCircular( )
+{
+	for ( int howManyBalls = 0; howManyBalls < balls.size( ); howManyBalls++ )
+	{
+		bool ballInsidePaddle = false; 
+		int ballXLocation = balls.at( howManyBalls ).getX( );
+		int ballYLocation = balls.at( howManyBalls ).getY( );
+		double ballXSpeed = balls.at( howManyBalls ).getSpeedX( );
+		double ballYSpeed = balls.at( howManyBalls ).getSpeedY( );
+		int stuckTo = -1; 
+		for ( int howManyPaddles = 0; howManyPaddles < paddles.size( ); howManyPaddles++ )
+		{
+			int paddleXLocation = paddles.at( howManyPaddles ).getX( );
+			int paddleYLocation = paddles.at( howManyPaddles ).getY( );
+			int paddlesWidth = (paddles.at( howManyPaddles ).getWidth( )) / 2; // Cender to Edge X
+			int paddlesHeight = (paddles.at( howManyPaddles ).getHeight( )) / 2; // Center to Edge Y
+
+			int top, bottom, left, right;
+			top = paddleYLocation - paddlesHeight; // Brick Top
+			bottom = paddleYLocation + paddlesHeight; // Brick Bottom
+			left = paddleXLocation - paddlesWidth; // Left of Brick 
+			right = paddleXLocation + paddlesWidth; // Right of Brick
+
+			// Is the ball in the paddle 
+			// Is the distance between the line and center 9  
+			//Center of ball (X/Y Ball) & Edge of Brick ( See Above ) 
+			if ( ballXLocation >= left && ballXLocation <= right )
+			{
+				if ( abs( ballYLocation - top ) < 9 ) // Is the ball on top of the brick 
+				{
+					// Is the ball going the right direction
+					if ( ballYSpeed > 0 )
+					{
+						balls.at( howManyBalls ).setSpeedY( ballYSpeed * -1 );
+					}
+
+					ballInsidePaddle = true; 
+					stuckTo=howManyPaddles;
+				}
+
+				if ( abs( ballYLocation - bottom ) < 9 ) // Is the ball on bottom of the brick 
+				{
+					// Is the ball going the right direction
+
+					if ( ballYSpeed < 0 )
+					{
+						balls.at( howManyBalls ).setSpeedY( ballYSpeed * -1 );
+					}
+
+					ballInsidePaddle = true;
+					stuckTo=howManyPaddles;
+				}
+			}
+
+			if ( ballYLocation <= bottom && ballYLocation >= top )
+			{
+				if ( abs( ballYLocation - left ) < 9 ) // Is the ball on top of the brick 
+				{
+					// Is the ball going the right direction
+					if ( ballXSpeed > 0 )
+					{
+						balls.at( howManyBalls ).setSpeedX( ballXSpeed * -1 );
+					}
+
+					ballInsidePaddle = true;
+					stuckTo=howManyPaddles;
+				}
+
+				if ( abs( ballYLocation - right < 9 ) ) // Is the ball on bottom of the brick 
+				{
+					// Is the ball going the right direction?
+					if ( ballXSpeed < 0 )
+					{
+						balls.at( howManyBalls ).setSpeedX( ballXSpeed * -1 );
+					}
+
+					ballInsidePaddle = true;
+					stuckTo=howManyPaddles;
+				}
+			}
+		}
+		
+		// If ball inside paddle move it
+		if ( ballInsidePaddle == true )
+		{
+			if (stickyBall>0)
+			{
+				balls.at(howManyBalls).setX(paddles.at(stuckTo).getX());
+				balls.at(howManyBalls).setY(paddles.at(stuckTo).getY()-10);
+				balls.at(howManyBalls).setSpeedX( 1.0 / 3.0 );
+				balls.at(howManyBalls).setSpeedY( -2.0 / 3.0 );
+				balls.at(howManyBalls).setMovable( false );
 			}
 			else
 			{
@@ -1021,7 +1414,7 @@ Description: Plays sound effect
 **********************************************************/
 void Level::playSound(int x)
 {
-	//if (SDL_Init(SDL_INIT_AUDIO) < 0) exit(1);
+	// if (SDL_Init(SDL_INIT_AUDIO) < 0) exit(1);
 
 	//Mix_OpenAudio(22050, AUDIO_S16SYS, 2, 640);
 	//Mix_Chunk* sound;  // Background Music

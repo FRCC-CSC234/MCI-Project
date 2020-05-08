@@ -302,6 +302,32 @@ void TrelGraphics2::addPictureToFrameRotation( int pictureID, int x, int y, doub
 }
 
 
+
+
+
+void TrelGraphics2::addPictureToFrameRotationResize( int pictureID, int x, int y, int w, int h, double degrees, bool vFlip, bool hFlip, SDL_Point* center )
+{
+    if ( pictureID >= index || pictureID < 0 )
+    {
+        return;
+    }
+    SDL_RendererFlip flip = SDL_FLIP_NONE;
+    if ( !hFlip && vFlip )
+    {
+        flip = SDL_FLIP_VERTICAL;
+    }
+    if ( !vFlip && hFlip )
+    {
+        flip = SDL_FLIP_HORIZONTAL;
+    }
+    if ( vFlip && hFlip )
+    {
+        flip = (SDL_RendererFlip)(SDL_FLIP_HORIZONTAL | SDL_FLIP_VERTICAL);
+    }
+    textures[pictureID].renderResize( x, y, gRenderer, w, h, degrees, flip, center );
+}
+
+
 /**********************************************************
 name: addRectToFrame
 description: adds a rectangle to the frame with the given color and transparancy
