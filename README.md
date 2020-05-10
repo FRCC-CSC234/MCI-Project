@@ -28,23 +28,35 @@ Class gameMain contains:
    	EndGame():
 
 Class graphicsMethods contains:
+
     drawFlatScreen(): for levels 1, 2 and 3 game play
+    
     drawCircularScreen(): to be implemented at a later date
+    
     drawTitleScreen(): for StartGame()
     
 Class level contains:
+
     createBricks():
+    
     gameFrame():
+    
     checkCollision():
+    
     shouldTheBallBeHere():
+    
     addBall():
+    
     addBrick():
+    
     checkPowerUps():
     
 Classes paddle, brick and ball primarily contains:
+
     move():
     
 Class TrelGraphics2 primarily contains (some methods have permutations):
+
     start():
 	close( ):
 	TrelGraphics2(): creates a graphics object
