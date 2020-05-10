@@ -5,7 +5,7 @@ The MCI Brick Break Game was created as a tool for publishing information regard
 
 # The Game 
 
-This brick break game is a 2 dimensional, 1980's style game.  The game consists of 3 levels.  Levels one and two are the standard straight attack brick break game.  Level three is "brick break in the round".  Both levels contain hidden powerup bricks which not only display a message regarding male contraception but alter the player's game (i.e. changing speeds, changing paddle sizes ...).
+This brick break game is a 2 dimensional, 1980's style game.  The game consists of 3 levels.  All levels contain hidden powerup bricks which not only display a message regarding male contraception but alter the player's game (i.e. changing speeds, changing paddle sizes ...).
 This is a single person game.
 
 ## Game Structure
@@ -23,8 +23,8 @@ Class gameMain contains:
    	EndGame():
 
 Class graphicsMethods contains:
-    drawFlatScreen(): for levels 1 and 2 game play
-    drawCircularScreen(): for level 3 game play
+    drawFlatScreen(): for levels 1, 2 and 3 game play
+    drawCircularScreen(): to be implemented at a later date
     drawTitleScreen(): for StartGame()
     
 Class level contains:
@@ -60,7 +60,7 @@ Class TrelTexture contains:
     setColor():
 
 ## Copyright/License Agreement
-Copyright 2020, Front Range Community College
+Copyright 2020: Nick Brady, Joy Choi, Kyle Dexter, Tony Erle, Trel Johnson, Ben Jurenka, Cayce Kelley, Blake Maenhout, Simon Martin, Nathan McIntrye, Nicholas Pallotti, Sophia Ressler, Alex Riesenhuber, Michael Webb, Patty Wiens
 
 This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
