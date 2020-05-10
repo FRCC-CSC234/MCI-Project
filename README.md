@@ -15,11 +15,16 @@ The game was written in C++ using SDL (Simple DirectMedia Layer) libraries.  App
 SDL_tff is not needed as text was rendered as images.
 
 ## Project Flow
-Class gameMain contains:    
+Class gameMain contains:
+
    	StartGame():
+	
     ShowIntro():
+    
    	PlayGame():
+	
     StartMusic():
+    
    	EndGame():
 
 Class graphicsMethods contains:
