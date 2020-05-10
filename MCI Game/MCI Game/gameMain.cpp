@@ -163,43 +163,43 @@ void endGame()
 Name: winGame
 Description: Handles the game being won
 **********************************************************/
-void winGame()
-{
-	// Game over is 5, Win screen is 6
-	bool pause = true;
-	int titleScreentoDisplay = 6;
-	SDL_Event e;
-
-	drawTitleScreen(6);
-
-	while (!Level::quit && pause)
-	{
-		while (SDL_PollEvent(&e) != 0)
-		{
-			switch (e.type)
-			{
-			case SDL_QUIT:
-				Level::quit = true;
-				TrelGraphics2::close();
-				break;
-			case SDL_KEYUP:
-				if (e.key.keysym.sym == SDLK_LEFT)
-				{
-					drawTitleScreen(4);
-				}
-				if (e.key.keysym.sym == SDLK_SPACE)
-				{
-					pause = false;
-				}
-				if (e.key.keysym.sym != SDLK_LEFT && e.key.keysym.sym != SDLK_SPACE)
-				{
-					pause = false;
-				}
-				break;
-			}
-		}
-	}
-}
+//void winGame()
+//{
+//	// Game over is 5, Win screen is 6
+//	bool pause = true;
+//	int titleScreentoDisplay = 6;
+//	SDL_Event e;
+//
+//	drawTitleScreen(6);
+//
+//	while (!Level::quit && pause)
+//	{
+//		while (SDL_PollEvent(&e) != 0)
+//		{
+//			switch (e.type)
+//			{
+//			case SDL_QUIT:
+//				Level::quit = true;
+//				TrelGraphics2::close();
+//				break;
+//			case SDL_KEYUP:
+//				if (e.key.keysym.sym == SDLK_LEFT)
+//				{
+//					drawTitleScreen(4);
+//				}
+//				if (e.key.keysym.sym == SDLK_SPACE)
+//				{
+//					pause = false;
+//				}
+//				if (e.key.keysym.sym != SDLK_LEFT && e.key.keysym.sym != SDLK_SPACE)
+//				{
+//					pause = false;
+//				}
+//				break;
+//			}
+//		}
+//	}
+//}
 
 /***********************************************************
 #NickB
