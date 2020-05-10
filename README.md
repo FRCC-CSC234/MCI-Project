@@ -11,6 +11,7 @@ This is a single person game.
 ## Game Structure
 
 The game was written in C++ using SDL (Simple DirectMedia Layer) libraries.  Appropriate SDL2 libraries will need to be installed, included and linked to the project file prior to editing.
+
 [https://www.libsdl.org/download-2.0.php](https://www.libsdl.org/download-2.0.php)
 
 [https://www.libsdl.org/projects/SDL_mixer/](https://www.libsdl.org/projects/SDL_mixer/)
