@@ -58,22 +58,37 @@ Classes paddle, brick and ball primarily contains:
 Class TrelGraphics2 primarily contains (some methods have permutations):
 
     start():
+    
 	close( ):
+	
 	TrelGraphics2(): creates a graphics object
-	createPictureFromFile( ):	
-	readImageListFromFile( ):	
+	
+	createPictureFromFile( ):
+	
+	readImageListFromFile( ):
+	
 	addPictureToFrame( ):  adds a picture to a frame
+	
 	addRectToFrame():
+	
     drawFrame( ):
+    
     clearFrame( ):
     
 Class TrelTexture contains:
+
     TrelTexture( ):
+    
 	~TrelTexture( ):
+	
 	loadFromFile():
+	
 	free( ):
+	
 	render( ):
+	
 	renderResize( ):
+	
     setColor():
 
 ## Copyright/License Agreement
