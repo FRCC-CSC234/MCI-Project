@@ -35,6 +35,9 @@ Description: Constructor
 Level::Level(int x) 
 {
 	levelNumber = x;
+
+	Paddle paddle( 350, 560 ); // Moving Paddle Creation to Constructor 
+	paddles.push_back( paddle );
 	
 	Ball ball(350, 550); // Moving Creation of Ball to Constructor
 	ball.setSpeedX(1.0 / 3.0);
@@ -42,8 +45,6 @@ Level::Level(int x)
 	ball.setMovable( false );
 	addBall(ball);
 	
-	Paddle paddle( 350, 560 ); // Moving Paddle Creation to Constructor 
-	paddles.push_back( paddle );
 
 	//set all the powerup booleans to false
 	bonusBall = false;
@@ -64,7 +65,11 @@ void Level::startFlatLevel()
 	balls.clear();
 	paddles.clear();
 	bricks.clear();
-	pictureID = levelNumber;
+
+	//#SimonM commented out levelnumber using rand for now
+	//pictureID = levelNumber;
+	pictureID = (rand() % 2);
+	
 	Ball ball(350, 550); // Moving Creation of Ball to Constructor
 	ball.setSpeedX(1.0 / 3.0);
 	ball.setSpeedY(-2.0 / 3.0);
@@ -89,6 +94,7 @@ Description:
 **********************************************************/
 void Level::startCircularLevel()
 {
+	startMusic(2);
 	balls.clear();
 	paddles.clear();
 	bricks.clear();
@@ -410,7 +416,7 @@ includes their art and power ups if applicable. Ensures only
 **********************************************************/
 void Level::createBricks( )
 {
-	startMusic( );
+	startMusic(levelNumber);
 
 	int levelcount = levelNumber;
 	int numberOfBricksInLevel;
@@ -418,12 +424,17 @@ void Level::createBricks( )
 
 	if ( levelcount == 0 )
 	{
-		numberOfBricksInLevel = 30;
+		numberOfBricksInLevel = 10;
+		numberOfPowerUpInLevel = 3;
+	}
+	else if (levelcount == 1)
+	{
+		numberOfBricksInLevel = 20;
 		numberOfPowerUpInLevel = 4;
 	}
 	else
 	{
-		numberOfBricksInLevel = 50;
+		numberOfBricksInLevel = 30;
 		numberOfPowerUpInLevel = 6;
 	}
 
@@ -459,6 +470,122 @@ void Level::createBricks( )
 }
 
 /***********************************************************
+#NickP, #NickB
+Name: createBricks2
+Description: randomly fills the bricks array with bricks
+includes their art and power ups if applicable. Ensures only
+2 max bricks contain powerups.
+**********************************************************/
+void Level::createBricks2()
+{
+	startMusic(levelNumber);
+
+	int levelCount = levelNumber;
+	int numberOfBricksInLevel; // Total # of Brick in level
+	int numberOfPowerUpInLevel; // Total # of power up in level
+	int powerUpCheck[10] = { 0 }; // Array to check if no duplicate powerups
+	int random; // Random number generator
+
+	//Based on Level sets # of Bricks in level and # of power up in level 
+
+	if (levelCount == 0)
+	{
+		numberOfBricksInLevel = 40;
+		numberOfPowerUpInLevel = 5;
+	}
+	if (levelCount == 1)
+	{
+		numberOfBricksInLevel = 50;
+		numberOfPowerUpInLevel = 7;
+	}
+	if (levelCount == 2)
+	{
+		numberOfBricksInLevel = 60;
+		numberOfPowerUpInLevel = 10;
+	}
+
+	// Generate basic bricks based on level 
+	for (int brickCount = 0; brickCount < numberOfBricksInLevel; brickCount++)
+	{
+		random = rand() % 4;
+		Brick brick((brickCount % 10) * 60 + 30, (brickCount / 10) * 30 + 15);
+		brick.setPictureID(random);
+		brick.setPowerupID(-1);
+		addBrick(brick);
+	}
+	int howManyRow = numberOfBricksInLevel / 10;
+
+	for (int powerUpCount = 0; powerUpCount < howManyRow; powerUpCount++)
+	{
+
+		//"Randomly" choose a power up
+
+		int powerUpID = rand() % 10 + 4;  // Generating 4-13
+
+		if (powerUpCheck[(powerUpID - 4)] == 0)  // If there no same power up, use that power up
+		{
+			powerUpCheck[(powerUpID - 4)]++;
+		}
+		else
+		{
+			while (powerUpCheck[(powerUpID - 4)] != 0) // if Power ID is matching, keep generating till you find one
+			{
+				random = rand() % 10 + 4;  // Generating 4-13
+			}
+			powerUpCheck[(powerUpID - 4)]++;
+		}
+
+		int rowMin; // Row Starts at....
+		int rowMax;	// Row Ends at....
+
+		// Are we adding a powerup to a row we haven't added a power up to
+
+		if (powerUpCount < howManyRow)
+		{
+			if (powerUpCount == 0)
+			{
+				rowMin = 0;
+				rowMax = powerUpCount + 9;
+			}
+			else
+			{
+				rowMax = (powerUpCount * 10) - 1;
+				rowMin = rowMax - 10;
+			}
+
+			random = rand() % (rowMax - rowMin + 1) + rowMin;
+
+			//Add that specific powerup to Row 
+
+			bricks.at(random).setPictureID(powerUpID);
+			bricks.at(random).setPowerupID((powerUpID - 4));
+		}
+
+		// Are we adding a powerup to a row we have already added a power up to
+
+		if (powerUpCount > howManyRow)
+		{
+			random = rand() % (rowMax - rowMin + 1) + rowMin;
+
+			if (bricks.at(random).getPowerupID() == -1)  // No power up at indext assign power up
+			{
+				bricks.at(random).setPictureID(powerUpID);
+				bricks.at(random).setPowerupID((powerUpID - 4));
+			}
+			else
+			{
+				while (bricks.at(random).getPowerupID() != -1) // if Power ID is matching, keep generating till you find one
+				{
+					random = rand() % (rowMax - rowMin + 1) + rowMin;
+				}
+				bricks.at(random).setPictureID(powerUpID);
+				bricks.at(random).setPowerupID((powerUpID - 4));
+			}
+		}
+	}
+}
+
+/***********************************************************
 #NickP, #NickB, TrelJ
 Name: gameFrame
 Description: 
@@ -467,7 +594,6 @@ void Level::gameFrame()
 {
 	bool canPaddleMove = true; 
 
-	
 		for ( int howManyBalls = 0; howManyBalls < balls.size( ); howManyBalls++ )
 		{
 			balls.at( howManyBalls ).move( paddles.at( 0 ) );
@@ -475,15 +601,15 @@ void Level::gameFrame()
 
 		if ( bricks.size( ) != 0 ) // Make sure there bricks available
 		{
-			if (levelNumber==2)
+			//#SimonM uncomment this when we get back to the circular level
+			/*if (levelNumber==2)
 			{
 				checkCollisionCircular( );
 			}
 			else
-			{
+			{*/
 				checkFlatCollision( );
-			}
-
+			//}
 		}
 
 		// Check to see if the paddles can move
@@ -521,7 +647,7 @@ void Level::gameFrame()
 /***********************************************************
 #NickP, #NickB, TrelJ
 Name: checkCollision
-Description: 
+Description:
 **********************************************************/
 void Level::checkFlatCollision()
 {
@@ -680,11 +806,11 @@ void Level::checkFlatCollision()
 				}
 			}
 
+			//if ball should samsh through without reflecting
 			if ( xCollide && !superBall )
 			{
 				balls.at( howManyBalls ).setSpeedX( ballXSpeed * -1 );
 			}
-
 			if ( yCollide && !superBall )
 			{
 				balls.at( howManyBalls ).setSpeedY( ballYSpeed * -1 );
@@ -696,6 +822,7 @@ void Level::checkFlatCollision()
 				bricks.erase( bricks.begin( ) + brickRemove.at( remove ) );
 			}
 
+			//paddle collision checks
 			for ( int howManyPaddles = 0; howManyPaddles < paddles.size( ); howManyPaddles++ )
 			{
 				// Center the Paddle
@@ -706,24 +833,46 @@ void Level::checkFlatCollision()
 				double paddlesWidth = (paddles.at( howManyPaddles ).getWidth( )) / 2; // Cender to Edge X
 				double paddlesHeight = (paddles.at( howManyPaddles ).getHeight( )) / 2; // Center to Edge Y
 				int top, bottom, left, right;
-				top = paddleYLocation - paddlesHeight; // Brick Top
-				bottom = paddleYLocation + paddlesHeight; // Brick Bottom
-				left = paddleXLocation - paddlesWidth; // Left of Brick 
-				right = paddleXLocation + paddlesWidth; // Right of Brick
+				top = paddleYLocation - paddlesHeight; // Paddle Top
+				bottom = paddleYLocation + paddlesHeight; // Paddle Bottom
+				left = paddleXLocation - paddlesWidth; // Left of Paddle 
+				right = paddleXLocation + paddlesWidth; // Right of Paddle
 
-				// Are you between the left and right edges  // X+bricksWidth // X-bricksWidth
-				// Are you between the top and bottom edges  // Y+bricksWidth // Y-bricksWidth
-				// Is the distance between the line and center 9  //Center of ball (X/Y Ball) & Edge of Brick ( See Above ) 
-
+				// Are you between the left and right edges  
+				// Are you between the top and bottom edges  
+				// Is the distance between the line and center 9  //Center of ball (X/Y Ball) & Edge of Paddle ( See Above ) 
 				if ( ballXLocation >= left && ballXLocation <= right )
 				{
-					if ( abs( ballYLocation - top ) < 9 ) // Is the ball on top of the brick 
+					if ( abs( ballYLocation - top ) < 9 ) // Is the ball on top of the paddle 
 					{
 						balls.at( howManyBalls ).setSpeedY( ballYSpeed * -1 );
+
+						if (ballXLocation < paddleXLocation)
+						{
+							if (ballXLocation >= 591 || ballXLocation <= 9)
+							{
+							balls.at(howManyBalls).setSpeedX(-1);
+							}
+							else
+							{
+								balls.at(howManyBalls).setSpeedX((paddleXLocation - ballXLocation) * -.02);
+							}
+						}
+						else
+						{
+							if (ballXLocation >= 591 || ballXLocation <= 9)
+							{
+								balls.at(howManyBalls).setSpeedX(-1);
+							}
+							else
+							{
+								balls.at(howManyBalls).setSpeedX((ballXLocation - paddleXLocation) * .02);
+							}
+						}
 						paddleCollision = true;
 					}
 
-					if ( abs( ballYLocation - bottom ) < 9 ) // Is the ball on bottom of the brick 
+					if ( abs( ballYLocation - bottom ) < 9 ) // Is the ball on bottom of the paddle 
 					{
 						balls.at( howManyBalls ).setSpeedY( ballYSpeed * -1 );
 						paddleCollision = true;
@@ -759,6 +908,11 @@ void Level::checkFlatCollision()
 	}
 }
 
+/***********************************************************
+
+Name: checkCollisionCircular
+Description:
+**********************************************************/
 void Level::checkCollisionCircular()
 {
 	if ( bricks.size( ) != 0 ) // If there is no bricks, do not check collision 
@@ -1132,6 +1286,11 @@ void Level::shouldTheBallBeHereFlat( )
 	}
 }
 
+/***********************************************************
+#
+Name: shouldTheBallBeHereCircular
+Description:
+**********************************************************/
 void Level::shouldTheBallBeHereCircular( )
 {
 	for ( int howManyBalls = 0; howManyBalls < balls.size( ); howManyBalls++ )
@@ -1391,21 +1550,39 @@ void Level::checkPowerUps(int brickLocation)
 }
 
 /***********************************************************
-#PattiW
+#PattiW, SimonM
 Name: startMusic
-Description: Plays music
+Description: Plays different songs based on input integer
 **********************************************************/
-void Level::startMusic()
+void Level::startMusic(int x)
 {
-	//if (SDL_Init(SDL_INIT_AUDIO) < 0) exit(1);
+	if (SDL_Init(SDL_INIT_AUDIO) < 0) exit(1);
 
-	//Mix_OpenAudio(22050, AUDIO_S16SYS, 2, 640);
-	//Mix_Music* mus;  // Background Music
+	Mix_OpenAudio(22050, AUDIO_S16SYS, 2, 640);
+	Mix_Music* mus;  // Background Music
 
+	//ints rep different music tracks.
+	// 0 = bounce, 1 = break, 2 = death, 3 = powerup
+	switch (x)
+	{
+	case 0:
+		mus = Mix_LoadMUS("MCIfunky.wav");
+		Mix_PlayMusic(mus, -1);
+		break;
+	case 1:
+		mus = Mix_LoadMUS("MCIgroovy.wav");
+		Mix_PlayMusic(mus, -1);
+		break;
+	case 2:
+		mus = Mix_LoadMUS("MCIsexy.wav");
+		Mix_PlayMusic(mus, -1);
+		break;
+	}
 	//mus = Mix_LoadMUS("MCIsong2.wav");
 
 	//Mix_PlayMusic(mus, -1); //Music loop: -1 for continuous play
 }
+
 
 /***********************************************************
 #SimonM
@@ -1414,50 +1591,50 @@ Description: Plays sound effect
 **********************************************************/
 void Level::playSound(int x)
 {
-	// if (SDL_Init(SDL_INIT_AUDIO) < 0) exit(1);
+	if (SDL_Init(SDL_INIT_AUDIO) < 0) exit(1);
 
-	//Mix_OpenAudio(22050, AUDIO_S16SYS, 2, 640);
-	//Mix_Chunk* sound;  // Background Music
+	Mix_OpenAudio(22050, AUDIO_S16SYS, 2, 640);
+	Mix_Chunk* sound;  // Background Music
 
-	////ints rep sound effects.
-	//// 0 = bounce, 1 = break, 2 = death, 3 = powerup
-	//switch (x)
-	//{
-	//case 0:
-	//	sound = Mix_LoadWAV("bloop1.wav");
-	//	Mix_PlayChannel(-1, sound, 0); //Music loop: 0 for one play
-	//	break;
-	//case 1:
-	//	sound = Mix_LoadWAV("break.wav");
-	//	Mix_PlayChannel(-1, sound, 0); //Music loop: 0 for one play
-	//	break;
-	//case 2:
-	//	sound = Mix_LoadWAV("death.wav");
-	//	Mix_PlayChannel(-1, sound, 0); //Music loop: 0 for one play
-	//	break;
-	//case 3:
-	//{
-	//	int randSound = (rand() % 3 + 1);
-	//	switch (randSound)
-	//	{
-	//	case 1:
-	//		sound = Mix_LoadWAV("allright.wav");
-	//		break;
+	//ints rep sound effects.
+	// 0 = bounce, 1 = break, 2 = death, 3 = powerup
+	switch (x)
+	{
+	case 0:
+		sound = Mix_LoadWAV("bloop1.wav");
+		Mix_PlayChannel(-1, sound, 0); //Music loop: 0 for one play
+		break;
+	case 1:
+		sound = Mix_LoadWAV("break.wav");
+		Mix_PlayChannel(-1, sound, 0); //Music loop: 0 for one play
+		break;
+	case 2:
+		sound = Mix_LoadWAV("death.wav");
+		Mix_PlayChannel(-1, sound, 0); //Music loop: 0 for one play
+		break;
+	case 3:
+	{
+		int randSound = (rand() % 3 + 1);
+		switch (randSound)
+		{
+		case 1:
+			sound = Mix_LoadWAV("allright.wav");
+			break;
 
-	//	case 2:
-	//		sound = Mix_LoadWAV("damn.wav");
-	//		break;
-	//	case 3:
-	//		sound = Mix_LoadWAV("ohyeah.wav");
-	//		break;
-	//	default:
-	//		sound = Mix_LoadWAV("powerup.wav");
-	//		break;
-	//	}
-	//}
-	//	Mix_PlayChannel(-1, sound, 0); //Music loop: 0 for one play
-	//	break;
-	//default:
-	//	break;
-	//}
+		case 2:
+			sound = Mix_LoadWAV("damn.wav");
+			break;
+		case 3:
+			sound = Mix_LoadWAV("ohyeah.wav");
+			break;
+		default:
+			sound = Mix_LoadWAV("powerup.wav");
+			break;
+		}
+	}
+	Mix_PlayChannel(-1, sound, 0); //Music loop: 0 for one play
+	break;
+	default:
+		break;
+	}
 }

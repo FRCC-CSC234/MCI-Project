@@ -34,7 +34,7 @@ Description: Starts the graphics methods
 void startGame()
 {
 	Level::quit = false; // Added to have intro and instructions show on screen 
-	TrelGraphics2::start( "Insert MCI Game Name Here", 600, 600 ); //*** needed a TrelGraphics::start call, made up a size.
+	TrelGraphics2::start( "SPERM SLAMMERS", 600, 600 ); //*** needed a TrelGraphics::start call, made up a size.
 
 }
 
@@ -55,7 +55,8 @@ void nextLevel()
 	}
 	if(level.getLevelNumber() == 2)
 	{
-		level.startCircularLevel();
+		level.startFlatLevel();
+		//level.startCircularLevel();
 	}
 }
 
@@ -66,7 +67,7 @@ Description: Contains calls to SDL and other classes to run the game
 **********************************************************/
 void playGame()
 {
-	level.setLevelNumber(2); //*** Needs to be set back to 0 
+	level.setLevelNumber(0); //*** Needs to be set back to 0 
 	nextLevel();
 
 	SDL_Event e;
@@ -148,13 +149,56 @@ void playGame()
 }
 
 /***********************************************************
-#NickP
+#NickP, SimonM
 Name: endGame
 Description: Calls graphics deletion of objects
 **********************************************************/
 void endGame()
 {
-	TrelGraphics2::close( );
+		TrelGraphics2::close();
+}
+
+/***********************************************************
+#SimonM
+Name: winGame
+Description: Handles the game being won
+**********************************************************/
+void winGame()
+{
+	// Game over is 5, Win screen is 6
+	bool pause = true;
+	int titleScreentoDisplay = 6;
+	SDL_Event e;
+
+	drawTitleScreen(6);
+
+	while (!Level::quit && pause)
+	{
+		while (SDL_PollEvent(&e) != 0)
+		{
+			switch (e.type)
+			{
+			case SDL_QUIT:
+				Level::quit = true;
+				TrelGraphics2::close();
+				break;
+			case SDL_KEYUP:
+				if (e.key.keysym.sym == SDLK_LEFT)
+				{
+					drawTitleScreen(4);
+				}
+				if (e.key.keysym.sym == SDLK_SPACE)
+				{
+					pause = false;
+				}
+				if (e.key.keysym.sym != SDLK_LEFT && e.key.keysym.sym != SDLK_SPACE)
+				{
+					pause = false;
+				}
+				break;
+			}
+		}
+	}
 }
 
 /***********************************************************
@@ -169,7 +213,7 @@ void showIntroSceen( )
 	int titleScreentoDisplay = 3; 
 	SDL_Event e;
 
-	drawTitleScreen( 3 );
+	drawTitleScreen(3);
 
 	while ( !Level::quit && pause )
 	{
@@ -180,12 +224,16 @@ void showIntroSceen( )
 			case SDL_QUIT:
 				Level::quit = true;
 				break;
-			case SDL_KEYDOWN:
+			case SDL_KEYUP:
 				if ( e.key.keysym.sym == SDLK_LEFT )
 				{
-					drawTitleScreen( 4 );
+					drawTitleScreen(4);
 				}
 				if ( e.key.keysym.sym == SDLK_SPACE )
+				{
+					pause = false;
+				}
+				if (e.key.keysym.sym != SDLK_LEFT && e.key.keysym.sym != SDLK_SPACE)
 				{
 					pause = false;
 				}

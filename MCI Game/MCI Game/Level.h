@@ -9,7 +9,7 @@
 #include <vector>
 #include <time.h>
 #include <stdlib.h>
-//#include "SDL_Mixer.h"
+#include "SDL_Mixer.h"
 
 using namespace std;
 
@@ -59,7 +59,8 @@ public:
 	void startFlatLevel( );
 	void startCircularLevel( );
 
-	void startMusic( );
+	//#SimonM sound effect and music methods
+	void startMusic(int x);
 	void playSound(int x);
 	
 	//Randomizes and draws bricks for the circular level
@@ -67,6 +68,7 @@ public:
 
 	//randomizes and draws bricks on the screen
 	void createBricks( );
+	void createBricks2();
 
 	//need comments
 	void gameFrame( );

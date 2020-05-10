@@ -23,20 +23,21 @@ void drawFlatScreen( std::vector<Brick> bricks, std::vector<Ball> balls, std::ve
 	titleScreens.addPictureToFrame( background.getPictureID( ), 0, 0 );
 	for ( Brick brick : bricks )
 	{
-		if (background.getLevelNumber()==2)
-		{
-			x = brick.getX();
-			y = brick.getY();
-			angle = brick.getRotateVal();
-			//angle = 0;
-			vFlip = brick.getVerFlip();
-			hFlip = brick.getHorFlip();
-			//vFlip = false;
-			//hFlip = false;
-			brickPictures.addPictureToFrameRotation( brick.getPictureID( ), x, y, angle, vFlip, hFlip );
-		}
-		else
-		{
+		//#SimonM commented out level2 since no circular right now
+		//if (background.getLevelNumber()==2)
+		//{
+		//	x = brick.getX();
+		//	y = brick.getY();
+		//	angle = brick.getRotateVal();
+		//	//angle = 0;
+		//	vFlip = brick.getVerFlip();
+		//	hFlip = brick.getHorFlip();
+		//	//vFlip = false;
+		//	//hFlip = false;
+		//	brickPictures.addPictureToFrameRotation( brick.getPictureID( ), x, y, angle, vFlip, hFlip );
+		//}
+		//else
+		//{
 			w = brick.getWidth() / 2;	// This is working under the assumtion that getWidth returns the distance to the edge from the center.
 			h = brick.getHeight() / 2; // This is working under the assumtion that getHeight returns the distance to the edge from teh center.
 			x = brick.getX() - w; //*** removed Center to match logic code
@@ -52,7 +53,7 @@ void drawFlatScreen( std::vector<Brick> bricks, std::vector<Ball> balls, std::ve
 			center.x = w; // Updated 4.28
 			center.y = h; // Updated 4.28
 			brickPictures.addPictureToFrameRotation( brick.getPictureID( ), x, y, angle, vFlip, hFlip, &center );
-		}
+		//}
 	}
 	//*** changes above repeated
 	for ( Ball ball : balls )
