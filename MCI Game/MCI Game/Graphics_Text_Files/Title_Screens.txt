@@ -12,3 +12,4 @@ Title_Screens/Lives/Two.bmp
 Title_Screens/Lives/Three.bmp
 Title_Screens/Lives/Four.bmp
 Title_Screens/Lives/Five.bmp
+Title_Screens/Credits.bmp

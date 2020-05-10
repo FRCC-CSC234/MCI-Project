@@ -58,8 +58,8 @@ void drawFlatScreen( std::vector<Brick> bricks, std::vector<Ball> balls, std::ve
 	//*** changes above repeated
 	for ( Ball ball : balls )
 	{
-		w = ball.getWidth( );	// This is working under the assumtion that getWidth returns the distance to the edge from the center.
-		h = ball.getHeight( ); // This is working under the assumtion that getHeight returns the distance to the edge from the center.
+		w = ball.getWidth();	// This is working under the assumtion that getWidth returns the distance to the edge from the center.
+		h = ball.getHeight(); // This is working under the assumtion that getHeight returns the distance to the edge from the center.
 		x = ball.getX( ) - w;
 		y = ball.getY( ) - h;
 		angle = ball.getAngle( );

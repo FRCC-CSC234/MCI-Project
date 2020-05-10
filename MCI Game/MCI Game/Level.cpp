@@ -39,13 +39,12 @@ Level::Level(int x)
 	Paddle paddle( 350, 560 ); // Moving Paddle Creation to Constructor 
 	paddles.push_back( paddle );
 	
-	Ball ball(350, 550); // Moving Creation of Ball to Constructor
+	Ball ball(350, 350); // Moving Creation of Ball to Constructor
 	ball.setSpeedX(1.0 / 3.0);
 	ball.setSpeedY(-2.0 / 3.0);
 	ball.setMovable( false );
 	addBall(ball);
 	
-
 	//set all the powerup booleans to false
 	bonusBall = false;
 	bonusPaddle = false;
@@ -69,15 +68,16 @@ void Level::startFlatLevel()
 	//#SimonM commented out levelnumber using rand for now
 	//pictureID = levelNumber;
 	pictureID = (rand() % 2);
+
+	Paddle paddle( 350, 560 ); // Moving Paddle Creation to Constructor 
+	paddles.push_back( paddle );
 	
-	Ball ball(350, 550); // Moving Creation of Ball to Constructor
+	Ball ball(paddle.getX(), (paddle.getY()-20)); // Moving Creation of Ball to Constructor
 	ball.setSpeedX(1.0 / 3.0);
 	ball.setSpeedY(-2.0 / 3.0);
 	ball.setMovable( false );
 	addBall(ball);
 	
-	Paddle paddle( 350, 560 ); // Moving Paddle Creation to Constructor 
-	paddles.push_back( paddle );
 
 	bonusBall = false;
 	bonusPaddle = false;
@@ -94,22 +94,21 @@ Description:
 **********************************************************/
 void Level::startCircularLevel()
 {
-	startMusic(2);
-	balls.clear();
-	paddles.clear();
-	bricks.clear();
-	pictureID = levelNumber;
-	Ball ball(250, 250); // Moving Creation of Ball to Constructor
-	ball.setSpeedX(1.0 / 3.0);
-	ball.setSpeedY(-2.0 / 3.0);
-	ball.setMovable( false );
-	addBall(ball);
-	
-	Paddle paddle( 350, 560, true, 0 ); // Moving Paddle Creation to Constructor 
-	paddles.push_back( paddle );
+	//startMusic(2);
+	//balls.clear();
+	//paddles.clear();
+	//bricks.clear();
+	//pictureID = levelNumber;
+	//Ball ball(250, 250); // Moving Creation of Ball to Constructor
+	//ball.setSpeedX(1.0 / 3.0);
+	//ball.setSpeedY(-2.0 / 3.0);
+	//ball.setMovable( false );
+	//addBall(ball);
+	//
+	//Paddle paddle( 350, 560, true, 0 ); // Moving Paddle Creation to Constructor 
+	//paddles.push_back( paddle );
 
-	createCircleBricks();
-
+	//createCircleBricks();
 }
 
 /***********************************************************
@@ -414,60 +413,60 @@ Description: randomly fills the bricks array with bricks
 includes their art and power ups if applicable. Ensures only
 2 max bricks contain powerups.
 **********************************************************/
-void Level::createBricks( )
-{
-	startMusic(levelNumber);
-
-	int levelcount = levelNumber;
-	int numberOfBricksInLevel;
-	int numberOfPowerUpInLevel;
-
-	if ( levelcount == 0 )
-	{
-		numberOfBricksInLevel = 10;
-		numberOfPowerUpInLevel = 3;
-	}
-	else if (levelcount == 1)
-	{
-		numberOfBricksInLevel = 20;
-		numberOfPowerUpInLevel = 4;
-	}
-	else
-	{
-		numberOfBricksInLevel = 30;
-		numberOfPowerUpInLevel = 6;
-	}
-
-	srand( time( NULL ) ); // Truely Random 
-	int	powerupBrickCount = 0; // How many powerup
-	for ( int brickCount = 0; brickCount < numberOfBricksInLevel; brickCount++ ) // Total Number of Brick
-	{
-
-		Brick brick( (brickCount % 10) * 60 + 30, (brickCount / 10) * 30 + 15 ); // Create a brick Object 
-
-		//random number for brick type
-		int randomPercent = rand( ) % 100 + 1;
-
-		// are we generating a power up brick
-		if (randomPercent >= 70 && powerupBrickCount != numberOfPowerUpInLevel)
-		{
-			int random = rand() % 10 + 4;  // Generating 4-13
-			brick.setPictureID(random); // Set a picture ID to brick
-			brick.setPowerupID((random - 4)); // Set a power id of brick from 0-9
-			addBrick(brick);
-			powerupBrickCount++;
-		}
-
-		//normal brick
-		else
-		{
-		int random = rand( ) % 4;  // Generating 0-4
-		brick.setPictureID( random ); // Set a picture ID to brick
-		brick.setPowerupID( -1 ); // No power up
-		addBrick( brick );
-		}
-	}
-}
+//void Level::createBricks( )
+//{
+//	startMusic(levelNumber);
+//
+//	int levelcount = levelNumber;
+//	int numberOfBricksInLevel;
+//	int numberOfPowerUpInLevel;
+//
+//	if ( levelcount == 0 )
+//	{
+//		numberOfBricksInLevel = 10;
+//		numberOfPowerUpInLevel = 3;
+//	}
+//	else if (levelcount == 1)
+//	{
+//		numberOfBricksInLevel = 20;
+//		numberOfPowerUpInLevel = 4;
+//	}
+//	else
+//	{
+//		numberOfBricksInLevel = 30;
+//		numberOfPowerUpInLevel = 6;
+//	}
+//
+//	srand( time( NULL ) ); // Truely Random 
+//	int	powerupBrickCount = 0; // How many powerup
+//	for ( int brickCount = 0; brickCount < numberOfBricksInLevel; brickCount++ ) // Total Number of Brick
+//	{
+//
+//		Brick brick( (brickCount % 10) * 60 + 30, (brickCount / 10) * 30 + 15 ); // Create a brick Object 
+//
+//		//random number for brick type
+//		int randomPercent = rand( ) % 100 + 1;
+//
+//		// are we generating a power up brick
+//		if (randomPercent >= 70 && powerupBrickCount != numberOfPowerUpInLevel)
+//		{
+//			int random = rand() % 10 + 4;  // Generating 4-13
+//			brick.setPictureID(random); // Set a picture ID to brick
+//			brick.setPowerupID((random - 4)); // Set a power id of brick from 0-9
+//			addBrick(brick);
+//			powerupBrickCount++;
+//		}
+//
+//		//normal brick
+//		else
+//		{
+//		int random = rand( ) % 4;  // Generating 0-4
+//		brick.setPictureID( random ); // Set a picture ID to brick
+//		brick.setPowerupID( -1 ); // No power up
+//		addBrick( brick );
+//		}
+//	}
+//}
 
 /***********************************************************
 #NickP, #NickB
@@ -476,7 +475,7 @@ Description: randomly fills the bricks array with bricks
 includes their art and power ups if applicable. Ensures only
 2 max bricks contain powerups.
 **********************************************************/
-void Level::createBricks2()
+void Level::createBricks()
 {
 	startMusic(levelNumber);
 
@@ -485,22 +484,23 @@ void Level::createBricks2()
 	int numberOfPowerUpInLevel; // Total # of power up in level
 	int powerUpCheck[10] = { 0 }; // Array to check if no duplicate powerups
 	int random; // Random number generator
+	srand(time(NULL)); // Truely Random 
 
 	//Based on Level sets # of Bricks in level and # of power up in level 
 
 	if (levelCount == 0)
 	{
-		numberOfBricksInLevel = 40;
+		numberOfBricksInLevel = 10;
 		numberOfPowerUpInLevel = 5;
 	}
 	if (levelCount == 1)
 	{
-		numberOfBricksInLevel = 50;
+		numberOfBricksInLevel = 10;
 		numberOfPowerUpInLevel = 7;
 	}
 	if (levelCount == 2)
 	{
-		numberOfBricksInLevel = 60;
+		numberOfBricksInLevel = 10;
 		numberOfPowerUpInLevel = 10;
 	}
 
@@ -515,7 +515,7 @@ void Level::createBricks2()
 	}
 	int howManyRow = numberOfBricksInLevel / 10;
 
-	for (int powerUpCount = 0; powerUpCount < howManyRow; powerUpCount++)
+	for (int powerUpCount = 0; powerUpCount < numberOfPowerUpInLevel; powerUpCount++)
 	{
 
 		//"Randomly" choose a power up
@@ -530,7 +530,7 @@ void Level::createBricks2()
 		{
 			while (powerUpCheck[(powerUpID - 4)] != 0) // if Power ID is matching, keep generating till you find one
 			{
-				random = rand() % 10 + 4;  // Generating 4-13
+				powerUpID = rand() % 10 + 4;  // Generating 4-13
 			}
 			powerUpCheck[(powerUpID - 4)]++;
 		}
@@ -540,7 +540,7 @@ void Level::createBricks2()
 
 		// Are we adding a powerup to a row we haven't added a power up to
 
-		if (powerUpCount < howManyRow)
+		if (powerUpCount <= howManyRow)
 		{
 			if (powerUpCount == 0)
 			{
@@ -565,6 +565,19 @@ void Level::createBricks2()
 
 		if (powerUpCount > howManyRow)
 		{
+			int chooseARow = rand() % howManyRow; // Choose a row 
+
+			if (chooseARow == 0)
+			{
+				rowMin = 0;
+				rowMax = powerUpCount + 9;
+			}
+			else
+			{
+				rowMax = (chooseARow * 10) - 1;
+				rowMin = rowMax - 10;
+			}
+
 			random = rand() % (rowMax - rowMin + 1) + rowMin;
 
 			if (bricks.at(random).getPowerupID() == -1)  // No power up at indext assign power up
@@ -611,7 +624,7 @@ void Level::gameFrame()
 				checkFlatCollision( );
 			//}
 		}
-
+		
 		// Check to see if the paddles can move
 		int paddlesWidth = (paddles.at( 0 ).getWidth( )) / 2; // Cender to Edge X
 		int direction = Paddle::getDirection( );
@@ -634,14 +647,14 @@ void Level::gameFrame()
 				paddles.at( howManyPaddles ).move( );
 			}
 		}
-		if (levelNumber==2)
+		/*if (levelNumber==2)
 		{
 			shouldTheBallBeHereCircular( );
 		}
 		else
-		{
+		{*/
 			shouldTheBallBeHereFlat( );
-		}
+		//}
 }
 
 /***********************************************************
@@ -690,11 +703,10 @@ void Level::checkFlatCollision()
 					playerLives--;
 					cout << "Lives: " << playerLives << endl;
 
-					
 					//reset ball and paddle to middle of screen
 					balls.erase( balls.begin( ) + howManyBalls );
 
-					Ball ball( 350, 550 );
+					Ball ball( 350, 350 );
 					ball.setSpeedX( 1.0 / 3.0 );
 					ball.setSpeedY( -2.0 / 3.0 );
 					ball.setMovable( false );
@@ -727,10 +739,18 @@ void Level::checkFlatCollision()
 			}
 
 			// if ball hits the left or right side of the screen
-			if ( ballXLocation >= 591 || ballXLocation <= 9 )
+			if (ballXLocation >= 591 || ballXLocation <= 9)
 			{
 				playSound(0);
-				balls.at( howManyBalls ).setSpeedX( ballXSpeed * -1 );
+				balls.at(howManyBalls).setSpeedX(ballXSpeed * -1);
+				if (ballXLocation >= 591)
+				{
+					balls.at(howManyBalls).setX(590);
+				}
+				else
+				{
+					balls.at(howManyBalls).setX(10);
+				}
 			}
 
 			vector<int> brickRemove;
@@ -897,7 +917,7 @@ void Level::checkFlatCollision()
 				if (paddleCollision && stickyBall > 0)
 				{
 					balls.at(howManyBalls).setX(paddleXLocation);
-					balls.at(howManyBalls).setY(paddleYLocation-10);
+					balls.at(howManyBalls).setY(paddleYLocation-20);
 					balls.at(howManyBalls).setSpeedX( 1.0 / 3.0 );
 					balls.at(howManyBalls).setSpeedY( -2.0 / 3.0 );
 					balls.at(howManyBalls).setMovable( false );
@@ -965,7 +985,7 @@ void Level::checkCollisionCircular()
 					//reset ball and paddle to middle of screen
 					balls.erase( balls.begin( ) + howManyBalls );
 
-					Ball ball( 350, 550 );
+					Ball ball( 350, 350 );
 					ball.setSpeedX( 1.0 / 3.0 );
 					ball.setSpeedY( -2.0 / 3.0 );
 					ball.setMovable( false );
@@ -1018,7 +1038,6 @@ void Level::checkCollisionCircular()
 			//brick collision checks
 			for ( int howManyBricks = 0; howManyBricks < bricks.size( ); howManyBricks++ )
 			{
-
 				// Center the Brick
 				brickCollide = false;
 				double bricksXLocation = bricks.at( howManyBricks ).getX( );
@@ -1030,9 +1049,7 @@ void Level::checkCollisionCircular()
 				top = bricks.at( howManyBricks ).getTopR( ); // Brick Top Radius
 				bottom = bricks.at( howManyBricks ).getBottomR( ); // Brick Bottom Radius
 				left = bricks.at( howManyBricks ).getLeftAngle( ); // Left of Brick Angle 
-				right = bricks.at( howManyBricks ).getRightAngle( ); // Right of Brick Angle 
-		
-
+				right = bricks.at( howManyBricks ).getRightAngle( ); // Right of Brick Angle
 
 				// Are you between the left and right edges  // X+bricksWidth // X-bricksWidth
 				// Is the distance between the line and center 9  //Center of ball (X/Y Ball) & Edge of Brick ( See Above ) 
@@ -1133,7 +1150,6 @@ void Level::checkCollisionCircular()
 						balls.at( howManyBalls ).setSpeedY( ballYSpeed * -1 );
 						paddleCollision = true;
 					}
-
 				}
 
 				if ( distance <= bottom && distance >= top )
@@ -1150,10 +1166,11 @@ void Level::checkCollisionCircular()
 						paddleCollision = true;
 					}
 				}
+
 				if (paddleCollision && stickyBall > 0)
 				{
 					balls.at(howManyBalls).setX(paddleXLocation);
-					balls.at(howManyBalls).setY(paddleYLocation-10);
+					balls.at(howManyBalls).setY(paddleYLocation-20);
 					balls.at(howManyBalls).setSpeedX( 1.0 / 3.0 );
 					balls.at(howManyBalls).setSpeedY( -2.0 / 3.0 );
 					balls.at(howManyBalls).setMovable( false );
@@ -1203,17 +1220,17 @@ void Level::shouldTheBallBeHereFlat( )
 			int paddlesHeight = (paddles.at( howManyPaddles ).getHeight( )) / 2; // Center to Edge Y
 
 			int top, bottom, left, right;
-			top = paddleYLocation - paddlesHeight; // Brick Top
-			bottom = paddleYLocation + paddlesHeight; // Brick Bottom
-			left = paddleXLocation - paddlesWidth; // Left of Brick 
-			right = paddleXLocation + paddlesWidth; // Right of Brick
+			top = paddleYLocation - paddlesHeight; // paddle Top
+			bottom = paddleYLocation + paddlesHeight; // paddle Bottom
+			left = paddleXLocation - paddlesWidth; // Left of paddle 
+			right = paddleXLocation + paddlesWidth; // Right of paddle
 
 			// Is the ball in the paddle 
 			// Is the distance between the line and center 9  
-			//Center of ball (X/Y Ball) & Edge of Brick ( See Above ) 
+			//Center of ball (X/Y Ball) & Edge of paddle ( See Above ) 
 			if ( ballXLocation >= left && ballXLocation <= right )
 			{
-				if ( abs( ballYLocation - top ) < 9 ) // Is the ball on top of the brick 
+				if ( abs( ballYLocation - top ) < 9 ) // Is the ball on top of the paddle 
 				{
 					// Is the ball going the right direction
 					if ( ballYSpeed > 0 )
@@ -1225,7 +1242,7 @@ void Level::shouldTheBallBeHereFlat( )
 					stuckTo=howManyPaddles;
 				}
 
-				if ( abs( ballYLocation - bottom ) < 9 ) // Is the ball on bottom of the brick 
+				if ( abs( ballYLocation - bottom ) < 9 ) // Is the ball on bottom of the paddle 
 				{
 					// Is the ball going the right direction
 
@@ -1273,7 +1290,7 @@ void Level::shouldTheBallBeHereFlat( )
 			if (stickyBall>0)
 			{
 				balls.at(howManyBalls).setX(paddles.at(stuckTo).getX());
-				balls.at(howManyBalls).setY(paddles.at(stuckTo).getY()-10);
+				balls.at(howManyBalls).setY(paddles.at(stuckTo).getY()-20);
 				balls.at(howManyBalls).setSpeedX( 1.0 / 3.0 );
 				balls.at(howManyBalls).setSpeedY( -2.0 / 3.0 );
 				balls.at(howManyBalls).setMovable( false );
@@ -1379,7 +1396,7 @@ void Level::shouldTheBallBeHereCircular( )
 			if (stickyBall>0)
 			{
 				balls.at(howManyBalls).setX(paddles.at(stuckTo).getX());
-				balls.at(howManyBalls).setY(paddles.at(stuckTo).getY()-10);
+				balls.at(howManyBalls).setY(paddles.at(stuckTo).getY()-20);
 				balls.at(howManyBalls).setSpeedX( 1.0 / 3.0 );
 				balls.at(howManyBalls).setSpeedY( -2.0 / 3.0 );
 				balls.at(howManyBalls).setMovable( false );
@@ -1490,7 +1507,7 @@ void Level::checkPowerUps(int brickLocation)
 			cout << "bonus ball" << endl;
 			Ball ball2(balls.at(0));
 			ball2.setX(paddles.at(0).getX());
-			ball2.setY(paddles.at(0).getY());
+			ball2.setY(paddles.at(0).getY()-20);
 			ball2.setSpeedX(1.0 / 3.0);
 			ball2.setSpeedY(-2.0 / 3.0);
 			//ball2.setSpeedX( (ball2.getSpeedX( )) * -1 ); 
@@ -1582,7 +1599,6 @@ void Level::startMusic(int x)
 
 	//Mix_PlayMusic(mus, -1); //Music loop: -1 for continuous play
 }
-
 
 /***********************************************************
 #SimonM
