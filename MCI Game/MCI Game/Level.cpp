@@ -52,7 +52,8 @@ Level::Level(int x)
 	superBall = false;
 	stickyBall = 0; 
 
-	createBricks();
+	// createBricks();
+	createBricks2( );
 }
 
 /***********************************************************
@@ -84,7 +85,8 @@ void Level::startFlatLevel()
 	superBall = false;
 	stickyBall = 0; 
 
-	createBricks();
+	//createBricks();
+	createBricks2( );
 }
 
 /***********************************************************
@@ -515,7 +517,7 @@ void Level::createBricks2()
 	}
 	int howManyRow = numberOfBricksInLevel / 10;
 
-	for (int powerUpCount = 0; powerUpCount < howManyRow; powerUpCount++)
+	for (int powerUpCount = 0; powerUpCount < numberOfPowerUpInLevel; powerUpCount++)
 	{
 
 		//"Randomly" choose a power up
@@ -530,7 +532,7 @@ void Level::createBricks2()
 		{
 			while (powerUpCheck[(powerUpID - 4)] != 0) // if Power ID is matching, keep generating till you find one
 			{
-				random = rand() % 10 + 4;  // Generating 4-13
+				powerUpID = rand( ) % 10 + 4;  // Generating 4-13
 			}
 			powerUpCheck[(powerUpID - 4)]++;
 		}
@@ -540,7 +542,7 @@ void Level::createBricks2()
 
 		// Are we adding a powerup to a row we haven't added a power up to
 
-		if (powerUpCount < howManyRow)
+		if (powerUpCount <= howManyRow)
 		{
 			if (powerUpCount == 0)
 			{
@@ -558,7 +560,7 @@ void Level::createBricks2()
 			//Add that specific powerup to Row 
 
 			bricks.at(random).setPictureID(powerUpID);
-			bricks.at(random).setPowerupID((powerUpID - 4));
+			bricks.at(random).setPowerupID((powerUpID-4));
 		}
 
 		// Are we adding a powerup to a row we have already added a power up to
