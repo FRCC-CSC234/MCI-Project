@@ -11,24 +11,23 @@ using namespace std;
 void startGame();
 void showIntroSceen( );
 void endGame();
-void playGame();
+int playGame();
 void nextLevel( );
-int winGame();
-int loseGame();
+void winGame();
+void loseGame();
 
 Level level; //*** exists to make me not have to delete stuff from drawScreen();
 
 int main( int argc, char** argv ) // Main must have these specific arguments for SDL to work 
 {
-	startGame( );
-	bool gameOver = false;
-	showIntroSceen();
-
-	while (!gameOver)
+	int gameLoop = 1;
+	startGame();
+	while (gameLoop == 1)
 	{
-		playGame();
+		showIntroSceen();
+		gameLoop = playGame();
 	}
-	
+
 	endGame();
 	system( "pause" );
 	return 0;
@@ -52,6 +51,9 @@ Description: Progress the game to the next level
 **********************************************************/
 void nextLevel()
 {
+	cout << "In nextLevel" << endl;
+	cout << level.getLevelNumber() << endl;
+
 	if(level.getLevelNumber() == 0)
 	{
 		level.startFlatLevel( );
@@ -72,92 +74,109 @@ void nextLevel()
 Name: playGame
 Description: Contains calls to SDL and other classes to run the game
 **********************************************************/
-void playGame()
+int playGame()
 {
+	cout << "Play game start" << endl;
 	level.setLevelNumber(0); //*** Needs to be set back to 0 
 	nextLevel();
 
 	SDL_Event e;
 	int direction = 0;
 	int gameState = 0;
-	while ( !Level::quit && level.getLevelNumber()<3&& level.getLives()>=0)
+	while (!Level::quit && level.getLevelNumber()<3 && level.getLives()>=0)
 	{
-			while (SDL_PollEvent(&e) != 0)
-			{
-				if (e.type == SDL_QUIT)
+		while (SDL_PollEvent(&e) != 0)
 				{
-					Level::quit = true;
-				}
-				else if (e.type == SDL_KEYDOWN)
-				{
-					int paddleLocation = level.getPaddles().at(0).getX();
-					switch (e.key.keysym.sym)
+					if (e.type == SDL_QUIT)
 					{
-					case SDLK_LEFT:
-						direction = -1;
-						Paddle::setDirection(-1);
-						break;
-					case SDLK_RIGHT:
-						direction = 1;
-						Paddle::setDirection(1);
-						break;
-					case SDLK_1:
-						level.setPictureID(0);
-						break;
-					case SDLK_2:
-						level.setPictureID(1);
-						break;
-					case SDLK_3:
-						level.setPictureID(2);
-						break;
-					case SDLK_SPACE:
-						if ( e.key.repeat == 0 )
+						Level::quit = true;
+					}
+					else if (e.type == SDL_KEYDOWN)
+					{
+						int paddleLocation = level.getPaddles().at(0).getX();
+						switch (e.key.keysym.sym)
 						{
-							level.moveBall( true );
+						case SDLK_LEFT:
+							direction = -1;
+							Paddle::setDirection(-1);
+							break;
+						case SDLK_RIGHT:
+							direction = 1;
+							Paddle::setDirection(1);
+							break;
+						case SDLK_1:
+							level.setPictureID(0);
+							break;
+						case SDLK_2:
+							level.setPictureID(1);
+							break;
+						case SDLK_3:
+							level.setPictureID(2);
+							break;
+						case SDLK_SPACE:
+							if ( e.key.repeat == 0 )
+							{
+								level.moveBall( true );
+							}
+							break;
 						}
-						break;
 					}
-				}
-				else if (e.type == SDL_KEYUP)
-				{
-					switch (e.key.keysym.sym)
+					else if (e.type == SDL_KEYUP)
 					{
-					case SDLK_LEFT:
-						direction = direction == 1 ? 1 : 0;
-						Paddle::setDirection(Paddle::getDirection() == 1 ? 1 : 0);
-						break;
-					case SDLK_RIGHT:
-						direction = direction == -1 ? -1 : 0;
-						Paddle::setDirection(Paddle::getDirection() == -1 ? -1 : 0);
-						break;
-						//#SimonM set spacebar to change balls movable bool to true
-					case SDLK_SPACE:
-						level.moveBall(true);
-						break;
+						switch (e.key.keysym.sym)
+						{
+						case SDLK_LEFT:
+							direction = direction == 1 ? 1 : 0;
+							Paddle::setDirection(Paddle::getDirection() == 1 ? 1 : 0);
+							break;
+						case SDLK_RIGHT:
+							direction = direction == -1 ? -1 : 0;
+							Paddle::setDirection(Paddle::getDirection() == -1 ? -1 : 0);
+							break;
+							//#SimonM set spacebar to change balls movable bool to true
+						case SDLK_SPACE:
+							level.moveBall(true);
+							break;
+						}
 					}
 				}
-			}
 	
 		//#SimonM the moveObjects method returns an int -1 for death, 0 for normal, 1 for moving to next level
 		for ( int i = 0; i < 6 && gameState == 0; i++ )
-		{
-			level.gameFrame( );
-		}
+			{
+				level.gameFrame( );
+			}
 
 		// removed draw code. Draw Flat screen needs to be used to draw things to the screen 
 		drawFlatScreen( level.getBricks( ), level.getBalls( ), level.getPaddles( ), level );
 
 		if ( level.getBricks().size() ==  0 )
-		{
-			level.setLevelNumber((level.getLevelNumber()) + 1);
-			nextLevel();
-		}
+			{
+				level.setLevelNumber((level.getLevelNumber()) + 1);
+				nextLevel();
+			}
 	}
 
-	if (level.getLives() == 0)
+	if (level.getLevelNumber() > 2)
 	{
-		
+		cout << "in win game" << endl;
+		winGame();
+		level.setLevelNumber(0);
+		level.setLives(4);
+		return 1;
 	}
+	else if (level.getLives() < 0)
+	{
+		loseGame();
+		level.setLevelNumber(0);
+		level.setLives(4);
+		return 1;
+	}
+	else
+	{
+		return 0;
+	}
+	
 }
 
 /***********************************************************
@@ -167,7 +186,7 @@ Description: Calls graphics deletion of objects
 **********************************************************/
 void endGame()
 {
-		TrelGraphics2::close();
+	TrelGraphics2::close();
 }
 
 /***********************************************************
@@ -175,7 +194,7 @@ void endGame()
 Name: winGame
 Description: Handles the game being won
 **********************************************************/
-int winGame()
+void winGame()
 {
 	// Game over is 5, Win screen is 6
 	bool pause = true;
@@ -194,8 +213,10 @@ int winGame()
 				Level::quit = true;
 				break;
 			case SDL_KEYUP:
-				pause = false;
-				return 0;
+				if (e.key.keysym.sym == SDLK_RETURN)
+				{
+					pause = false;
+				}
 				break;
 			}
 		}
@@ -207,14 +228,14 @@ int winGame()
 Name: loseGame
 Description: Handles the game being lost
 **********************************************************/
-int loseGame()
+void loseGame()
 {
 	// Game over is 5, Win screen is 6
 	bool pause = true;
 	//int titleScreentoDisplay = 5;
 	SDL_Event e;
 
-	drawTitleScreen(5);
+	drawTitleScreen(14);
 
 	while (!Level::quit && pause)
 	{
@@ -229,7 +250,11 @@ int loseGame()
 				if (e.key.keysym.sym == SDLK_SPACE)
 				{
 					pause = false;
-					return 0;
+					cout << pause << endl;
+				}
+				if (e.key.keysym.sym != SDLK_SPACE)
+				{
+					pause = false;
 				}
 				break;
 			}

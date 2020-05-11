@@ -92,6 +92,7 @@ public:
 	void setBonusPaddle(bool isBonus) { this->bonusPaddle = isBonus; }
 	void setInvincible(bool isInvincible) { this->invincible = isInvincible; }
 	void setPictureID( int pictureID ) { this->pictureID = pictureID; }
+	void setLives(int addLives) { this->playerLives = addLives; }
 
 	int getPictureID( ) { return pictureID; }
 	void moveBall(bool b);

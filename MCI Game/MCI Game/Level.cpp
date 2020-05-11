@@ -40,8 +40,8 @@ Level::Level(int x)
 	paddles.push_back( paddle );
 	
 	Ball ball(350, 350); // Moving Creation of Ball to Constructor
-	ball.setSpeedX(1.0 / 3.0);
-	ball.setSpeedY(-2.0 / 3.0);
+	ball.setSpeedX(1.5 / 3.0);
+	ball.setSpeedY(-3.0 / 3.0);
 	ball.setMovable( false );
 	addBall(ball);
 	
@@ -73,11 +73,12 @@ void Level::startFlatLevel()
 	paddles.push_back( paddle );
 	
 	Ball ball(paddle.getX(), (paddle.getY()-20)); // Moving Creation of Ball to Constructor
-	ball.setSpeedX(1.0 / 3.0);
-	ball.setSpeedY(-2.0 / 3.0);
+	ball.setSpeedX(1.5 / 3.0);
+	ball.setSpeedY(-3.0 / 3.0);
 	ball.setMovable( false );
 	addBall(ball);
 	
+	cout << "ball and paddle generated" << endl;
 
 	bonusBall = false;
 	bonusPaddle = false;
@@ -468,6 +469,7 @@ includes their art and power ups if applicable. Ensures only
 //	}
 //}
 
+
 /***********************************************************
 #NickP, #NickB
 Name: createBricks2
@@ -490,17 +492,17 @@ void Level::createBricks()
 
 	if (levelCount == 0)
 	{
-		numberOfBricksInLevel = 10;
+		numberOfBricksInLevel = 20;
 		numberOfPowerUpInLevel = 5;
 	}
 	if (levelCount == 1)
 	{
-		numberOfBricksInLevel = 10;
+		numberOfBricksInLevel = 40;
 		numberOfPowerUpInLevel = 7;
 	}
 	if (levelCount == 2)
 	{
-		numberOfBricksInLevel = 10;
+		numberOfBricksInLevel = 60;
 		numberOfPowerUpInLevel = 10;
 	}
 
@@ -540,9 +542,9 @@ void Level::createBricks()
 
 		// Are we adding a powerup to a row we haven't added a power up to
 
-		if (powerUpCount <= howManyRow)
+		if (powerUpCount < howManyRow)
 		{
-			if (powerUpCount == 0)
+			/*if (powerUpCount == 0)
 			{
 				rowMin = 0;
 				rowMax = powerUpCount + 9;
@@ -551,9 +553,15 @@ void Level::createBricks()
 			{
 				rowMax = (powerUpCount * 10) - 1;
 				rowMin = rowMax - 10;
-			}
+			}*/
 
-			random = rand() % (rowMax - rowMin + 1) + rowMin;
+
+			//#nick p this is easier than the above if esle block
+			rowMin = powerUpCount * 10;
+			rowMax = rowMin + 9;
+
+			//random = rand() % (rowMax - rowMin + 1) + rowMin;
+			random = rand() % (9 + rowMin);
 
 			//Add that specific powerup to Row 
 
@@ -565,8 +573,19 @@ void Level::createBricks()
 
 		if (powerUpCount > howManyRow)
 		{
-			int chooseARow = rand() % howManyRow; // Choose a row 
+			//int chooseARow = rand() % (howManyRow + 1); // Choose a row 
 
+
+			//#nick p if howManyRow is 1 than chooseARow can be anything and the program blows up
+			//so i added an if statement to handle it
+			int chooseARow;
+
+			if (howManyRow == 1) {
+				chooseARow = 0;
+			}
+			else {
+				chooseARow = rand() % howManyRow;
+			}
 			if (chooseARow == 0)
 			{
 				rowMin = 0;
@@ -578,7 +597,11 @@ void Level::createBricks()
 				rowMin = rowMax - 10;
 			}
 
-			random = rand() % (rowMax - rowMin + 1) + rowMin;
+			//random = rand() % (rowMax - rowMin + 1) + rowMin;
+			//#nick p
+			//rowMax - RowMin + 1 will always be ten
+			random = rand() % (10 + rowMin);
+
 
 			if (bricks.at(random).getPowerupID() == -1)  // No power up at indext assign power up
 			{
@@ -587,9 +610,14 @@ void Level::createBricks()
 			}
 			else
 			{
+
 				while (bricks.at(random).getPowerupID() != -1) // if Power ID is matching, keep generating till you find one
 				{
-					random = rand() % (rowMax - rowMin + 1) + rowMin;
+					//random = rand() % (rowMax - rowMin + 1) + rowMin;
+					//#nick p
+					//rowMax - RowMin + 1 will always be ten
+					random = rand() % (10 + rowMin);
+
 				}
 				bricks.at(random).setPictureID(powerUpID);
 				bricks.at(random).setPowerupID((powerUpID - 4));
@@ -707,8 +735,8 @@ void Level::checkFlatCollision()
 					balls.erase( balls.begin( ) + howManyBalls );
 
 					Ball ball( 350, 350 );
-					ball.setSpeedX( 1.0 / 3.0 );
-					ball.setSpeedY( -2.0 / 3.0 );
+					ball.setSpeedX(1.5 / 3.0);
+					ball.setSpeedY(-3.0 / 3.0);
 					ball.setMovable( false );
 					addBall( ball );
 
@@ -918,8 +946,8 @@ void Level::checkFlatCollision()
 				{
 					balls.at(howManyBalls).setX(paddleXLocation);
 					balls.at(howManyBalls).setY(paddleYLocation-20);
-					balls.at(howManyBalls).setSpeedX( 1.0 / 3.0 );
-					balls.at(howManyBalls).setSpeedY( -2.0 / 3.0 );
+					balls.at(howManyBalls).setSpeedX( 1.5 / 3.0 );
+					balls.at(howManyBalls).setSpeedY( -3.0 / 3.0 );
 					balls.at(howManyBalls).setMovable( false );
 					
 				}
@@ -986,8 +1014,8 @@ void Level::checkCollisionCircular()
 					balls.erase( balls.begin( ) + howManyBalls );
 
 					Ball ball( 350, 350 );
-					ball.setSpeedX( 1.0 / 3.0 );
-					ball.setSpeedY( -2.0 / 3.0 );
+					ball.setSpeedX( 1.5 / 3.0 );
+					ball.setSpeedY( -3.0 / 3.0 );
 					ball.setMovable( false );
 					addBall( ball );
 
@@ -1171,8 +1199,8 @@ void Level::checkCollisionCircular()
 				{
 					balls.at(howManyBalls).setX(paddleXLocation);
 					balls.at(howManyBalls).setY(paddleYLocation-20);
-					balls.at(howManyBalls).setSpeedX( 1.0 / 3.0 );
-					balls.at(howManyBalls).setSpeedY( -2.0 / 3.0 );
+					balls.at(howManyBalls).setSpeedX( 1.5 / 3.0 );
+					balls.at(howManyBalls).setSpeedY( -3.0 / 3.0 );
 					balls.at(howManyBalls).setMovable( false );
 				}
 			}
@@ -1291,8 +1319,8 @@ void Level::shouldTheBallBeHereFlat( )
 			{
 				balls.at(howManyBalls).setX(paddles.at(stuckTo).getX());
 				balls.at(howManyBalls).setY(paddles.at(stuckTo).getY()-20);
-				balls.at(howManyBalls).setSpeedX( 1.0 / 3.0 );
-				balls.at(howManyBalls).setSpeedY( -2.0 / 3.0 );
+				balls.at(howManyBalls).setSpeedX( 1.5 / 3.0 );
+				balls.at(howManyBalls).setSpeedY( -3.0 / 3.0 );
 				balls.at(howManyBalls).setMovable( false );
 			}
 			else
@@ -1397,8 +1425,8 @@ void Level::shouldTheBallBeHereCircular( )
 			{
 				balls.at(howManyBalls).setX(paddles.at(stuckTo).getX());
 				balls.at(howManyBalls).setY(paddles.at(stuckTo).getY()-20);
-				balls.at(howManyBalls).setSpeedX( 1.0 / 3.0 );
-				balls.at(howManyBalls).setSpeedY( -2.0 / 3.0 );
+				balls.at(howManyBalls).setSpeedX( 1.5 / 3.0 );
+				balls.at(howManyBalls).setSpeedY( -3.0 / 3.0 );
 				balls.at(howManyBalls).setMovable( false );
 			}
 			else
@@ -1458,6 +1486,10 @@ void Level::checkPowerUps(int brickLocation)
 		{
 			//#SimonM add a life to player
 			playerLives++;
+			if (playerLives > 5)
+			{
+				playerLives == 5;
+			}
 			cout << "Bonus life! Lives now: " << playerLives << endl;
 		}
 		
@@ -1508,8 +1540,8 @@ void Level::checkPowerUps(int brickLocation)
 			Ball ball2(balls.at(0));
 			ball2.setX(paddles.at(0).getX());
 			ball2.setY(paddles.at(0).getY()-20);
-			ball2.setSpeedX(1.0 / 3.0);
-			ball2.setSpeedY(-2.0 / 3.0);
+			ball2.setSpeedX(1.50 / 3.0);
+			ball2.setSpeedY(-3.0 / 3.0);
 			//ball2.setSpeedX( (ball2.getSpeedX( )) * -1 ); 
 			ball2.setMovable(true);
 			bonusBall = true;
